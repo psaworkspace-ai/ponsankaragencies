@@ -15,11 +15,11 @@ function BrandMark() {
       className="flex shrink-0 items-center gap-3"
       aria-label="Ponshankar Agencies Home"
     >
-    <img
-      src={logo}
-      alt="Ponshankar Agencies"
-      className="h-12 w-auto object-contain"
-    />
+        <img
+          src={logo}
+          alt="Ponshankar Agencies"
+          className="h-14 w-auto object-contain"
+        />
 
       <div className="leading-none">
         <h1 className="font-display text-[28px] font-extrabold tracking-tight text-[#E10600]">
