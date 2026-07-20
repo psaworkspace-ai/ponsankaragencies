@@ -1,0 +1,208 @@
+import {
+  Boxes, Droplets, Container, Blocks, CircleDot, Wrench,
+  Gauge, Layers, Database, Waves, Home, Factory, Sprout, Building,
+} from 'lucide-react'
+import type { Portfolio, TrendingProduct, Application } from '@/types'
+
+export const PORTFOLIOS: Portfolio[] = [
+  { id: 'plumbing', kind: 'tile', title: 'Plumbing & PTMT Systems', description: '', media: 'steel', icon: Boxes, href: '/products/gallery' },
+  { id: 'industrial', kind: 'tile', title: 'Industrial Piping', description: '', media: 'water', icon: Factory, href: '/products' },
+  { id: 'sewerage', kind: 'note', title: 'Sewerage & Drainage', description: '', note: 'High-flow capacity systems engineered for municipal and residential waste transport.', media: 'drainage', icon: Waves, href: '/solutions' },
+  { id: 'agri', kind: 'tile', title: 'Agri & Borewell', description: '', media: 'agri', icon: Sprout, href: '/products' },
+  { id: 'storage', kind: 'tile', title: 'Water Storage', description: '', media: 'tank', icon: Container, href: '/products' },
+  { id: 'protection', kind: 'note', title: 'Infrastructure Protection', description: '', note: 'Cable ducting, conduits, and surface drainage for resilient public infrastructure.', media: 'infra', icon: Building, href: '/solutions' },
+]
+
+export const TRENDING: TrendingProduct[] = [
+  {
+    id: 'smartfit', slug: 'smartfit-plus', name: 'Smartfit Plus', category: 'Piping Systems',
+    description: 'Advanced ring-seal PVC piping with superior chemical resistance.',
+    longDescription: 'Smartfit Plus is a premium CPVC piping system engineered for both hot and cold water distribution. Its precision ring-seal joints eliminate leaks under pressure, while the chlorinated PVC compound resists scaling, corrosion, and chemical attack for a service life exceeding 25 years.',
+    media: 'industrial', icon: Boxes, accent: 'blue', href: '/products/smartfit-plus',
+    specs: [
+      { label: 'Material', value: 'CPVC (Chlorinated PVC)' },
+      { label: 'Temperature Range', value: 'Up to 82°C' },
+      { label: 'Pressure Rating', value: 'SDR 11 / 13.5' },
+      { label: 'Size Range', value: '½" to 2"' },
+      { label: 'Service Life', value: '25+ years' },
+      { label: 'Standard', value: 'ASTM D2846 / ISI' },
+    ],
+    features: ['Leak-proof ring-seal joints', 'Chemical & corrosion resistant', 'Low thermal conductivity', 'Freedom from toxicity'],
+  },
+  {
+    id: 'greenfit', slug: 'greenfit', name: 'Greenfit', category: 'Potable Water',
+    description: 'Eco-friendly PPR-C plumbing system for hot and cold water.',
+    longDescription: 'Greenfit is a polypropylene random copolymer (PPR-C) system designed for potable water applications. Fusion-welded joints create a homogeneous, leak-free network ideal for high-rise residential and commercial plumbing.',
+    media: 'agri', icon: Droplets, accent: 'green', href: '/products/greenfit',
+    specs: [
+      { label: 'Material', value: 'PPR-C' },
+      { label: 'Temperature Range', value: 'Up to 95°C' },
+      { label: 'Jointing', value: 'Heat fusion welding' },
+      { label: 'Size Range', value: '20mm to 110mm' },
+      { label: 'Service Life', value: '50 years' },
+      { label: 'Standard', value: 'DIN 8077/8078' },
+    ],
+    features: ['Fusion-welded seamless joints', 'Non-toxic & food-grade', 'Excellent heat retention', 'Recyclable material'],
+  },
+  {
+    id: 'storefit', slug: 'storefit', name: 'Storefit', category: 'Storage',
+    description: 'Multi-layer LLDPE water tanks with antimicrobial inner coatings.',
+    longDescription: 'Storefit water tanks feature multi-layer LLDPE construction with an antimicrobial inner layer that inhibits bacterial growth, keeping stored water safe. UV-stabilised outer walls withstand harsh sun exposure without degradation.',
+    media: 'tank', icon: Container, href: '/products/storefit',
+    specs: [
+      { label: 'Material', value: 'Food-grade LLDPE' },
+      { label: 'Layers', value: '3 / 4 / 5 layer options' },
+      { label: 'Capacity', value: '500L to 10,000L' },
+      { label: 'Inner Layer', value: 'Antimicrobial' },
+      { label: 'UV Protection', value: 'Yes' },
+      { label: 'Warranty', value: '10 years' },
+    ],
+    features: ['Antimicrobial inner surface', 'UV-stabilised outer wall', 'Impact & weather resistant', 'Multiple capacity options'],
+  },
+  {
+    id: 'easyfit', slug: 'easyfit-pvc', name: 'Easyfit PVC', category: 'Fittings',
+    description: 'High-pressure white PVC elbow fitting for precision plumbing.',
+    longDescription: 'Easyfit PVC fittings deliver dependable, high-pressure connections for cold water plumbing. Precision-moulded sockets ensure a tight solvent-cement bond every time.',
+    media: 'water', icon: Blocks, accent: 'blue', href: '/products/easyfit-pvc',
+    specs: [
+      { label: 'Material', value: 'uPVC' },
+      { label: 'Pressure Rating', value: 'Up to 10 kg/cm²' },
+      { label: 'Jointing', value: 'Solvent cement' },
+      { label: 'Size Range', value: '½" to 6"' },
+      { label: 'Colour', value: 'White' },
+      { label: 'Standard', value: 'IS 7834' },
+    ],
+    features: ['Precision-moulded sockets', 'High-pressure tolerance', 'Smooth internal bore', 'Easy solvent jointing'],
+  },
+  {
+    id: 'ballvalve', slug: 'industrial-ball-valve', name: 'Industrial Ball Valve', category: 'Flow Control',
+    description: 'Precision-moulded blue UPVC control valve for industrial flow.',
+    longDescription: 'The Industrial Ball Valve provides reliable on/off flow control in demanding industrial fluid systems. Its full-bore design minimises pressure drop, while the chemical-resistant uPVC body handles aggressive media.',
+    media: 'commercial', icon: CircleDot, accent: 'blue', href: '/products/industrial-ball-valve',
+    specs: [
+      { label: 'Material', value: 'uPVC' },
+      { label: 'Design', value: 'Full-bore, double-union' },
+      { label: 'Pressure Rating', value: 'PN 10' },
+      { label: 'Size Range', value: '½" to 4"' },
+      { label: 'Seals', value: 'EPDM / Viton' },
+      { label: 'Operation', value: 'Manual lever' },
+    ],
+    features: ['Full-bore low-loss design', 'Chemical-resistant body', 'Double-union serviceability', 'Leak-tight sealing'],
+  },
+  {
+    id: 'connector', slug: 'stainless-connector', name: 'Stainless Connector', category: 'Connectors',
+    description: 'High-grade industrial pipe connector with precision threads.',
+    longDescription: 'Machined from corrosion-resistant stainless steel, this connector provides a robust, high-integrity threaded joint for industrial and high-pressure applications where plastic fittings fall short.',
+    media: 'steel', icon: Wrench, href: '/products/stainless-connector',
+    specs: [
+      { label: 'Material', value: 'SS 304 / 316' },
+      { label: 'Thread', value: 'BSP / NPT' },
+      { label: 'Pressure Rating', value: 'Up to 40 bar' },
+      { label: 'Size Range', value: '¼" to 3"' },
+      { label: 'Finish', value: 'Polished' },
+      { label: 'Temperature', value: 'Up to 200°C' },
+    ],
+    features: ['Corrosion-resistant steel', 'Precision-cut threads', 'High-pressure rated', 'Long service life'],
+  },
+  {
+    id: 'flowassembly', slug: 'flow-control-assembly', name: 'Flow Control Assembly', category: 'Instrumentation',
+    description: 'Advanced pressure gauge and silver-blue valve system.',
+    longDescription: 'A pre-assembled flow-control and monitoring unit combining a calibrated pressure gauge with a precision regulating valve — ideal for plant rooms and process lines requiring real-time flow visibility.',
+    media: 'commercial', icon: Gauge, accent: 'blue', href: '/products/flow-control-assembly',
+    specs: [
+      { label: 'Gauge Range', value: '0–16 bar' },
+      { label: 'Valve Type', value: 'Regulating globe' },
+      { label: 'Body', value: 'Brass / SS' },
+      { label: 'Connection', value: 'Threaded' },
+      { label: 'Accuracy', value: '±1.5%' },
+      { label: 'Media', value: 'Water / air' },
+    ],
+    features: ['Integrated pressure gauge', 'Fine flow regulation', 'Pre-assembled unit', 'Plant-room ready'],
+  },
+  {
+    id: 'foamfit', slug: 'foamfit-insulation', name: 'Foamfit Insulation', category: 'Insulation',
+    description: 'Premium grey thermal insulation for high-performance piping.',
+    longDescription: 'Foamfit closed-cell elastomeric insulation minimises heat loss and prevents condensation on hot and chilled water lines, improving energy efficiency across the piping network.',
+    media: 'steel', icon: Layers, href: '/products/foamfit-insulation',
+    specs: [
+      { label: 'Material', value: 'Closed-cell elastomeric' },
+      { label: 'Thickness', value: '6mm to 25mm' },
+      { label: 'Temperature', value: '-40°C to 105°C' },
+      { label: 'Fire Rating', value: 'Class 1' },
+      { label: 'Thermal λ', value: '0.034 W/mK' },
+      { label: 'Form', value: 'Tube / sheet' },
+    ],
+    features: ['Prevents condensation', 'Low thermal conductivity', 'Fire-retardant', 'Flexible & easy to fit'],
+  },
+  {
+    id: 'aquafit', slug: 'aquafit-storage', name: 'Aquafit Storage', category: 'Storage',
+    description: 'Modern deep-blue and white water storage solution.',
+    longDescription: 'Aquafit combines a contemporary aesthetic with proven multi-layer storage technology, keeping water cool and clean for residential rooftops and utility applications.',
+    media: 'tank', icon: Database, href: '/products/aquafit-storage',
+    specs: [
+      { label: 'Material', value: 'LLDPE' },
+      { label: 'Layers', value: '3-layer' },
+      { label: 'Capacity', value: '500L to 5,000L' },
+      { label: 'Finish', value: 'Deep blue / white' },
+      { label: 'UV Protection', value: 'Yes' },
+      { label: 'Warranty', value: '7 years' },
+    ],
+    features: ['Cool-keeping insulation', 'Modern finish', 'Weatherproof shell', 'Easy-clean interior'],
+  },
+  {
+    id: 'brassvalve', slug: 'brass-gate-valve', name: 'Brass Gate Valve', category: 'Valves',
+    description: 'Polished brass valve for heavy-duty industrial applications.',
+    longDescription: 'A forged-brass gate valve delivering full-flow shutoff for water and industrial lines. The rising-stem design gives clear open/close indication and long-term reliability under frequent operation.',
+    media: 'sunset', icon: CircleDot, accent: 'amber', href: '/products/brass-gate-valve',
+    specs: [
+      { label: 'Material', value: 'Forged brass' },
+      { label: 'Design', value: 'Rising stem gate' },
+      { label: 'Pressure Rating', value: 'PN 20' },
+      { label: 'Size Range', value: '½" to 4"' },
+      { label: 'Thread', value: 'BSP' },
+      { label: 'Temperature', value: 'Up to 120°C' },
+    ],
+    features: ['Full-flow shutoff', 'Forged-brass durability', 'Rising-stem indication', 'Heavy-duty service'],
+  },
+  {
+    id: 'cpvcpro', slug: 'cpvc-pro-system', name: 'CPVC Pro System', category: 'Piping Systems',
+    description: 'Cream-coloured CPVC fittings for hot and cold water distribution.',
+    longDescription: 'The CPVC Pro System is a complete hot-and-cold water solution with a full range of pipes and fittings, engineered to handle continuous high-temperature service in residential and commercial buildings.',
+    media: 'water', icon: Boxes, accent: 'blue', href: '/products/cpvc-pro-system',
+    specs: [
+      { label: 'Material', value: 'CPVC' },
+      { label: 'Temperature', value: 'Up to 93°C' },
+      { label: 'Pressure', value: 'SDR 11' },
+      { label: 'Size Range', value: '½" to 2"' },
+      { label: 'Colour', value: 'Cream' },
+      { label: 'Standard', value: 'ASTM D2846' },
+    ],
+    features: ['Complete pipe + fitting range', 'High-temperature service', 'Corrosion-free', 'Long service life'],
+  },
+  {
+    id: 'hdpe', slug: 'hdpe-corrugated', name: 'HDPE Corrugated', category: 'Drainage',
+    description: 'High-strength black corrugated drainage pipes for infrastructure.',
+    longDescription: 'HDPE Corrugated double-wall pipes combine a smooth inner bore for high flow with a corrugated outer wall for exceptional ring stiffness — the standard choice for buried municipal drainage and stormwater.',
+    media: 'drainage', icon: Waves, href: '/products/hdpe-corrugated',
+    specs: [
+      { label: 'Material', value: 'HDPE' },
+      { label: 'Wall', value: 'Double-wall corrugated' },
+      { label: 'Ring Stiffness', value: 'SN4 / SN8' },
+      { label: 'Diameter', value: '75mm to 1000mm' },
+      { label: 'Jointing', value: 'Coupler / socket' },
+      { label: 'Application', value: 'Buried drainage' },
+    ],
+    features: ['High ring stiffness', 'Smooth high-flow bore', 'Corrosion-proof', 'Long laying lengths'],
+  },
+]
+
+export const APPLICATIONS: Application[] = [
+  { id: 'residential', title: 'Residential', description: 'Premium plumbing and storage for modern homes.', icon: Home },
+  { id: 'industrial', title: 'Industrial', description: 'High-pressure systems for complex processing units.', icon: Factory },
+  { id: 'agriculture', title: 'Agriculture', description: 'Irrigation and borewell solutions for large-scale farming.', icon: Sprout },
+  { id: 'infrastructure', title: 'Infrastructure', description: 'City-wide drainage and protection networks.', icon: Building },
+]
+
+export function getProductBySlug(slug: string) {
+  return TRENDING.find((p) => p.slug === slug)
+}
