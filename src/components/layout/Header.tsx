@@ -4,22 +4,32 @@ import { NAV_ITEMS } from '@/data/navigation'
 import { useUIStore } from '@/store/useUIStore'
 import { MegaMenu } from './MegaMenu'
 import { Button } from '@/components/ui/button'
+import logo from "@/assets/logo.jpg";
 import { WhatsAppLink } from '@/components/common/WhatsAppLink'
 import { cn } from '@/lib/utils'
 
 function BrandMark() {
   return (
-    <Link to="/" className="flex shrink-0 items-center gap-[11px]" aria-label="Ponshankar Agencies home">
-      <span className="grid size-[38px] place-items-center rounded-lg bg-gradient-to-br from-navy-900 to-brand-600">
-        <span className="flex gap-[3px]">
-          <i className="block h-[18px] w-1 rounded-sm bg-brand-300" />
-          <i className="block h-[18px] w-1 rounded-sm bg-white" />
-        </span>
-      </span>
-      <span className="leading-none">
-        <b className="block font-display text-[1.16rem] font-extrabold tracking-tight text-navy-900">PONSHANKAR</b>
-        <small className="text-[.62rem] font-semibold tracking-[0.34em] text-brand-600">AGENCIES</small>
-      </span>
+    <Link
+      to="/"
+      className="flex shrink-0 items-center gap-3"
+      aria-label="Ponshankar Agencies Home"
+    >
+    <img
+      src={logo}
+      alt="Ponshankar Agencies"
+      className="h-12 w-auto object-contain"
+    />
+
+      <div className="leading-none">
+        <h1 className="font-display text-[28px] font-extrabold tracking-tight text-[#E10600]">
+          PONSHANKAR
+        </h1>
+
+        <p className="mt-1 text-[16px] font-semibold tracking-[0.35em] text-[#E10600]">
+          AGENCIES
+        </p>
+      </div>
     </Link>
   )
 }
