@@ -4,6 +4,17 @@ export type MediaVariant =
   | 'water' | 'commercial' | 'industrial' | 'infra'
   | 'agri' | 'drainage' | 'sunset' | 'tank' | 'steel'
 
+
+export interface ProductSpec {
+  label: string
+  value: string
+}
+
+export interface CaseStudyStat {
+  label: string
+  value: string
+}
+
 export interface NavChild {
   label: string
   href: string
@@ -26,10 +37,15 @@ export interface Solution {
   id: string
   title: string
   slug: string
+
   description: string
+  detail: string
+
+  outcomes: string[]
+  features: string[]
+
   media: MediaVariant
   icon: LucideIcon
-  features: string[]
 }
 
 export interface Portfolio {
@@ -44,15 +60,25 @@ export interface Portfolio {
 }
 
 export interface TrendingProduct {
-  id: string
-  name: string
-  slug: string
-  category: string
-  description: string
-  media: MediaVariant
-  icon: LucideIcon
-  accent?: 'blue' | 'green' | 'amber'
-  href: string
+  id: string;
+  name: string;
+  slug: string;
+
+  category: string;
+
+  description: string;
+  longDescription: string;
+
+  specs: ProductSpec[];
+  features: string[];
+
+  media: MediaVariant;
+
+  icon: LucideIcon;
+
+  accent?: "blue" | "green" | "amber";
+
+  href: string;
 }
 
 export interface Application {
@@ -97,10 +123,25 @@ export interface GalleryItem {
 
 export interface CaseStudy {
   id: string
+
   title: string
   slug: string
+
   tag: string
+
+  location: string
+  year: string
+  scope: string
+
+  overview: string
+  challenge: string
+  result: string
+
+  stats: CaseStudyStat[]
+
   description?: string
+
   media: MediaVariant
-  span?: 'tall' | 'wide'
+
+  span?: "tall" | "wide"
 }

@@ -6,6 +6,7 @@ import { ProductRange } from '@/components/sections/home/ProductRange'
 import { ProjectsShowcase } from '@/components/sections/home/ProjectsShowcase'
 import { InquiryForm } from '@/components/sections/home/InquiryForm'
 
+
 export default function HomePage() {
   return (
     <>
