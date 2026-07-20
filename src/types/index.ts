@@ -25,6 +25,7 @@ export interface NavItem {
 export interface Solution {
   id: string
   title: string
+  slug: string
   description: string
   media: MediaVariant
   icon: LucideIcon
@@ -45,6 +46,7 @@ export interface Portfolio {
 export interface TrendingProduct {
   id: string
   name: string
+  slug: string
   category: string
   description: string
   media: MediaVariant
@@ -96,6 +98,7 @@ export interface GalleryItem {
 export interface CaseStudy {
   id: string
   title: string
+  slug: string
   tag: string
   description?: string
   media: MediaVariant

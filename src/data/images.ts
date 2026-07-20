@@ -28,7 +28,7 @@
  import municipalImg     from '@/assets/46.jpg'
  import residentialProjImg from '@/assets/42.jpg'
  import factoryImg       from '@/assets/37.jpg'
- import irrigationImg    from '@/assets/AB6AXuClQlhn9E-79y3tipoVHt65mqVQWGIcQ5bj4-drpn4mYVStEdDbb4ZDNVtc3eDqSr-7P9vg9z67QNWc2ZKrNl6UvxKI2g33tjwc-Vl7jwFokWdoh4kxyITyF8XcBawCjQwr5r3Rr5aY5lI7H6yVagE9DwWIC-C458ZU3I1gnGzXhqFeGt58IzUW1_kHyKgqPA6ETokYW1PqfGVwxIFd-bzmNSEkdMH2LpL34ozALyN1cx22qFiz.jpg'
+ import irrigationImg    from '@/assets/45.jpg'
  import sewerImg         from '@/assets/44.jpg'
  import rainwaterImg     from '@/assets/35.jpg'
 
