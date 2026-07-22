@@ -227,3 +227,7 @@ export const GALLERY_IMAGES: Record<string, string | undefined> = {
   'female-adapter':   galFemaleAdapter,
   'elbow-45-b':       galElbow45B,
 }
+
+import solutionsHero from '@/assets/logo.jpg'
+
+export const SOLUTIONS_HERO_IMAGE = solutionsHero

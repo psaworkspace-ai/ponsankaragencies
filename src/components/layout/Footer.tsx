@@ -1,112 +1,176 @@
 import { Link } from 'react-router-dom'
-import { Globe, Share2, BarChart3 } from 'lucide-react'
+import { Globe, Phone, Mail } from 'lucide-react'
 import { SITE } from '@/lib/constants'
 
 function BrandMark() {
   return (
-    <div className="flex items-center gap-[11px]">
-      <span className="grid size-[38px] place-items-center rounded-lg bg-gradient-to-br from-navy-900 to-brand-600">
+    <div className="flex items-center gap-3">
+      <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-navy-900 to-brand-600">
         <span className="flex gap-[3px]">
-          <i className="block h-[18px] w-1 rounded-sm bg-brand-300" />
-          <i className="block h-[18px] w-1 rounded-sm bg-white" />
+          <i className="block h-4 w-1 rounded-sm bg-brand-300" />
+          <i className="block h-4 w-1 rounded-sm bg-white" />
         </span>
       </span>
+
       <span className="leading-none">
-        <b className="block font-display text-[1.16rem] font-extrabold tracking-tight text-white">PONSHANKAR</b>
-        <small className="text-[.62rem] font-semibold tracking-[0.34em] text-brand-300">AGENCIES</small>
+        <b className="font-display text-base font-bold text-white md:text-lg">
+          Ponshankar
+        </b>
+
+        <small className="mt-0.5 block text-[11px] font-medium text-brand-300 md:text-xs">
+          Agencies
+        </small>
       </span>
     </div>
   )
 }
 
-const COLUMNS = [
-  {
-    heading: 'Quick Links',
-    links: [
-      { label: 'About Company', href: '/about' },
-      { label: 'Our Infrastructure', href: '/about' },
-      { label: 'Latest Projects', href: '/#projects' },
-      { label: 'Become a Distributor', href: '/contact' },
-      { label: 'Quality Control', href: '/about' },
-    ],
-  },
-  {
-    heading: 'Product Range',
-    links: [
-      { label: 'CPVC Plumbing', href: '/products' },
-      { label: 'Industrial Fittings', href: '/products' },
-      { label: 'SWR Drainage', href: '/products' },
-      { label: 'Agriculture Pipes', href: '/products' },
-      { label: 'Storage Tanks', href: '/products' },
-    ],
-  },
-  {
-    heading: 'Resources',
-    links: [
-      { label: 'Download Catalogue', href: '/products' },
-      { label: 'Price List 2024', href: '/products' },
-      { label: 'Technical Guides', href: '/products' },
-      { label: 'Certifications', href: '/about' },
-      { label: 'Warranty Info', href: '/contact' },
-    ],
-  },
+const QUICK_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Products', href: '/products' },
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const PRODUCTS = [
+  { label: 'CPVC Plumbing', href: '/products' },
+  { label: 'Industrial Pipes', href: '/products' },
+  { label: 'SWR Drainage', href: '/products' },
+  { label: 'Agriculture Pipes', href: '/products' },
 ]
 
 const SOCIALS = [
   { icon: Globe, label: 'Website', href: '/' },
-  { icon: Share2, label: 'Network', href: '/about' },
-  { icon: BarChart3, label: 'Insights', href: '/products' },
+  { icon: Phone, label: 'Call', href: 'tel:+919876543210' },
+  { icon: Mail, label: 'Email', href: 'mailto:info@ponshankar.com' },
 ]
+
 const LEGAL = [
   { label: 'Privacy Policy', href: '/contact' },
-  { label: 'Sitemap', href: '/' },
   { label: 'Terms of Service', href: '/contact' },
 ]
 
 export function Footer() {
   const year = new Date().getFullYear()
+
   return (
-    <footer className="bg-navy-950 pt-20 text-white">
+    <footer className="bg-navy-950 text-white">
       <div className="container-px">
-        <div className="grid grid-cols-1 gap-8 pb-[46px] md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+
+        {/* Top Footer */}
+        <div className="grid gap-8 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+
+          {/* Company */}
           <div>
             <BrandMark />
-            <p className="my-[18px] max-w-[280px] text-[.9rem] text-slate-400">
-              Providing end-to-end infrastructure solutions with the highest quality standards since {SITE.since}.
+
+            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-400">
+              Trusted distributor of premium plumbing and piping solutions
+              across Tamil Nadu since {SITE.since}.
             </p>
-            <div className="flex gap-2.5">
-              {SOCIALS.map((s) => (
-                <Link key={s.label} to={s.href} aria-label={s.label} className="grid size-[38px] place-items-center rounded-[9px] bg-white/[0.06] transition-colors hover:bg-brand-600">
-                  <s.icon className="size-[18px] text-slate-200" />
+
+            <div className="mt-5 flex gap-2.5">
+              {SOCIALS.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  aria-label={item.label}
+                  className="grid h-9 w-9 place-items-center rounded-lg bg-white/5 transition-colors hover:bg-brand-600"
+                >
+                  <item.icon className="h-4.5 w-4.5 text-slate-200" />
                 </Link>
               ))}
             </div>
           </div>
 
-          {COLUMNS.map((col) => (
-            <div key={col.heading}>
-              <h5 className="mb-4 font-display text-[.92rem] font-bold text-white">{col.heading}</h5>
-              {col.links.map((link) => (
-                <Link key={link.label} to={link.href} className="block py-1.5 text-[.88rem] text-slate-400 transition-all hover:pl-1 hover:text-white">
+          {/* Quick Links */}
+          <div>
+            <h4 className="mb-4 font-display text-sm font-semibold text-white">
+              Quick Links
+            </h4>
+
+            <div className="space-y-2">
+              {QUICK_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="block text-sm text-slate-400 transition-colors hover:text-white"
+                >
                   {link.label}
                 </Link>
               ))}
             </div>
-          ))}
+          </div>
+
+          {/* Products */}
+          <div>
+            <h4 className="mb-4 font-display text-sm font-semibold text-white">
+              Products
+            </h4>
+
+            <div className="space-y-2">
+              {PRODUCTS.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="block text-sm text-slate-400 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="mb-4 font-display text-sm font-semibold text-white">
+              Contact
+            </h4>
+
+            <div className="space-y-2 text-sm text-slate-400">
+              <p>Erode, Tamil Nadu</p>
+
+              <a
+                href="tel:+919876543210"
+                className="block transition-colors hover:text-white"
+              >
+                +91 98765 43210
+              </a>
+
+              <a
+                href="mailto:info@ponshankar.com"
+                className="block break-all transition-colors hover:text-white"
+              >
+                info@ponshankar.com
+              </a>
+            </div>
+          </div>
+
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-5 border-t border-white/[0.08] pb-[30px] pt-[22px]">
-          <p className="text-[.8rem] uppercase tracking-wide text-slate-400">
-            (c) {year} Ponshankar Agencies. All rights reserved.
+        {/* Bottom Footer */}
+        <div className="flex flex-col items-center justify-between gap-3 py-5 text-center md:flex-row">
+
+          <p className="text-xs text-slate-500 md:text-sm">
+            © {year} Ponshankar Agencies. All Rights Reserved.
           </p>
-          <div className="flex flex-wrap gap-[26px]">
-            {LEGAL.map((l) => (
-              <Link key={l.label} to={l.href} className="text-[.8rem] uppercase tracking-wide text-slate-400 hover:text-white">
-                {l.label}
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {LEGAL.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                className="text-xs text-slate-500 transition-colors hover:text-white md:text-sm"
+              >
+                {item.label}
               </Link>
             ))}
           </div>
+
         </div>
+
       </div>
     </footer>
   )

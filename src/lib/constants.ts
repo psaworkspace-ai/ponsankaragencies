@@ -17,9 +17,7 @@ export const CONTACT = {
   hours: ['Mon - Fri: 09:00 - 18:00', 'Sat: 09:00 - 13:00'],
 } as const
 
-export const BRANDS = [
-  'PRINCE PIPES', 'FINOLEX', 'ASTRAL', 'ASHIRVAD', 'AQUEL BATHWARE', 'HAURATON', 'SUPREME',
-] as const
+
 
 export const GALLERY_FEATURES = [
   'Up to 82°C', 'High tensile and impact strength', 'Freedom from toxicity',

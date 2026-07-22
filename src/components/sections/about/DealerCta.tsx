@@ -4,10 +4,10 @@ import { Reveal } from '@/components/common/Reveal'
 
 export function DealerCta() {
   return (
-    <section className="bg-[#050B18] py-[60px] text-center text-white">
+    <section className="bg-[#050B18] py-16 text-center text-white">
       <div className="container-px">
         <Reveal>
-          <h2 className="text-[clamp(1.7rem,3.6vw,2.4rem)] text-white">
+          <h2 className="text-3xl md:text-4xl text-white">
             Expand Your Business with Ponshankar
           </h2>
           <p className="mx-auto my-[14px] mb-[26px] max-w-[600px] text-slate-400">

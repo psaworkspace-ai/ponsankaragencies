@@ -3,13 +3,13 @@ import type { NavItem } from '@/types'
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   {
-    label: 'About Us',
+    label: 'About',
     href: '/about',
     dropdown: [
-      { label: 'Company Overview', href: '/about' },
-      { label: 'Infrastructure Portfolio', href: '/about' },
-      { label: 'The Ponshankar Edge', href: '/about' },
-      { label: 'Certifications & Quality', href: '/about' },
+      { label: 'Company Profile', href: '/about' },
+      { label: 'Infrastructure', href: '/about' },
+      { label: 'Why Choose Us', href: '/about' },
+      { label: 'Quality & Certifications', href: '/about' },
     ],
   },
   {

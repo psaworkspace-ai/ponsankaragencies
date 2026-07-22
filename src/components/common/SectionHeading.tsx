@@ -21,22 +21,31 @@ export function SectionHeading({
   return (
     <Reveal
       className={cn(
-        'max-w-2xl',
+        'max-w-3xl',
         align === 'center' ? 'mx-auto text-center' : 'text-left',
         className,
       )}
     >
       {eyebrow && (
-        <span className="mb-3.5 inline-block text-[.74rem] font-bold uppercase tracking-[0.16em] text-brand-600">
+        <span className="mb-2 inline-block text-[11px] font-semibold tracking-wide text-brand-600 uppercase">
           {eyebrow}
         </span>
       )}
-      <h2 className="text-[clamp(1.8rem,3.6vw,2.5rem)] font-bold">{title}</h2>
-      {subtitle && <p className="mt-3.5 text-[1.02rem] text-muted">{subtitle}</p>}
+
+      <h2 className="text-2xl font-bold leading-tight text-ink sm:text-3xl lg:text-4xl">
+        {title}
+      </h2>
+
+      {subtitle && (
+        <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-muted md:text-base">
+          {subtitle}
+        </p>
+      )}
+
       {rule && (
         <div
           className={cn(
-            'mt-[18px] h-1 w-16 rounded bg-brand-600',
+            'mt-4 h-1 w-14 rounded bg-brand-600',
             align === 'center' && 'mx-auto',
           )}
         />

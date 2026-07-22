@@ -31,7 +31,7 @@ const MAP_SRC = `https://www.google.com/maps?q=${MAP_Q}&output=embed`
 
 const Field = ({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) => (
   <div>
-    <label className="mb-[7px] block text-[.68rem] font-bold uppercase tracking-wider text-muted">{label}</label>
+    <label className="mb-[7px] block text-xs font-semibold tracking-wide text-muted">{label}</label>
     {children}
     {error && <p className="mt-1 text-[.72rem] text-red-500">{error}</p>}
   </div>
@@ -78,17 +78,17 @@ export function InquiryForm() {
   return (
     <section className="section-y">
       <div className="container-px">
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-10 lg:grid-cols-2">
           {/* LEFT — heading, contact info, map */}
           <Reveal>
-            <h2 className="text-[clamp(1.8rem,3.6vw,2.4rem)] leading-[1.12]">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight ">
               Let's build something great together.
             </h2>
-            <p className="mt-4 max-w-[440px] text-[1rem] leading-[1.7] text-muted">
+            <p className="mt-4 max-w-[440px] text-sm md:text-base leading-7  text-muted">
               Have a requirement or a query? Reach out to our technical team today. We provide detailed estimations and on-site consultations for large projects.
             </p>
 
-            <div className="mt-8 flex flex-col gap-6">
+            <div className="mt-8 flex flex-col gap-4">
               <InfoRow icon={MapPin} title="Head Office" lines={[CONTACT.address.line1, CONTACT.address.line2]} />
               <InfoRow icon={Mail} title="Email Us" lines={[...CONTACT.emails]} />
               <InfoRow icon={Phone} title="Call Support" lines={[...CONTACT.phones]} />
@@ -99,7 +99,7 @@ export function InquiryForm() {
                 title="Ponshankar Agencies location"
                 src={MAP_SRC}
                 width="100%"
-                height="240"
+                height="220"
                 style={{ border: 0, display: 'block' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -110,9 +110,9 @@ export function InquiryForm() {
 
           {/* RIGHT — Send an Inquiry form */}
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line bg-white p-7 shadow-[var(--shadow-card)] sm:p-9">
-              <h3 className="mb-6 text-[1.4rem] font-bold">Send an Inquiry</h3>
-              <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Send an inquiry" className="flex flex-col gap-5">
+            <div className="rounded-2xl border border-line bg-white p-6 shadow-[var(--shadow-card)] sm:p-8">
+              <h3 className="mb-6 text-xl font-semibold">Send an Inquiry</h3>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Send an inquiry" className="flex flex-col gap-4">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Full Name" error={errors.name?.message}>
                     <Input placeholder="John Doe" {...register('name')} />

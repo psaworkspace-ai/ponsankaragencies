@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { INDUSTRIES } from '@/data/solutions'
 import { SmartImage } from '@/components/common/SmartImage'
-import { Reveal } from '@/components/common/Reveal'
+import { SectionHeading } from '@/components/common/SectionHeading'
 import { INDUSTRY_IMAGES } from '@/data/images'
 
 export function IndustriesCarousel() {
@@ -17,10 +17,11 @@ export function IndustriesCarousel() {
       <div className="container-px">
         {/* Item 17 — title + buttons grouped tight */}
         <div className="mb-9 flex items-end justify-between gap-4">
-          <Reveal>
-            <span className="mb-3.5 inline-block text-[.74rem] font-bold uppercase tracking-[0.16em] text-brand-600">Sectors</span>
-            <h2 className="text-[clamp(1.8rem,3.6vw,2.5rem)]">Industries We Serve</h2>
-          </Reveal>
+        <SectionHeading
+    eyebrow="Sectors"
+    align="left"
+    title="Industries We Serve"
+/>
           <div className="flex gap-2">
             <button onClick={() => scrollBy(-1)} aria-label="Previous industries" className="grid size-10 place-items-center rounded-full border-[1.5px] border-line-2 bg-white text-ink-2 transition-colors hover:border-brand-600 hover:text-brand-600"><ChevronLeft className="size-[18px]" /></button>
             <button onClick={() => scrollBy(1)} aria-label="Next industries" className="grid size-10 place-items-center rounded-full border-[1.5px] border-line-2 bg-white text-ink-2 transition-colors hover:border-brand-600 hover:text-brand-600"><ChevronRight className="size-[18px]" /></button>
@@ -32,7 +33,7 @@ export function IndustriesCarousel() {
               <SmartImage src={INDUSTRY_IMAGES[ind.id]} alt={ind.label} variant={ind.media} className="absolute inset-0 size-full" />
               <div className="absolute inset-x-0 bottom-0 flex items-center gap-[9px] bg-white p-[14px_16px]">
                 <ind.icon className="size-[18px] text-brand-600 [stroke-width:1.9]" />
-                <span className="text-[.92rem] font-semibold">{ind.label}</span>
+                <span className="text-base font-semibold">{ind.label}</span>
               </div>
             </div>
           ))}

@@ -9,6 +9,7 @@ const ProductGalleryPage = lazy(() => import('@/pages/ProductGalleryPage'))
 const SolutionsPage = lazy(() => import('@/pages/SolutionsPage'))
 const ContactPage = lazy(() => import('@/pages/ContactPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
+const ProductDetailsPage = lazy(() => import('@/pages/ProductDetailsPage'))
 
 function Loader() {
   return (
@@ -29,10 +30,19 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="products" element={<ProductsPage />} />
-          <Route path="products/gallery" element={<ProductGalleryPage />} />
-          <Route path="solutions" element={<SolutionsPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+
+<Route path="products/gallery" element={<ProductGalleryPage />} />
+
+<Route
+    path="products/:productId"
+    element={<ProductDetailsPage />}
+/>
+
+<Route path="solutions" element={<SolutionsPage />} />
+
+<Route path="contact" element={<ContactPage />} />
+
+<Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>

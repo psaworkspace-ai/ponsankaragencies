@@ -19,8 +19,8 @@ export function WhyUs() {
                 <div className="mb-4 grid size-[58px] place-items-center rounded-[14px] bg-brand-50">
                   <f.icon className="size-7 text-brand-600 [stroke-width:1.8]" />
                 </div>
-                <h3 className="mb-2 text-[1.06rem]">{f.title}</h3>
-                <p className="text-[.9rem] text-muted">{f.description}</p>
+                <h3 className="mb-2 text-xl font-semibold">{f.title}</h3>
+                <p className="text-sm leading-6 text-muted">{f.description}</p>
               </div>
             </Reveal>
           ))}

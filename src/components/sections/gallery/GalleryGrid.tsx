@@ -30,10 +30,10 @@ export function GalleryGrid() {
       <div className="grid grid-cols-2 gap-[18px] sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visible.map((item, i) => (
           <Reveal key={item.id} delay={(i % 5) * 0.04}>
-            <Link
-              to="/products/smartfit-plus"
-              className="group relative block h-full overflow-hidden rounded-xl border border-brand-100 bg-white transition-all duration-[240ms] hover:-translate-y-1.5 hover:border-brand-400 hover:shadow-[var(--shadow-card)]"
-            >
+<Link
+  to={`/products/${item.id}`}
+  className="group relative block h-full overflow-hidden rounded-xl border border-brand-100 bg-white transition-all duration-[240ms] hover:-translate-y-1.5 hover:border-brand-400 hover:shadow-[var(--shadow-card)]"
+>
               {item.isNew && <Badge variant="new" className="absolute right-3 top-3 z-[2]">New</Badge>}
               <div className="grid aspect-square place-items-center bg-[#F4F6FA] p-[22px]">
                 <SmartImage

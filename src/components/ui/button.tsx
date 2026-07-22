@@ -17,7 +17,7 @@ const buttonVariants = cva(
       // Item 31 — fixed heights so every button matches
       size: {
         default: 'h-11 px-6',
-        lg: 'h-[52px] px-8 text-base',
+        lg: 'h-12 px-6 text-sm',
         sm: 'h-9 px-4 text-xs',
         icon: 'size-11',
       },

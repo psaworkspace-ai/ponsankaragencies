@@ -3,9 +3,9 @@ import { Seo } from '@/components/common/Seo'
 import { Reveal } from '@/components/common/Reveal'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { ProductPortfolios } from '@/components/sections/products/ProductPortfolios'
-import { TrendingSolutions } from '@/components/sections/products/TrendingSolutions'
-import { TailoredByApplication } from '@/components/sections/products/TailoredByApplication'
+import { ProductPortfolios } from '@/components/sections/product-details/ProductPortfolios'
+import { TrendingSolutions } from '@/components/sections/product-details/TrendingSolutions'
+import { TailoredByApplication } from '@/components/sections/product-details/TailoredByApplication'
 import { CtaBlue } from '@/components/sections/shared/CtaBlue'
 
 function ProductsHero() {

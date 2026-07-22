@@ -1,6 +1,6 @@
 import { Seo } from '@/components/common/Seo'
 import { Marquee } from '@/components/common/Marquee'
-import { BRANDS } from '@/lib/constants'
+import { BRANDS } from '@/data/brands'
 import { Hero } from '@/components/sections/home/Hero'
 import { ProductRange } from '@/components/sections/home/ProductRange'
 import { ProjectsShowcase } from '@/components/sections/home/ProjectsShowcase'

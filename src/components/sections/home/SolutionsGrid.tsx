@@ -21,11 +21,11 @@ export function SolutionsGrid() {
                   {/* Item 6 — shorter image band */}
                   <SmartImage src={SOLUTION_IMAGES[s.id]} alt={s.title} variant={s.media} icon={s.icon} className="aspect-[16/9]" />
                   <div className="p-6">
-                    <h3 className="mb-2.5 text-[1.2rem] text-brand-600">{s.title}</h3>
-                    <p className="mb-4 text-[.92rem] text-muted">{s.description}</p>
+                    <h3 className="mb-2.5  text-xl font-semibold text-brand-600">{s.title}</h3>
+                    <p className="mb-4 text-sm leading-6 text-muted">{s.description}</p>
                     <ul className="flex flex-col gap-[7px]">
                       {s.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2 text-[.72rem] font-semibold uppercase tracking-wide text-ink-2">
+                        <li key={f} className="flex items-center gap-2 text-sm font-medium  text-ink-2">
                           <Check className="size-[15px] shrink-0 text-brand-600" /> {f}
                         </li>
                       ))}

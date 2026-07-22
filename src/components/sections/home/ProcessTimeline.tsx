@@ -18,8 +18,8 @@ export function ProcessTimeline() {
                 <div className="mx-auto mb-4 grid size-14 place-items-center rounded-full border-2 border-brand-100 bg-white transition-all duration-200 group-hover:-translate-y-1 group-hover:border-brand-600 group-hover:bg-brand-600">
                   <step.icon className="size-6 text-brand-600 transition-colors group-hover:text-white [stroke-width:1.9]" />
                 </div>
-                <h4 className="mb-1.5 text-[.96rem]">{step.title}</h4>
-                <p className="text-[.82rem] text-muted">{step.description}</p>
+                <h4 className="mb-2 text-lg font-semibold">{step.title}</h4>
+                <p className="text-sm leading-6 text-muted">{step.description}</p>
               </div>
             ))}
           </div>
