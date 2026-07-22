@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
 import { Seo } from '@/components/common/Seo'
-import { Marquee } from '@/components/common/Marquee'
-import { GALLERY_FEATURES } from '@/lib/constants'
 import { useGalleryStore } from '@/store/useGalleryStore'
 import { GalleryFilters } from '@/components/sections/gallery/GalleryFilters'
 import { GalleryGrid } from '@/components/sections/gallery/GalleryGrid'
@@ -39,7 +37,6 @@ export default function ProductGalleryPage() {
         </div>
       </section>
 
-      <Marquee items={GALLERY_FEATURES} variant="feature" />
     </>
   )
 }

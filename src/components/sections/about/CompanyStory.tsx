@@ -51,6 +51,7 @@ export function CompanyStory() {
               <SmartImage
                 src={ABOUT_HERO_IMAGE}
                 alt="Ponshankar Agencies"
+                variant="water"
                 className="aspect-[4/5] w-full object-cover"
               />
             </div>
