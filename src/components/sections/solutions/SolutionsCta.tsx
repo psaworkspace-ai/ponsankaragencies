@@ -38,7 +38,7 @@ export function SolutionsCta() {
 
               <Button
                 asChild
-                variant="secondary"
+                variant="outline"
                 size="lg"
                 className="border border-white/15 bg-white/10 text-white hover:bg-white/20"
               >
