@@ -3,9 +3,7 @@ import {
   Building2,
   Factory,
   Sprout,
-  ArrowRight,
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
 
 import { Reveal } from '@/components/common/Reveal'
 import { SectionHeading } from '@/components/common/SectionHeading'

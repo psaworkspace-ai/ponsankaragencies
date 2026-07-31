@@ -78,8 +78,8 @@ export function FeaturedProducts() {
                   hover:shadow-[var(--shadow-card)]
                 "
               >
-                <div className="relative overflow-hidden">
-                  <SmartImage
+                <SmartImage
+                    variant="image"
                     src={product.image}
                     alt={product.title}
                     className="h-64 w-full object-cover transition duration-500 group-hover:scale-110"

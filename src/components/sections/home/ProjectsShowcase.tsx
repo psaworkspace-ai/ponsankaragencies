@@ -162,10 +162,6 @@ export function ProjectsShowcase() {
                       {project.title}
                     </h3>
 
-                    <p className="text-sm leading-6 text-muted-foreground">
-                      {project.description}
-                    </p>
-
                     <div className="flex items-center justify-between pt-2">
 
                       <button

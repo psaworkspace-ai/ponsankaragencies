@@ -41,11 +41,7 @@ export default function ProductDetailsPage() {
         path={`/products/${product.id}`}
       />
 
-      <ProductHero
-        product={product}
-        image={image}
-        details={details}
-      />
+<ProductHero />
 
       <ProductGallery
         product={product}

@@ -102,8 +102,8 @@ export function WhyChooseUs() {
             }}
             className="pb-14"
           >
-            {APPLICATIONS.map((item, index) => (
-              <SwiperSlide key={item.title} className="h-auto">
+            {FEATURES.map((feature, index) => (
+              <SwiperSlide key={feature.title} className="h-auto">
                 <Reveal delay={index * 0.05}>
                   <div
                     className="

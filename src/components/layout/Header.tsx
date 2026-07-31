@@ -101,7 +101,7 @@ export function Header() {
                     "
                   >
                     <div className="p-2">
-                      {item.dropdown.map((link) => (
+                      {item.dropdown?.map((link) => (
                         <Link
                           key={link.label}
                           to={link.href}
@@ -128,7 +128,7 @@ export function Header() {
                 )}
 
                 {/* Mega Menu */}
-                {hasMega && (
+                {item.mega && (
                   <MegaMenu
                     columns={item.mega}
                     title={item.label}

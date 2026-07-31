@@ -103,6 +103,7 @@ export function ProductPortfolios() {
               >
                 <div className="overflow-hidden">
                   <SmartImage
+                    variant="image"
                     src={PORTFOLIO_IMAGES[portfolio.key]}
                     alt={portfolio.title}
                     className="

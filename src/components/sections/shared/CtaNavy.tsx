@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Phone, FileText } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Reveal } from '@/components/common/Reveal'
 import { CONTACT } from '@/lib/constants'

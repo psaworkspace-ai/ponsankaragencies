@@ -75,6 +75,7 @@ export function ProductHero() {
             <div className="relative">
               <div className="overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl">
                 <SmartImage
+                  variant="image"
                   src={HERO_IMAGE}
                   alt="Ponshankar Agencies Products"
                   className="h-[260px] w-full object-cover sm:h-[420px] lg:h-[620px]"
