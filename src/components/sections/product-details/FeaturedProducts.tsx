@@ -79,12 +79,12 @@ export function FeaturedProducts() {
                 "
               >
                 <div className="relative overflow-hidden">
-                  <SmartImage
-                    variant="image"
-                    src={product.image}
-                    alt={product.title}
-                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-110"
-                  />
+<SmartImage
+  src={product.image}
+  alt={product.title}
+  className="h-64"
+  imgClassName="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+/>
 
                   <span className="absolute left-4 top-4 rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
                     {product.category}
