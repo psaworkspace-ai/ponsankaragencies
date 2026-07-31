@@ -3,13 +3,37 @@ import type { NavItem } from '@/types'
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   {
-    label: 'About',
-    href: '/about',
+    label: "About",
+    href: "/about",
     dropdown: [
-      { label: 'Company Profile', href: '/about' },
-      { label: 'Infrastructure', href: '/about' },
-      { label: 'Why Choose Us', href: '/about' },
-      { label: 'Quality & Certifications', href: '/about' },
+      {
+        label: "Overview",
+        href: "/about#hero",
+      },
+      {
+        label: "Company Story",
+        href: "/about#company-story",
+      },
+      {
+        label: "Vision & Mission",
+        href: "/about#vision-mission",
+      },
+      {
+        label: "Our Journey",
+        href: "/about#timeline",
+      },
+      {
+        label: "Our Brands",
+        href: "/about#brands",
+      },
+      {
+        label: "Become a Dealer",
+        href: "/about#dealer",
+      },
+      {
+        label: "Contact Us",
+        href: "/contact",
+      },
     ],
   },
   {
@@ -50,7 +74,28 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  { label: 'Solutions', href: '/solutions' },
+  {
+    label: "Solutions",
+    href: "/solutions",
+    dropdown: [
+      {
+        label: "Overview",
+        href: "/solutions#hero",
+      },
+      {
+        label: "Applications",
+        href: "/solutions#applications",
+      },
+      {
+        label: "Why Choose Us",
+        href: "/solutions#why-us",
+      },
+      {
+        label: "Trusted Brands",
+        href: "/solutions#brands",
+      },
+    ],
+  },
   { label: 'Contact', href: '/contact' },
 ]
 

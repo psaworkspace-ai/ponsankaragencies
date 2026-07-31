@@ -73,15 +73,6 @@ export function SolutionsCategories() {
                 <p className="mb-6 flex-1 text-sm leading-7 text-muted">
                   {category.description}
                 </p>
-
-                <Link
-                  to={category.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-all group-hover:gap-3"
-                >
-                  Explore Solution
-
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
               </div>
             </Reveal>
           ))}

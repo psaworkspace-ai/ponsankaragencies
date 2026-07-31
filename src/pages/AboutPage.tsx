@@ -1,12 +1,10 @@
-import { Seo } from '@/components/common/Seo'
+import { Seo } from "@/components/common/Seo";
 
-import { AboutHero } from '../components/sections/about/AboutHero'
-import { CompanyStory } from '../components/sections/about/CompanyStory'
-import { Timeline } from '../components/sections/about/Timeline'
-import { EdgeGrid } from '@/components/sections/about/EdgeGrid'
-import { BrandGrid } from '../components/sections/about/BrandGrid'
-import { VisionMission } from '../components/sections/about/VisionMission'
-import { DealerCta } from '@/components/sections/about/DealerCta'
+import { AboutHero } from "../components/sections/about/AboutHero";
+import { CompanyStory } from "../components/sections/about/CompanyStory";
+import { Timeline } from "../components/sections/about/Timeline";
+import { VisionMission } from "../components/sections/about/VisionMission";
+import { DealerCta } from "@/components/sections/about/DealerCta";
 
 export default function AboutPage() {
   return (
@@ -17,19 +15,25 @@ export default function AboutPage() {
         path="/about"
       />
 
-      <AboutHero />
+      <section id="hero" className="scroll-mt-20">
+        <AboutHero />
+      </section>
 
-      <CompanyStory />
+      <section id="company-story" className="scroll-mt-20">
+        <CompanyStory />
+      </section>
 
-      <Timeline />
+      <section id="vision-mission" className="scroll-mt-20">
+        <VisionMission />
+      </section>
 
-      <EdgeGrid />
+      <section id="timeline" className="scroll-mt-20">
+        <Timeline />
+      </section>
 
-      <BrandGrid />
-
-      <VisionMission />
-
-      <DealerCta />
+      <section id="dealer" className="scroll-mt-20">
+        <DealerCta />
+      </section>
     </>
-  )
+  );
 }

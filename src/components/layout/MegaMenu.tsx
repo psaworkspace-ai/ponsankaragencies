@@ -1,33 +1,88 @@
-import { Link } from 'react-router-dom'
-import type { NavColumn } from '@/types'
-import { Badge } from '@/components/ui/badge'
+import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import type { NavColumn } from "@/types";
 
 interface MegaMenuProps {
-  columns: NavColumn[]
+  title?: string;
+  columns: NavColumn[];
 }
 
-export function MegaMenu({ columns }: MegaMenuProps) {
+export function MegaMenu({ title, columns }: MegaMenuProps) {
   return (
     <div
-      className="invisible absolute left-1/2 top-[calc(100%+10px)] z-50 grid w-[min(1080px,94vw)] -translate-x-1/2 translate-y-2 grid-cols-4 gap-x-[30px] gap-y-6 rounded-2xl border border-line bg-white p-[30px_34px] opacity-0 shadow-[var(--shadow-lift)] transition-all duration-[240ms] group-hover/mega:visible group-hover/mega:translate-y-0 group-hover/mega:opacity-100"
+      className="
+        invisible
+        absolute
+        left-1/2
+        top-[calc(100%+12px)]
+        z-50
+        w-[min(1080px,94vw)]
+        -translate-x-1/2
+        translate-y-2
+        rounded-2xl
+        border
+        border-line
+        bg-white
+        p-8
+        opacity-0
+        shadow-[var(--shadow-lift)]
+        transition-all
+        duration-300
+        group-hover/mega:visible
+        group-hover/mega:translate-y-0
+        group-hover/mega:opacity-100
+      "
     >
-      {columns.map((col) => (
-        <div key={col.heading}>
-          <h5 className="mb-3 text-[.74rem] font-bold uppercase tracking-[0.12em] text-brand-600">
-            {col.heading}
-          </h5>
-          {col.links.map((link) => (
-            <Link
-              key={link.label}
-              to={link.href}
-              className="flex items-center gap-2 py-[5px] text-[.82rem] font-medium text-ink-2 transition-colors hover:text-brand-600"
-            >
-              {link.label}
-              {link.tag && <Badge variant="tagNew">{link.tag}</Badge>}
-            </Link>
-          ))}
+      {/* Optional Title */}
+      {title && (
+        <div className="mb-6 border-b border-line pb-4">
+          <h3 className="text-lg font-semibold text-slate-900">
+            {title}
+          </h3>
         </div>
-      ))}
+      )}
+
+      <div className="grid grid-cols-4 gap-8">
+        {columns.map((column) => (
+          <div key={column.heading}>
+            <h5 className="mb-4 text-xs font-bold uppercase tracking-widest text-brand-600">
+              {column.heading}
+            </h5>
+
+            <div className="space-y-1">
+              {column.links.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-lg
+                    px-2
+                    py-2
+                    text-sm
+                    font-medium
+                    text-ink-2
+                    transition-all
+                    duration-200
+                    hover:bg-brand-50
+                    hover:text-brand-600
+                  "
+                >
+                  <span>{link.label}</span>
+
+                  {link.tag && (
+                    <Badge variant="tagNew">
+                      {link.tag}
+                    </Badge>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }

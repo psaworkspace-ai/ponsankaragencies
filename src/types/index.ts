@@ -16,9 +16,48 @@ export interface CaseStudyStat {
 }
 
 export interface NavChild {
+  /**
+   * Navigation title
+   */
   label: string
+
+  /**
+   * Route or URL
+   */
   href: string
+
+  /**
+   * Small badge
+   * Example: "New", "Popular"
+   */
   tag?: string
+
+  /**
+   * Short description
+   * Used in enhanced dropdowns
+   */
+  description?: string
+
+  /**
+   * Lucide icon name/component
+   * (Will be used in later phases)
+   */
+  icon?: string
+
+  /**
+   * Highlight important menu item
+   */
+  featured?: boolean
+
+  /**
+   * Disable navigation if required
+   */
+  disabled?: boolean
+
+  /**
+   * External website
+   */
+  external?: boolean
 }
 
 export interface NavColumn {

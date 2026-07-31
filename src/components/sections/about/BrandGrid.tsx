@@ -39,7 +39,7 @@ export function BrandGrid() {
                   src={brand.logo}
                   alt={brand.name}
                   className="
-                    max-h-16
+                    max-h-14
                     w-auto
                     object-contain
                     opacity-80

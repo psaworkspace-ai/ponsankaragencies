@@ -50,12 +50,6 @@ export function SolutionsHero() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button asChild size="lg">
-                <Link to="/contact">
-                  Get Consultation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
 
 <Button
   asChild

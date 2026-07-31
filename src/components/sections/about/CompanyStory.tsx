@@ -1,44 +1,40 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Award,
   Truck,
   ShieldCheck,
   Users,
-} from 'lucide-react'
+} from "lucide-react";
 
-import { Button } from '@/components/ui/button'
-import { Reveal } from '@/components/common/Reveal'
-import { SectionHeading } from '@/components/common/SectionHeading'
-import { SmartImage } from '@/components/common/SmartImage'
-import { ABOUT_HERO_IMAGE } from '@/data/images'
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/common/Reveal";
+import { SectionHeading } from "@/components/common/SectionHeading";
+import { SmartImage } from "@/components/common/SmartImage";
+import { ABOUT_HERO_IMAGE } from "@/data/images";
 
 const FEATURES = [
   {
     icon: ShieldCheck,
-    title: 'Genuine Products',
-    description:
-      'We supply only authentic products from trusted manufacturers.',
+    title: "Quality Assured",
+    description: "100% genuine products with guaranteed quality.",
   },
   {
     icon: Award,
-    title: 'Premium Brands',
-    description:
-      'Authorized distributor for leading national and international brands.',
+    title: "Trusted Brands",
+    description: "Partnering with India's leading piping manufacturers.",
   },
   {
     icon: Truck,
-    title: 'Fast Delivery',
-    description:
-      'Efficient logistics ensure timely delivery across Tamil Nadu.',
+    title: "On-Time Delivery",
+    description: "Reliable supply across Tamil Nadu.",
   },
   {
     icon: Users,
-    title: 'Technical Support',
-    description:
-      'Experienced team providing expert product guidance and assistance.',
+    title: "Technical Expertise",
+    description: "Expert guidance for the right piping solutions.",
   },
-]
+];
 
 export function CompanyStory() {
   return (
@@ -63,21 +59,21 @@ export function CompanyStory() {
               align="left"
               eyebrow="Who We Are"
               title="Delivering Trusted Piping Solutions Since 1993"
-              subtitle="Ponshankar Agencies has earned the trust of contractors, engineers, builders, industries, and homeowners by delivering premium-quality piping products backed by dependable service."
+              subtitle="For over 30 years, Ponshankar Agencies has been supplying quality piping products and water management solutions to customers across Tamil Nadu."
             />
 
             <div className="mt-6 space-y-5 text-base leading-7 text-muted">
               <p>
-                For more than three decades, Ponshankar Agencies has been a
-                reliable distribution partner for premium piping systems used in
-                residential, commercial, industrial, and infrastructure
-                projects.
+                Established in 1993, Ponshankar Agencies is a trusted distributor of
+                premium piping products from leading brands. We serve residential,
+                commercial, industrial, agricultural, and infrastructure projects with
+                reliable products and professional service.
               </p>
 
               <p>
-                Our focus on quality, technical expertise, customer support, and
-                timely delivery has helped us become one of Tamil Nadu's trusted
-                suppliers for complete water management solutions.
+                Our focus on quality, timely delivery, and customer satisfaction has helped
+                us build long-term relationships with contractors, engineers, builders, and
+                businesses across Tamil Nadu.
               </p>
             </div>
 
@@ -86,10 +82,10 @@ export function CompanyStory() {
               {FEATURES.map((feature) => (
                 <div
                   key={feature.title}
-                  className="rounded-2xl border border-line bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
+                  className="group rounded-2xl border border-line bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[var(--shadow-card)]"
                 >
-                  <div className="mb-4 grid size-12 place-items-center rounded-xl bg-brand-50">
-                    <feature.icon className="size-6 text-brand-600" />
+                  <div className="mb-4 grid size-12 place-items-center rounded-xl bg-brand-50 transition-colors duration-300 group-hover:bg-brand-600">
+                    <feature.icon className="size-6 text-brand-600 transition-colors duration-300 group-hover:text-white" />
                   </div>
 
                   <h3 className="text-lg font-semibold text-ink">
@@ -107,7 +103,7 @@ export function CompanyStory() {
             <div className="mt-10">
               <Button asChild size="lg">
                 <Link to="/contact">
-                  Contact Our Team
+                  Get in Touch
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -116,5 +112,5 @@ export function CompanyStory() {
         </div>
       </div>
     </section>
-  )
+  );
 }

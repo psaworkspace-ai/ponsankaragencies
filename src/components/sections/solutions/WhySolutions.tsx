@@ -5,84 +5,148 @@ import {
   Wrench,
   Headphones,
   PackageCheck,
-} from 'lucide-react'
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
-import { Reveal } from '@/components/common/Reveal'
-import { SectionHeading } from '@/components/common/SectionHeading'
+import { Reveal } from "@/components/common/Reveal";
+import { SectionHeading } from "@/components/common/SectionHeading";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const FEATURES = [
   {
     icon: BadgeCheck,
-    title: 'Premium Quality',
-    description:
-      'We supply certified piping systems from trusted national and international brands.',
+    title: "Premium Quality",
+    description: "High-quality piping products from trusted manufacturers.",
   },
   {
     icon: ShieldCheck,
-    title: 'Genuine Products',
-    description:
-      'Every product is sourced directly from authorized manufacturers and distributors.',
+    title: "Authorized Brands",
+    description: "100% genuine products sourced directly from leading brands.",
   },
   {
     icon: Truck,
-    title: 'Fast Delivery',
-    description:
-      'Efficient inventory management ensures quick delivery for projects of every scale.',
+    title: "Fast Delivery",
+    description: "Reliable and on-time delivery for projects of every size.",
   },
   {
     icon: Wrench,
-    title: 'Technical Expertise',
-    description:
-      'Our experienced team helps you choose the right piping solution for every application.',
+    title: "Technical Support",
+    description: "Expert guidance to choose the right products.",
   },
   {
     icon: Headphones,
-    title: 'Customer Support',
-    description:
-      'Dedicated assistance before and after every purchase to ensure complete satisfaction.',
+    title: "Customer Service",
+    description: "Responsive assistance before and after every purchase.",
   },
   {
     icon: PackageCheck,
-    title: 'Complete Solutions',
-    description:
-      'From residential plumbing to industrial infrastructure, we provide end-to-end piping solutions.',
+    title: "Complete Solutions",
+    description: "Comprehensive piping solutions for every application.",
   },
-]
+];
 
-export function WhySolutions() {
+export function WhyChooseUs() {
   return (
-    <section className="section-y bg-white">
+    <section className="bg-softer py-16 lg:py-20">
       <div className="container-px">
         <SectionHeading
           eyebrow="Why Choose Us"
-          title="Why Customers Choose Ponshankar Agencies"
-          subtitle="Our commitment to quality, reliability, and customer satisfaction has made us a trusted partner for thousands of successful projects."
-          className="mb-14"
+          title="Why Customers Trust Ponshankar Agencies"
+          subtitle="Delivering quality products, dependable service, and complete piping solutions for residential, commercial, and industrial projects."
+          className="mb-10"
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature, index) => (
-            <Reveal
-              key={feature.title}
-              delay={index * 0.05}
-            >
-              <div className="group h-full rounded-2xl border border-line bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-50 transition-colors duration-300 group-hover:bg-brand-100">
-                  <feature.icon className="h-7 w-7 text-brand-600" />
-                </div>
+        <div className="relative">
+          {/* Previous Button */}
+          <button className="why-prev absolute -left-5 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-line bg-white p-3 shadow-lg transition-all hover:bg-brand-600 hover:text-white lg:flex">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
 
-                <h3 className="mb-3 text-xl font-semibold text-ink">
-                  {feature.title}
-                </h3>
+          {/* Next Button */}
+          <button className="why-next absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-line bg-white p-3 shadow-lg transition-all hover:bg-brand-600 hover:text-white lg:flex">
+            <ChevronRight className="h-5 w-5" />
+          </button>
 
-                <p className="leading-7 text-muted">
-                  {feature.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            loop
+            speed={700}
+            spaceBetween={24}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            className="pb-14"
+          >
+            {FEATURES.map((feature, index) => (
+              <SwiperSlide key={feature.title} className="h-auto">
+                <Reveal delay={index * 0.05}>
+                  <div
+                    className="
+                      group
+                      relative
+                      flex
+                      h-full
+                      flex-col
+                      overflow-hidden
+                      rounded-2xl
+                      border
+                      border-line
+                      bg-white
+                      p-5
+                      shadow-sm
+                      transition-all
+                      duration-300
+                      hover:-translate-y-2
+                      hover:border-brand-200
+                      hover:shadow-xl
+                    "
+                  >
+                    {/* Background Glow */}
+                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-50 opacity-40 blur-3xl transition-opacity duration-300 group-hover:opacity-70" />
+
+                    <div className="relative">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 transition-colors duration-300 group-hover:bg-brand-100">
+                        <feature.icon className="h-6 w-6 text-brand-600" />
+                      </div>
+
+                      <h3 className="mb-2 text-lg font-semibold text-ink">
+                        {feature.title}
+                      </h3>
+
+                      <p className="text-sm leading-6 text-muted">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
-  )
+  );
 }

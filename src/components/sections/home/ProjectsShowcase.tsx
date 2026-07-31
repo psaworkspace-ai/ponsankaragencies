@@ -1,163 +1,217 @@
-import { useRef } from 'react'
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-import { FEATURED_PROJECT, PROJECT_GALLERY } from '@/data/projects'
-import { FEATURED_IMAGE, PROJECT_IMAGES } from '@/data/images'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
 
-import { SmartImage } from '@/components/common/SmartImage'
-import { Reveal } from '@/components/common/Reveal'
-import { SectionHeading } from '@/components/common/SectionHeading'
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { FEATURED_PROJECT, PROJECT_GALLERY } from "@/data/projects";
+import { FEATURED_IMAGE, PROJECT_IMAGES } from "@/data/images";
+
+import { SmartImage } from "@/components/common/SmartImage";
+import { Reveal } from "@/components/common/Reveal";
+import { SectionHeading } from "@/components/common/SectionHeading";
 
 export function ProjectsShowcase() {
-  const railRef = useRef<HTMLDivElement>(null)
-
-  const scrollBy = (direction: number) => {
-    if (!railRef.current) return
-
-    railRef.current.scrollBy({
-      left: direction * Math.min(railRef.current.clientWidth * 0.85, 420),
-      behavior: 'smooth',
-    })
-  }
-
   return (
     <section id="projects" className="section-y bg-softer">
-      <div className="container-px">
-        {/* Heading + Featured Project */}
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
+      <div className="container-px mx-auto max-w-7xl">
+
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+
+          <div className="flex flex-col justify-center">
+
             <SectionHeading
               align="left"
               eyebrow="Our Projects"
               title="Trusted Piping Solutions Across Tamil Nadu"
-              subtitle="For over two decades, Ponshankar Agencies has been the backbone of critical infrastructure by delivering high-performance piping solutions for residential, commercial, industrial, and agricultural projects."
+              subtitle="For over two decades, Ponshankar Agencies has successfully supplied premium plumbing, industrial, drainage, agricultural, and water management solutions across residential, commercial and infrastructure projects."
             />
 
-            <div className="mt-8 flex gap-3">
-              <button
-                onClick={() => scrollBy(-1)}
-                className="grid size-10 place-items-center rounded-lg border border-line bg-white transition hover:border-brand-600 hover:text-brand-600"
-                aria-label="Previous Projects"
-              >
-                <ChevronLeft className="size-5" />
-              </button>
-
-              <button
-                onClick={() => scrollBy(1)}
-                className="grid size-11 place-items-center rounded-lg bg-brand-600 text-white transition hover:bg-brand-700"
-                aria-label="Next Projects"
-              >
-                <ChevronRight className="size-5" />
-              </button>
-            </div>
           </div>
 
-          <Reveal delay={0.1}>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg">
+          <Reveal delay={0.15}>
+
+            <div className="relative overflow-hidden rounded-3xl shadow-xl">
+
               <SmartImage
                 src={FEATURED_IMAGE}
                 alt={FEATURED_PROJECT.title}
                 variant={FEATURED_PROJECT.media}
-                className="aspect-[4/3] w-full object-cover"
+                className="h-[260px] w-full object-cover sm:h-[360px] lg:h-[460px]"
               />
 
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <div className="flex items-center justify-between gap-4 rounded-xl bg-white/95 p-5 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 p-6">
+
+                <div className="flex items-center justify-between rounded-2xl bg-white/95 p-5 backdrop-blur">
+
                   <div>
-                    <span className="text-xs font-semibold text-brand-600">
+
+                    <span className="text-xs font-semibold uppercase tracking-widest text-brand-600">
                       {FEATURED_PROJECT.tag}
                     </span>
 
-                    <h4 className="mt-1 text-lg font-semibold text-ink">
+                    <h3 className="mt-2 text-2xl font-bold text-ink">
                       {FEATURED_PROJECT.title}
-                    </h4>
+                    </h3>
+
                   </div>
 
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
-                    <ArrowRight className="size-5" />
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white">
+                    <ArrowRight className="h-5 w-5" />
                   </span>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
 
-        {/* Project Slider */}
-        <div
-          ref={railRef}
-          className="
-            mt-10
-            flex
-            gap-6
-            overflow-x-auto
-            snap-x
-            snap-mandatory
-            scroll-smooth
-            pb-2
-            no-scrollbar
-          "
+                </div>
+
+              </div>
+
+            </div>
+
+          </Reveal>
+
+        </div>
+                {/* ===================== Projects Slider ===================== */}
+
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          navigation
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          loop
+          spaceBetween={24}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 1.4,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+            1440: {
+              slidesPerView: 3.2,
+            },
+          }}
+          className="mt-20"
         >
           {PROJECT_GALLERY.map((project, index) => (
-            <Reveal key={project.id} delay={(index % 3) * 0.05}>
-              <div
-                className="
-                  group
-                  relative
-                  h-[250px]
-                  min-w-[290px]
-                  overflow-hidden
-                  rounded-2xl
-                  snap-start
-                  shadow-md
-                  lg:min-w-[330px]
-                "
-              >
-                <SmartImage
-                  src={PROJECT_IMAGES[project.id]}
-                  alt={project.title}
-                  variant={project.media}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+            <SwiperSlide key={project.id}>
+              <Reveal delay={(index % 3) * 0.08}>
+                <article
+                  className="
+                    group
+                    overflow-hidden
+                    rounded-3xl
+                    border
+                    border-line
+                    bg-white
+                    shadow-lg
+                    transition-all
+                    duration-500
+                    hover:-translate-y-2
+                    hover:shadow-2xl
+                  "
+                >
+                  <div className="relative h-[260px] overflow-hidden lg:h-[300px]">
+                    <SmartImage
+                      src={PROJECT_IMAGES[project.id]}
+                      alt={project.title}
+                      variant={project.media}
+                      className="
+                        h-full
+                        w-full
+                        object-cover
+                        transition-transform
+                        duration-700
+                        group-hover:scale-110
+                      "
+                    />
 
-                <div className="absolute inset-0 bg-[linear-gradient(transparent_30%,rgba(8,20,40,.92))]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-                <span className="absolute left-4 top-4 rounded-md bg-white/90 px-3 py-1 text-xs font-semibold text-ink backdrop-blur-sm">
-                  {project.category}
-                </span>
+                    <span
+                      className="
+                        absolute
+                        left-5
+                        top-5
+                        rounded-full
+                        bg-white/95
+                        px-4
+                        py-2
+                        text-xs
+                        font-semibold
+                        text-ink
+                      "
+                    >
+                      {project.category}
+                    </span>
+                  </div>
 
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-                  <h4 className="max-w-[80%] text-base font-semibold leading-tight text-white">
-                    {project.title}
-                  </h4>
+                  <div className="space-y-4 p-6">
 
-                  <span
-                    className="
-                      grid
-                      size-9
-                      shrink-0
-                      place-items-center
-                      rounded-full
-                      bg-white/20
-                      text-white
-                      backdrop-blur-sm
-                      transition-all
-                      duration-300
-                      group-hover:bg-brand-700
-                    "
-                  >
-                    <ArrowUpRight className="size-4" />
-                  </span>
-                </div>
-              </div>
-            </Reveal>
+                    <h3 className="text-xl font-bold text-ink">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {project.description}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-2">
+
+                      <button
+                        className="
+                          inline-flex
+                          items-center
+                          gap-2
+                          font-medium
+                          text-brand-600
+                          transition
+                          hover:gap-3
+                        "
+                      >
+                        View Project
+
+                        <ArrowUpRight className="h-4 w-4" />
+                      </button>
+
+                      <span
+                        className="
+                          flex
+                          h-11
+                          w-11
+                          items-center
+                          justify-center
+                          rounded-full
+                          bg-brand-50
+                          text-brand-600
+                          transition
+                          group-hover:bg-brand-600
+                          group-hover:text-white
+                        "
+                      >
+                        <ArrowRight className="h-5 w-5" />
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </article>
+              </Reveal>
+            </SwiperSlide>
           ))}
-        </div>
-      </div>
+        </Swiper>
+              </div>
     </section>
-  )
+  );
 }

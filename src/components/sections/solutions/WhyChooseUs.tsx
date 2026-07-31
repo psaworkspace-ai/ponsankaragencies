@@ -1,10 +1,10 @@
 import {
-  Home,
-  Building2,
-  Factory,
-  Sprout,
-  Hotel,
-  Warehouse,
+  BadgeCheck,
+  ShieldCheck,
+  Truck,
+  Wrench,
+  Headphones,
+  PackageCheck,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -13,63 +13,57 @@ import { Reveal } from "@/components/common/Reveal";
 import { SectionHeading } from "@/components/common/SectionHeading";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-const APPLICATIONS = [
+const FEATURES = [
   {
-    title: "Residential Projects",
-    description:
-      "Reliable plumbing solutions for homes, villas, apartments, and gated communities.",
-    icon: Home,
+    icon: BadgeCheck,
+    title: "Premium Quality",
+    description: "High-quality piping products from trusted manufacturers.",
   },
   {
-    title: "Commercial Buildings",
-    description:
-      "Complete piping systems for offices, shopping malls, schools, and hospitals.",
-    icon: Building2,
+    icon: ShieldCheck,
+    title: "Authorized Brands",
+    description: "100% genuine products sourced directly from leading brands.",
   },
   {
-    title: "Industrial Plants",
-    description:
-      "Heavy-duty piping systems designed for factories, warehouses, and manufacturing facilities.",
-    icon: Factory,
+    icon: Truck,
+    title: "Fast Delivery",
+    description: "Reliable and on-time delivery for projects of every size.",
   },
   {
-    title: "Agriculture",
-    description:
-      "Efficient irrigation and water management solutions for farms and plantations.",
-    icon: Sprout,
+    icon: Wrench,
+    title: "Technical Support",
+    description: "Expert guidance to choose the right products.",
   },
   {
-    title: "Hospitality",
-    description:
-      "Premium plumbing systems for hotels, resorts, and hospitality infrastructure.",
-    icon: Hotel,
+    icon: Headphones,
+    title: "Customer Service",
+    description: "Responsive assistance before and after every purchase.",
   },
   {
-    title: "Infrastructure",
-    description:
-      "Large-scale piping solutions for public utilities, government, and infrastructure projects.",
-    icon: Warehouse,
+    icon: PackageCheck,
+    title: "Complete Solutions",
+    description: "Comprehensive piping solutions for every application.",
   },
 ];
 
-export function ProductApplications() {
+export function WhyChooseUs() {
   return (
     <section className="bg-softer py-16 lg:py-20">
       <div className="container-px">
         <SectionHeading
-          eyebrow="Applications"
-          title="Built for Every Environment"
-          subtitle="Our products are trusted across residential, commercial, industrial, agricultural, and infrastructure projects."
+          eyebrow="Why Choose Us"
+          title="Why Customers Trust Ponshankar Agencies"
+          subtitle="Delivering quality products, dependable service, and complete piping solutions for residential, commercial, and industrial projects."
           className="mb-10"
         />
 
-        <div className="relative">
+<div className="relative">
           {/* Navigation Buttons */}
           <button className="applications-prev absolute -left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-line bg-white p-3 shadow-lg transition hover:bg-brand-600 hover:text-white lg:flex">
             <ChevronLeft className="h-5 w-5" />
@@ -114,14 +108,16 @@ export function ProductApplications() {
                   <div
                     className="
                       group
+                      relative
                       flex
                       h-full
                       flex-col
+                      overflow-hidden
                       rounded-2xl
                       border
                       border-line
                       bg-white
-                      p-6
+                      p-5
                       shadow-sm
                       transition-all
                       duration-300
@@ -130,17 +126,22 @@ export function ProductApplications() {
                       hover:shadow-xl
                     "
                   >
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-50 transition-all group-hover:bg-brand-100">
-                      <item.icon className="h-7 w-7 text-brand-600" />
+                    {/* Background Glow */}
+                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-50 opacity-40 blur-3xl transition-opacity duration-300 group-hover:opacity-70" />
+
+                    <div className="relative">
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 transition-colors duration-300 group-hover:bg-brand-100">
+                        <feature.icon className="h-6 w-6 text-brand-600" />
+                      </div>
+
+                      <h3 className="mb-2 text-lg font-semibold text-ink">
+                        {feature.title}
+                      </h3>
+
+                      <p className="text-sm leading-6 text-muted">
+                        {feature.description}
+                      </p>
                     </div>
-
-                    <h3 className="mb-3 text-xl font-semibold text-ink">
-                      {item.title}
-                    </h3>
-
-                    <p className="flex-1 leading-7 text-muted">
-                      {item.description}
-                    </p>
                   </div>
                 </Reveal>
               </SwiperSlide>

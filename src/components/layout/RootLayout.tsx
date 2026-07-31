@@ -6,16 +6,34 @@ import { MobileNav } from './MobileNav'
 import { useUIStore } from '@/store/useUIStore'
 
 export function RootLayout() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation();
   const closeMobileNav = useUIStore((s) => s.closeMobileNav)
 
   useEffect(() => {
+    closeMobileNav();
+
+    if (hash) {
+      const id = hash.replace("#", "");
+
+      setTimeout(() => {
+        const element = document.getElementById(id);
+
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 100);
+
+      return;
+    }
+
     window.scrollTo({
-    top:0,
-    behavior:'auto'
-    })
-    closeMobileNav()
-  }, [pathname, closeMobileNav])
+      top: 0,
+      behavior: "auto",
+    });
+  }, [pathname, hash, closeMobileNav]);
 
   return (
     <div className="flex min-h-screen flex-col">

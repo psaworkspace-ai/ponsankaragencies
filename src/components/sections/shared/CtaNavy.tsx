@@ -20,9 +20,6 @@ export function CtaNavy() {
             <Button asChild variant="primary" size="lg">
               <a href={`tel:${CONTACT.phones[0].replace(/\s/g, '')}`}><Phone /> Call Us Now</a>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/contact"><FileText /> Request a Quote</Link>
-            </Button>
           </div>
         </Reveal>
       </div>
