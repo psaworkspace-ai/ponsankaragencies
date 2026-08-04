@@ -23,53 +23,49 @@ export const NAV_ITEMS: NavItem[] = [
         href: "/about#timeline",
       },
       {
-        label: "Our Brands",
-        href: "/about#brands",
-      },
-      {
-        label: "Become a Dealer",
-        href: "/about#dealer",
-      },
-      {
         label: "Contact Us",
         href: "/contact",
       },
     ],
   },
   {
-    label: 'Products',
-    href: '/products',
+    label: "Products",
+    href: "/products",
     mega: [
       {
-        heading: 'Plumbing',
+        heading: "Pipes & Fittings",
         links: [
-          { label: 'SmartFit Plus — CPVC', href: '/products/gallery' },
-          { label: 'EasyFit — UPVC', href: '/products' },
-          { label: 'EasyFit RE — Reclaim', href: '/products' },
+          { label: "PVC Pipes", href: "/products/pipes-fittings" },
+          { label: "CPVC Pipes", href: "/products/pipes-fittings" },
+          { label: "UPVC Pipes", href: "/products/pipes-fittings" },
         ],
       },
       {
-        heading: 'Industrial',
+        heading: "Hoses & Fittings",
         links: [
-          { label: 'OneFit Corzan CPVC', href: '/products' },
-          { label: 'GreenFit PP-R', href: '/products' },
-          { label: 'GreenFit Blue', href: '/products' },
+          { label: "Garden Hoses", href: "/products/hoses-fittings" },
+          { label: "Industrial Hoses", href: "/products/hoses-fittings" },
+          { label: "Hose Accessories", href: "/products/hoses-fittings" },
         ],
       },
       {
-        heading: 'Agriculture',
+        heading: "Valves & Cocks",
         links: [
-          { label: 'AquaFit Pressure', href: '/products' },
-          { label: 'SafeFit Borewell', href: '/products' },
-          { label: 'PeFit Aqua HDPE', href: '/products' },
+          { label: "Ball Valves", href: "/products/valves-cocks" },
+          { label: "Gate Valves", href: "/products/valves-cocks" },
+          { label: "Control Valves", href: "/products/valves-cocks" },
         ],
       },
       {
-        heading: 'Storage & Drainage',
+        heading: "Allied Products",
         links: [
-          { label: 'StoreFit Tanks', href: '/products' },
-          { label: 'SilentFit SWR', href: '/products' },
-          { label: 'DeciLo Drainage', href: '/products', tag: 'New' },
+          { label: "Sealants", href: "/products/allied-products" },
+          { label: "Solvent Cement", href: "/products/allied-products" },
+          {
+            label: "Bath Fittings & Sanitary Ware",
+            href: "/products/bath-fittings",
+            tag: "New",
+          },
         ],
       },
     ],

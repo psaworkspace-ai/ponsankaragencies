@@ -30,10 +30,6 @@ export default function AboutPage() {
       <section id="timeline" className="scroll-mt-20">
         <Timeline />
       </section>
-
-      <section id="dealer" className="scroll-mt-20">
-        <DealerCta />
-      </section>
     </>
   );
 }
