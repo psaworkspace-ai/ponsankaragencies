@@ -4,7 +4,6 @@ import { AboutHero } from "../components/sections/about/AboutHero";
 import { CompanyStory } from "../components/sections/about/CompanyStory";
 import { Timeline } from "../components/sections/about/Timeline";
 import { VisionMission } from "../components/sections/about/VisionMission";
-import { DealerCta } from "@/components/sections/about/DealerCta";
 
 export default function AboutPage() {
   return (
