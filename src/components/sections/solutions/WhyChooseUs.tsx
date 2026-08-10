@@ -63,11 +63,10 @@ export function WhyChooseUs() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <Reveal>
-          <SectionHeading
-            eyebrow="Why Choose Us"
-            title="Built Around Quality, Reliability & Support"
-            description="We provide dependable piping products and complete solutions backed by technical expertise and responsive service."
-          />
+<SectionHeading
+  eyebrow="Why Choose Us"
+  title="Built Around Quality, Reliability & Support"
+/>
         </Reveal>
 
         <div className="relative mt-10">
