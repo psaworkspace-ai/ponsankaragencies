@@ -5,18 +5,13 @@ import {
   Wrench,
   Headphones,
   PackageCheck,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-
-import { useRef } from "react";
 
 import { Reveal } from "@/components/common/Reveal";
 import { SectionHeading } from "@/components/common/SectionHeading";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -61,35 +56,6 @@ const FEATURES = [
 ];
 
 export function WhyChooseUs() {
-  const prevButtonRef = useRef<HTMLButtonElement | null>(null);
-  const nextButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  const paginationRef = useRef<HTMLDivElement | null>(null);
-
-  const handleSwiper = (swiper: SwiperType) => {
-    if (
-      swiper.params.navigation &&
-      typeof swiper.params.navigation !== "boolean"
-    ) {
-      swiper.params.navigation.prevEl = prevButtonRef.current;
-      swiper.params.navigation.nextEl = nextButtonRef.current;
-    }
-
-    if (
-      swiper.params.pagination &&
-      typeof swiper.params.pagination !== "boolean"
-    ) {
-      swiper.params.pagination.el = paginationRef.current;
-    }
-
-    swiper.navigation.init();
-    swiper.navigation.update();
-
-    swiper.pagination.init();
-    swiper.pagination.render();
-    swiper.pagination.update();
-  };
-
   return (
     <section className="py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -116,7 +82,7 @@ export function WhyChooseUs() {
         <div className="relative mt-10">
 
           <Swiper
-            modules={[Autoplay, Pagination, Navigation]}
+            modules={[Autoplay, Pagination]}
             loop={true}
             speed={700}
             spaceBetween={24}
@@ -125,10 +91,6 @@ export function WhyChooseUs() {
               delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
-            }}
-
-            navigation={{
-              enabled: true,
             }}
 
             pagination={{
@@ -149,9 +111,7 @@ export function WhyChooseUs() {
               },
             }}
 
-            onSwiper={handleSwiper}
-
-            className="why-choose-swiper"
+            className="why-choose-swiper !pb-10"
           >
             {FEATURES.map((feature, index) => {
               const Icon = feature.icon;
@@ -257,90 +217,6 @@ export function WhyChooseUs() {
             })}
           </Swiper>
 
-          {/* ===================================================
-              BOTTOM NAVIGATION
-          =================================================== */}
-          <div
-            className="
-              mt-7
-              flex
-              items-center
-              justify-center
-              gap-4
-            "
-          >
-
-            {/* Previous */}
-            <button
-              ref={prevButtonRef}
-              type="button"
-              aria-label="Previous slide"
-              className="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-full
-                border
-                border-line
-                bg-white
-                text-ink
-                shadow-sm
-                transition-all
-                duration-300
-                hover:border-brand-600
-                hover:bg-brand-600
-                hover:text-white
-                active:scale-95
-              "
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            {/* Pagination */}
-            <div
-              ref={paginationRef}
-              className="
-                why-choose-pagination
-                flex
-                min-w-[80px]
-                items-center
-                justify-center
-              "
-            />
-
-            {/* Next */}
-            <button
-              ref={nextButtonRef}
-              type="button"
-              aria-label="Next slide"
-              className="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-full
-                border
-                border-line
-                bg-white
-                text-ink
-                shadow-sm
-                transition-all
-                duration-300
-                hover:border-brand-600
-                hover:bg-brand-600
-                hover:text-white
-                active:scale-95
-              "
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-
-          </div>
         </div>
       </div>
     </section>
