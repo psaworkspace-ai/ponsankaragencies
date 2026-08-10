@@ -9,14 +9,16 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import { useRef } from "react";
+
 import { Reveal } from "@/components/common/Reveal";
 import { SectionHeading } from "@/components/common/SectionHeading";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const FEATURES = [
@@ -59,23 +61,58 @@ const FEATURES = [
 ];
 
 export function WhyChooseUs() {
+  const prevButtonRef = useRef<HTMLButtonElement | null>(null);
+  const nextButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const paginationRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSwiper = (swiper: SwiperType) => {
+    if (
+      swiper.params.navigation &&
+      typeof swiper.params.navigation !== "boolean"
+    ) {
+      swiper.params.navigation.prevEl = prevButtonRef.current;
+      swiper.params.navigation.nextEl = nextButtonRef.current;
+    }
+
+    if (
+      swiper.params.pagination &&
+      typeof swiper.params.pagination !== "boolean"
+    ) {
+      swiper.params.pagination.el = paginationRef.current;
+    }
+
+    swiper.navigation.init();
+    swiper.navigation.update();
+
+    swiper.pagination.init();
+    swiper.pagination.render();
+    swiper.pagination.update();
+  };
+
   return (
     <section className="py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* =========================================================
+        {/* =====================================================
             SECTION HEADING
-        ========================================================= */}
+        ===================================================== */}
         <Reveal>
           <SectionHeading
             eyebrow="Why Choose Us"
-            title="Built Around Quality, Reliability & Support"
+            title="Why Customers Trust Ponshankar Agencies"
           />
+
+          <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-6 text-muted">
+            Delivering quality products, dependable service, and complete
+            piping solutions for residential, commercial, and industrial
+            projects.
+          </p>
         </Reveal>
 
-        {/* =========================================================
+        {/* =====================================================
             SLIDER
-        ========================================================= */}
+        ===================================================== */}
         <div className="relative mt-10">
 
           <Swiper
@@ -84,38 +121,20 @@ export function WhyChooseUs() {
             speed={700}
             spaceBetween={24}
 
-            /* -------------------------
-               AUTOPLAY
-            ------------------------- */
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
 
-            /* -------------------------
-               PAGINATION
-               IMPORTANT:
-               Uses custom pagination
-               container below slider
-            ------------------------- */
+            navigation={{
+              enabled: true,
+            }}
+
             pagination={{
-              el: ".why-choose-pagination",
               clickable: true,
             }}
 
-            /* -------------------------
-               NAVIGATION
-               Uses custom buttons below
-            ------------------------- */
-            navigation={{
-              prevEl: ".applications-prev",
-              nextEl: ".applications-next",
-            }}
-
-            /* -------------------------
-               RESPONSIVE
-            ------------------------- */
             breakpoints={{
               0: {
                 slidesPerView: 1,
@@ -130,12 +149,10 @@ export function WhyChooseUs() {
               },
             }}
 
+            onSwiper={handleSwiper}
+
             className="why-choose-swiper"
           >
-
-            {/* =====================================================
-                FEATURE CARDS
-            ===================================================== */}
             {FEATURES.map((feature, index) => {
               const Icon = feature.icon;
 
@@ -145,7 +162,6 @@ export function WhyChooseUs() {
                   className="!h-auto"
                 >
                   <Reveal delay={index * 0.05}>
-
                     <div
                       className="
                         group
@@ -163,16 +179,12 @@ export function WhyChooseUs() {
                         shadow-sm
                         transition-all
                         duration-300
-
                         hover:-translate-y-2
                         hover:border-brand-200
                         hover:shadow-xl
                       "
                     >
-
-                      {/* =========================================
-                          BACKGROUND GLOW
-                      ========================================= */}
+                      {/* Background Glow */}
                       <div
                         className="
                           pointer-events-none
@@ -191,9 +203,6 @@ export function WhyChooseUs() {
                         "
                       />
 
-                      {/* =========================================
-                          CARD CONTENT
-                      ========================================= */}
                       <div className="relative">
 
                         {/* Icon */}
@@ -213,11 +222,7 @@ export function WhyChooseUs() {
                           "
                         >
                           <Icon
-                            className="
-                              h-6
-                              w-6
-                              text-brand-600
-                            "
+                            className="h-6 w-6 text-brand-600"
                           />
                         </div>
 
@@ -246,16 +251,15 @@ export function WhyChooseUs() {
 
                       </div>
                     </div>
-
                   </Reveal>
                 </SwiperSlide>
               );
             })}
           </Swiper>
 
-          {/* =======================================================
-              BOTTOM SLIDER CONTROLS
-          ======================================================= */}
+          {/* ===================================================
+              BOTTOM NAVIGATION
+          =================================================== */}
           <div
             className="
               mt-7
@@ -266,49 +270,38 @@ export function WhyChooseUs() {
             "
           >
 
-            {/* =====================================================
-                PREVIOUS BUTTON
-            ===================================================== */}
+            {/* Previous */}
             <button
+              ref={prevButtonRef}
               type="button"
+              aria-label="Previous slide"
               className="
-                applications-prev
-
                 flex
                 h-10
                 w-10
                 shrink-0
                 items-center
                 justify-center
-
                 rounded-full
-
                 border
                 border-line
-
                 bg-white
                 text-ink
-
                 shadow-sm
-
                 transition-all
                 duration-300
-
                 hover:border-brand-600
                 hover:bg-brand-600
                 hover:text-white
-
                 active:scale-95
               "
-              aria-label="Previous slide"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
 
-            {/* =====================================================
-                PAGINATION DOTS
-            ===================================================== */}
+            {/* Pagination */}
             <div
+              ref={paginationRef}
               className="
                 why-choose-pagination
                 flex
@@ -318,41 +311,31 @@ export function WhyChooseUs() {
               "
             />
 
-            {/* =====================================================
-                NEXT BUTTON
-            ===================================================== */}
+            {/* Next */}
             <button
+              ref={nextButtonRef}
               type="button"
+              aria-label="Next slide"
               className="
-                applications-next
-
                 flex
                 h-10
                 w-10
                 shrink-0
                 items-center
                 justify-center
-
                 rounded-full
-
                 border
                 border-line
-
                 bg-white
                 text-ink
-
                 shadow-sm
-
                 transition-all
                 duration-300
-
                 hover:border-brand-600
                 hover:bg-brand-600
                 hover:text-white
-
                 active:scale-95
               "
-              aria-label="Next slide"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
