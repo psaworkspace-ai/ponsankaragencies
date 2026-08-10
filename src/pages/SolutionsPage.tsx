@@ -11,32 +11,37 @@ export default function SolutionsPage() {
   return (
     <>
       <Seo
-        title="Solutions"
-        description="End-to-end piping solutions for residential, commercial, industrial, agricultural, and infrastructure projects."
-        path="/solutions"
+        title="Solutions | Ponshankar Agencies"
+        description="Explore complete piping solutions, premium products, trusted brands, technical support, and reliable services from Ponshankar Agencies."
       />
 
       <main>
+        {/* Hero */}
         <section id="hero" className="scroll-mt-20">
           <SolutionsHero />
         </section>
 
+        {/* Product Applications */}
         <section id="applications" className="scroll-mt-20">
           <ProductApplications />
         </section>
 
+        {/* Why Choose Us */}
         <section id="why-us" className="scroll-mt-20">
           <WhyChooseUs />
         </section>
 
+        {/* Brands & Support */}
         <section id="brands" className="scroll-mt-20">
           <BrandsSupport />
         </section>
 
+        {/* FAQ */}
         <section id="faq" className="scroll-mt-20">
           <FAQ />
         </section>
 
+        {/* Contact */}
         <section id="contact" className="scroll-mt-20">
           <SolutionsCta />
         </section>

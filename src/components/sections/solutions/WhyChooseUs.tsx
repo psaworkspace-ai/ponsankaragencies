@@ -60,9 +60,7 @@ export function WhyChooseUs() {
     <section className="py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* =====================================================
-            SECTION HEADING
-        ===================================================== */}
+        {/* Section Heading */}
         <Reveal>
           <SectionHeading
             eyebrow="Why Choose Us"
@@ -76,42 +74,33 @@ export function WhyChooseUs() {
           </p>
         </Reveal>
 
-        {/* =====================================================
-            SLIDER
-        ===================================================== */}
+        {/* Slider */}
         <div className="relative mt-10">
-
           <Swiper
             modules={[Autoplay, Pagination]}
             loop={true}
             speed={700}
             spaceBetween={24}
-
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
-
             pagination={{
               clickable: true,
             }}
-
             breakpoints={{
               0: {
                 slidesPerView: 1,
               },
-
               640: {
                 slidesPerView: 2,
               },
-
               1024: {
                 slidesPerView: 3,
               },
             }}
-
-            className="why-choose-swiper !pb-10"
+            className="why-choose-swiper !pb-12"
           >
             {FEATURES.map((feature, index) => {
               const Icon = feature.icon;
@@ -127,8 +116,8 @@ export function WhyChooseUs() {
                         group
                         relative
                         flex
-                        min-h-[190px]
                         h-full
+                        min-h-[190px]
                         flex-col
                         overflow-hidden
                         rounded-2xl
@@ -181,9 +170,7 @@ export function WhyChooseUs() {
                             group-hover:bg-brand-100
                           "
                         >
-                          <Icon
-                            className="h-6 w-6 text-brand-600"
-                          />
+                          <Icon className="h-6 w-6 text-brand-600" />
                         </div>
 
                         {/* Title */}
@@ -216,7 +203,6 @@ export function WhyChooseUs() {
               );
             })}
           </Swiper>
-
         </div>
       </div>
     </section>
