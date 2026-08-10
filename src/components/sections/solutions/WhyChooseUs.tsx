@@ -60,57 +60,98 @@ const FEATURES = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {/* =========================================================
+            SECTION HEADING
+        ========================================================= */}
         <Reveal>
-<SectionHeading
-  eyebrow="Why Choose Us"
-  title="Built Around Quality, Reliability & Support"
-/>
+          <SectionHeading
+            eyebrow="Why Choose Us"
+            title="Built Around Quality, Reliability & Support"
+          />
         </Reveal>
 
+        {/* =========================================================
+            SLIDER
+        ========================================================= */}
         <div className="relative mt-10">
-          {/* Slider */}
+
           <Swiper
             modules={[Autoplay, Pagination, Navigation]}
             loop={true}
             speed={700}
             spaceBetween={24}
+
+            /* -------------------------
+               AUTOPLAY
+            ------------------------- */
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
+
+            /* -------------------------
+               PAGINATION
+               IMPORTANT:
+               Uses custom pagination
+               container below slider
+            ------------------------- */
             pagination={{
+              el: ".why-choose-pagination",
               clickable: true,
             }}
+
+            /* -------------------------
+               NAVIGATION
+               Uses custom buttons below
+            ------------------------- */
             navigation={{
               prevEl: ".applications-prev",
               nextEl: ".applications-next",
             }}
+
+            /* -------------------------
+               RESPONSIVE
+            ------------------------- */
             breakpoints={{
               0: {
                 slidesPerView: 1,
               },
+
               640: {
                 slidesPerView: 2,
               },
+
               1024: {
                 slidesPerView: 3,
               },
             }}
-            className="pb-8"
+
+            className="why-choose-swiper"
           >
+
+            {/* =====================================================
+                FEATURE CARDS
+            ===================================================== */}
             {FEATURES.map((feature, index) => {
               const Icon = feature.icon;
 
               return (
-                <SwiperSlide key={feature.title} className="h-auto">
+                <SwiperSlide
+                  key={feature.title}
+                  className="!h-auto"
+                >
                   <Reveal delay={index * 0.05}>
+
                     <div
                       className="
                         group
                         relative
                         flex
+                        min-h-[190px]
                         h-full
                         flex-col
                         overflow-hidden
@@ -122,14 +163,19 @@ export function WhyChooseUs() {
                         shadow-sm
                         transition-all
                         duration-300
+
                         hover:-translate-y-2
                         hover:border-brand-200
                         hover:shadow-xl
                       "
                     >
-                      {/* Background Glow */}
+
+                      {/* =========================================
+                          BACKGROUND GLOW
+                      ========================================= */}
                       <div
                         className="
+                          pointer-events-none
                           absolute
                           -right-8
                           -top-8
@@ -145,7 +191,11 @@ export function WhyChooseUs() {
                         "
                       />
 
+                      {/* =========================================
+                          CARD CONTENT
+                      ========================================= */}
                       <div className="relative">
+
                         {/* Icon */}
                         <div
                           className="
@@ -162,82 +212,151 @@ export function WhyChooseUs() {
                             group-hover:bg-brand-100
                           "
                         >
-                          <Icon className="h-6 w-6 text-brand-600" />
+                          <Icon
+                            className="
+                              h-6
+                              w-6
+                              text-brand-600
+                            "
+                          />
                         </div>
 
                         {/* Title */}
-                        <h3 className="mb-2 text-lg font-semibold text-ink">
+                        <h3
+                          className="
+                            mb-2
+                            text-lg
+                            font-semibold
+                            text-ink
+                          "
+                        >
                           {feature.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-sm leading-6 text-muted">
+                        <p
+                          className="
+                            text-sm
+                            leading-6
+                            text-muted
+                          "
+                        >
                           {feature.description}
                         </p>
+
                       </div>
                     </div>
+
                   </Reveal>
                 </SwiperSlide>
               );
             })}
           </Swiper>
 
-          {/* Bottom Slider Controls */}
-          <div className="mt-6 flex items-center justify-center gap-3">
-            {/* Previous */}
+          {/* =======================================================
+              BOTTOM SLIDER CONTROLS
+          ======================================================= */}
+          <div
+            className="
+              mt-7
+              flex
+              items-center
+              justify-center
+              gap-4
+            "
+          >
+
+            {/* =====================================================
+                PREVIOUS BUTTON
+            ===================================================== */}
             <button
+              type="button"
               className="
                 applications-prev
+
                 flex
-                h-11
-                w-11
+                h-10
+                w-10
+                shrink-0
                 items-center
                 justify-center
+
                 rounded-full
+
                 border
                 border-line
+
                 bg-white
                 text-ink
+
                 shadow-sm
+
                 transition-all
                 duration-300
+
                 hover:border-brand-600
                 hover:bg-brand-600
                 hover:text-white
+
+                active:scale-95
               "
               aria-label="Previous slide"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
 
-            {/* Pagination */}
-            <div className="why-choose-pagination flex items-center justify-center" />
-
-            {/* Next */}
-            <button
+            {/* =====================================================
+                PAGINATION DOTS
+            ===================================================== */}
+            <div
               className="
-                applications-next
+                why-choose-pagination
                 flex
-                h-11
-                w-11
+                min-w-[80px]
                 items-center
                 justify-center
+              "
+            />
+
+            {/* =====================================================
+                NEXT BUTTON
+            ===================================================== */}
+            <button
+              type="button"
+              className="
+                applications-next
+
+                flex
+                h-10
+                w-10
+                shrink-0
+                items-center
+                justify-center
+
                 rounded-full
+
                 border
                 border-line
+
                 bg-white
                 text-ink
+
                 shadow-sm
+
                 transition-all
                 duration-300
+
                 hover:border-brand-600
                 hover:bg-brand-600
                 hover:text-white
+
+                active:scale-95
               "
               aria-label="Next slide"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
+
           </div>
         </div>
       </div>
