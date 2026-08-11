@@ -26,7 +26,7 @@ const PRODUCTS = [
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 // Google Maps embed — no API key. Change q= to the exact address.
-const MAP_Q = encodeURIComponent('Industrial Estate, Guindy, Chennai, Tamil Nadu 600032')
+const MAP_Q = encodeURIComponent('558,Sathy Road,Erode Tamil Nadu 638003')
 const MAP_SRC = `https://www.google.com/maps?q=${MAP_Q}&output=embed`
 
 const Field = ({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) => (

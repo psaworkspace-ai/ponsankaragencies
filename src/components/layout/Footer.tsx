@@ -177,10 +177,10 @@ export function Footer() {
                   </p>
 
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+919865293333"
                     className="text-xs text-slate-300 transition hover:text-white sm:text-sm"
                   >
-                    +91 98765 43210
+                    +91 98652 93333
                   </a>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export function Footer() {
                     href="mailto:info@ponshankar.com"
                     className="break-all text-xs text-slate-300 transition hover:text-white sm:text-sm"
                   >
-                    info@ponshankar.com
+                    ponsankared@gmail.com
                   </a>
                 </div>
               </div>
@@ -217,11 +217,11 @@ export function Footer() {
                   </p>
 
                   <p className="text-xs leading-5 text-slate-300 sm:text-sm sm:leading-6">
-                    Erode,
+                    558,
                     <br />
-                    Tamil Nadu,
+                    Sathy Road,
                     <br />
-                    India
+                    Erode - 3
                   </p>
                 </div>
               </div>

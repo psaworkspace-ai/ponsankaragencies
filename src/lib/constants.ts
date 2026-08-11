@@ -6,13 +6,13 @@ export const SITE = {
 } as const
 
 export const CONTACT = {
-  phones: ['+91 44 2250 1234', '+91 98400 12345'],
-  emails: ['info@ponshankaragencies.com', 'sales@ponshankaragencies.com'],
-  whatsapp: '914422501234',
+  phones: ['+91 98652 93333', '+91 98652 11114'],
+  emails: ['ponsankared@gmail.com','psa@gmail.com'],
+  whatsapp: '91 98652 93333',
   address: {
-    line1: '12/B, Industrial Estate, Guindy',
-    line2: 'Chennai, Tamil Nadu - 600032',
-    full: '12/B, Industrial Estate, Guindy, Chennai, Tamil Nadu - 600032',
+    line1: '558, Sathy Road,',
+    line2: 'Erode, Tamil Nadu - 638002',
+    full: '558, Sathy Road, Erode, Tamil Nadu - 638002',
   },
   hours: ['Mon - Fri: 09:00 - 18:00', 'Sat: 09:00 - 13:00'],
 } as const
