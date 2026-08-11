@@ -5,7 +5,6 @@ import { ProductApplications } from "@/components/sections/solutions/ProductAppl
 import { WhyChooseUs } from "@/components/sections/solutions/WhySolutions";
 import { BrandsSupport } from "@/components/sections/solutions/BrandsSupport";
 import { FAQ } from "@/components/sections/solutions/FAQ";
-import { SolutionsCta } from "@/components/sections/solutions/SolutionsCta";
 
 export default function SolutionsPage() {
   return (
@@ -39,11 +38,6 @@ export default function SolutionsPage() {
         {/* FAQ */}
         <section id="faq" className="scroll-mt-20">
           <FAQ />
-        </section>
-
-        {/* Contact */}
-        <section id="contact" className="scroll-mt-20">
-          <SolutionsCta />
         </section>
       </main>
     </>

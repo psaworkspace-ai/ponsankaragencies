@@ -1,4 +1,4 @@
-import { ArrowRight, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { Reveal } from "@/components/common/Reveal";
@@ -51,22 +51,6 @@ export function ProductHero() {
               >
                 About Us
               </Link>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-4 text-sm lg:mt-12 lg:gap-8">
-              <div className="flex items-center gap-2 sm:gap-3">
-                <Phone className="h-4 w-4 text-brand-400 sm:h-5 sm:w-5" />
-                <span className="text-slate-300">
-                  Expert Consultation
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-3">
-                <MessageCircle className="h-4 w-4 text-brand-400 sm:h-5 sm:w-5" />
-                <span className="text-slate-300">
-                  WhatsApp Support
-                </span>
-              </div>
             </div>
           </Reveal>
 

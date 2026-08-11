@@ -39,7 +39,7 @@ export function SolutionsHero() {
               Complete Piping Solutions
             </span>
 
-            <h1 className="text-3xl  font-bold leading-tight md:text-4xl lg:text-5xl">
+            <h1 className="text-3xl  font-bold leading-tight md:text-4xl lg:text-5xl text-white">
               Innovative Solutions for Every Water Management Need
             </h1>
 

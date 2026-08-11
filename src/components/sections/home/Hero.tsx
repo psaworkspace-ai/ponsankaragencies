@@ -12,7 +12,7 @@ export function Hero() {
           <div className="absolute inset-0">
             <SmartImage
               src={HERO_IMAGE}
-              alt="Industrial piping infrastructure"
+              alt="Industrial Piping Infrastructure"
               variant="industrial"
               icon={Boxes}
               className="size-full object-cover object-center"
