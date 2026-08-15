@@ -20,7 +20,7 @@ interface Product {
 
 interface ProductGridProps {
   title: string;
-  products: Product[];
+  products: readonly Product[];
 }
 
 /* =========================================================
@@ -75,7 +75,7 @@ export function ProductGrid({
   const [sort, setSort] = useState("default");
 
   /* =========================================================
-     CURRENT URL TYPE
+     URL TYPE
   ========================================================= */
 
   const urlType = searchParams.get("type") || "";
@@ -106,39 +106,29 @@ export function ProductGrid({
 
   /* =========================================================
      ACTIVE SUBCATEGORY
-     
-     Priority:
-     URL ?type=xxx
-     ↓
-     Local filter
-     ↓
-     All
   ========================================================= */
 
   const activeSubcategory =
     urlSubcategory || subcategory;
 
   /* =========================================================
-     FILTER + SEARCH + SORT
+     FILTER PRODUCTS
   ========================================================= */
 
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    /* -------------------------------------------------------
-       URL TYPE FILTER
-    ------------------------------------------------------- */
+    /* URL FILTER */
 
     if (urlSubcategory) {
       result = result.filter(
         (product) =>
-          product.subcategory === urlSubcategory
+          product.subcategory ===
+          urlSubcategory
       );
     }
 
-    /* -------------------------------------------------------
-       LOCAL SUBCATEGORY FILTER
-    ------------------------------------------------------- */
+    /* LOCAL FILTER */
 
     if (
       !urlSubcategory &&
@@ -146,13 +136,12 @@ export function ProductGrid({
     ) {
       result = result.filter(
         (product) =>
-          product.subcategory === subcategory
+          product.subcategory ===
+          subcategory
       );
     }
 
-    /* -------------------------------------------------------
-       SEARCH
-    ------------------------------------------------------- */
+    /* SEARCH */
 
     const query = search
       .trim()
@@ -174,9 +163,7 @@ export function ProductGrid({
       });
     }
 
-    /* -------------------------------------------------------
-       SORT
-    ------------------------------------------------------- */
+    /* SORT */
 
     if (sort === "az") {
       result.sort((a, b) =>
@@ -207,11 +194,6 @@ export function ProductGrid({
     value: string
   ) => {
     setSubcategory(value);
-
-    /*
-      Remove URL type when selecting
-      the local subcategory filter.
-    */
 
     const params = new URLSearchParams(
       searchParams
@@ -297,13 +279,11 @@ export function ProductGrid({
         </div>
 
         {/* ===================================================
-            CATEGORY / SUBCATEGORY FILTER
+            CATEGORY / SUBCATEGORY
         =================================================== */}
 
         {currentCategory && (
           <div className="mb-5">
-
-            {/* CATEGORY TITLE */}
 
             <div
               className="
@@ -355,10 +335,6 @@ export function ProductGrid({
               </span>
             </div>
 
-            {/* =================================================
-                SUBCATEGORY RAIL
-            ================================================= */}
-
             <div
               className="
                 overflow-x-auto
@@ -367,20 +343,16 @@ export function ProductGrid({
                 [&::-webkit-scrollbar]:hidden
               "
             >
-              <div
-                className="
-                  flex
-                  min-w-max
-                  gap-2
-                "
-              >
+              <div className="flex min-w-max gap-2">
 
                 {/* ALL */}
 
                 <button
                   type="button"
                   onClick={() =>
-                    handleSubcategoryChange("All")
+                    handleSubcategoryChange(
+                      "All"
+                    )
                   }
                   className={`
                     whitespace-nowrap
@@ -396,7 +368,7 @@ export function ProductGrid({
                     ${
                       !urlSubcategory &&
                       subcategory === "All"
-                        ? "border-brand-600 bg-brand-600 text-white shadow-sm"
+                        ? "border-brand-600 bg-brand-600 text-white"
                         : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
                     }
                   `}
@@ -430,7 +402,7 @@ export function ProductGrid({
                         ${
                           activeSubcategory ===
                           item
-                            ? "border-brand-600 bg-brand-600 text-white shadow-sm"
+                            ? "border-brand-600 bg-brand-600 text-white"
                             : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
                         }
                       `}
@@ -445,7 +417,7 @@ export function ProductGrid({
         )}
 
         {/* ===================================================
-            SEARCH + SORT
+            SEARCH / SORT
         =================================================== */}
 
         <div
@@ -502,9 +474,7 @@ export function ProductGrid({
                   pl-9
                   pr-3
                   text-sm
-                  text-slate-900
                   outline-none
-                  placeholder:text-slate-400
                   focus:border-brand-500
                   focus:ring-2
                   focus:ring-brand-500/10
@@ -582,7 +552,6 @@ export function ProductGrid({
                 px-4
                 text-sm
                 font-medium
-                transition
                 ${
                   hasFilters
                     ? "border-slate-200 bg-white text-slate-600 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
@@ -600,11 +569,6 @@ export function ProductGrid({
           <div
             className="
               mt-3
-              flex
-              flex-wrap
-              items-center
-              justify-between
-              gap-2
               border-t
               border-slate-200
               pt-3
@@ -612,26 +576,25 @@ export function ProductGrid({
               text-slate-500
             "
           >
-            <span>
-              Showing{" "}
-              <strong className="text-slate-900">
-                {filteredProducts.length}
-              </strong>{" "}
-              of{" "}
-              <strong className="text-slate-900">
-                {products.length}
-              </strong>{" "}
-              products
-            </span>
+            Showing{" "}
+            <strong className="text-slate-900">
+              {filteredProducts.length}
+            </strong>{" "}
+            of{" "}
+            <strong className="text-slate-900">
+              {products.length}
+            </strong>{" "}
+            products
 
             {(urlSubcategory ||
               subcategory !== "All") && (
-              <span>
+              <>
+                {" · "}
                 Filter:{" "}
                 <strong className="text-brand-600">
                   {activeSubcategory}
                 </strong>
-              </span>
+              </>
             )}
           </div>
         </div>
@@ -660,15 +623,14 @@ export function ProductGrid({
                   name={product.name}
                   image={product.image}
                   href={product.href}
+                  subcategory={
+                    product.subcategory
+                  }
                 />
               )
             )}
           </div>
         ) : (
-          /* =================================================
-             EMPTY STATE
-          ================================================= */
-
           <div
             className="
               flex
@@ -685,39 +647,14 @@ export function ProductGrid({
               text-center
             "
           >
-            <div
-              className="
-                mb-3
-                grid
-                size-12
-                place-items-center
-                rounded-full
-                bg-white
-                shadow-sm
-              "
-            >
-              <Search className="size-5 text-slate-400" />
-            </div>
+            <Search className="mb-3 size-6 text-slate-400" />
 
-            <h3
-              className="
-                text-base
-                font-semibold
-                text-slate-900
-              "
-            >
+            <h3 className="font-semibold text-slate-900">
               No products found
             </h3>
 
-            <p
-              className="
-                mt-1
-                text-sm
-                text-slate-500
-              "
-            >
-              Try another product name or
-              filter.
+            <p className="mt-1 text-sm text-slate-500">
+              Try another product name or filter.
             </p>
 
             {hasFilters && (
@@ -726,16 +663,12 @@ export function ProductGrid({
                 onClick={clearFilters}
                 className="
                   mt-4
-                  inline-flex
-                  items-center
-                  gap-1.5
                   text-sm
                   font-semibold
                   text-brand-600
                   hover:text-brand-700
                 "
               >
-                <X className="size-4" />
                 Clear filters
               </button>
             )}
