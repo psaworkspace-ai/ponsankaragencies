@@ -266,18 +266,6 @@ export function ProductPortfolios() {
                         {category.title}
                       </h3>
 
-                      {/* Product Count */}
-                      <p
-                        className="
-                          mt-1
-                          text-xs
-                          text-slate-500
-                          sm:text-sm
-                        "
-                      >
-                        {category.count} Products
-                      </p>
-
                       {/* Explore */}
                       <div
                         className="

@@ -6,7 +6,6 @@ import { PRODUCT_RANGE } from "@/data/productRange";
 import { PRODUCT_IMAGES } from "@/data/images";
 
 import { SmartImage } from "@/components/common/SmartImage";
-import { Reveal } from "@/components/common/Reveal";
 import { SectionHeading } from "@/components/common/SectionHeading";
 
 const keyFor = (name: string) =>
@@ -38,6 +37,7 @@ export function ProductRange() {
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
+
         <div className="mb-8 flex items-end justify-between gap-6">
 
           {/* Heading */}
@@ -104,36 +104,55 @@ export function ProductRange() {
         </div>
 
         {/* =====================================================
-            PRODUCT GRID / HORIZONTAL RAIL
+            PRODUCT HORIZONTAL RAIL
         ===================================================== */}
+
         <div
           ref={railRef}
           className="
             no-scrollbar
-            grid
-            auto-cols-[minmax(250px,1fr)]
-            grid-flow-col
-            gap-6
+            flex
+            gap-4
             overflow-x-auto
             overscroll-x-contain
             scroll-smooth
+            snap-x
+            snap-mandatory
             pb-3
 
-            sm:auto-cols-[minmax(280px,1fr)]
+            touch-pan-x
+            [-webkit-overflow-scrolling:touch]
 
-            md:grid-flow-row
+            sm:gap-5
+
+            md:grid
             md:grid-cols-2
+            md:gap-6
             md:overflow-visible
+            md:snap-none
 
             lg:grid-cols-4
           "
         >
-          {PRODUCT_RANGE.map((product, index) => (
-            <Reveal
+
+          {PRODUCT_RANGE.map((product) => (
+            <div
               key={product.num}
-              delay={(index % 4) * 0.05}
-              className="h-full"
+              className="
+                w-[78vw]
+                min-w-[78vw]
+                shrink-0
+                snap-start
+
+                sm:w-[300px]
+                sm:min-w-[300px]
+
+                md:w-auto
+                md:min-w-0
+                md:shrink
+              "
             >
+
               <Link
                 to={product.href}
                 className="
@@ -141,12 +160,15 @@ export function ProductRange() {
                   flex
                   h-full
                   flex-col
+                  transform-none
+                  transition-none
                 "
               >
 
                 {/* =================================================
                     IMAGE
                 ================================================= */}
+
                 <div
                   className="
                     relative
@@ -157,6 +179,7 @@ export function ProductRange() {
                     bg-slate-100
                   "
                 >
+
                   <SmartImage
                     src={
                       PRODUCT_IMAGES[
@@ -169,6 +192,11 @@ export function ProductRange() {
                       h-full
                       w-full
                       object-cover
+                    "
+                    imgClassName="
+                      h-full
+                      w-full
+                      object-cover
                       transition-transform
                       duration-500
                       group-hover:scale-105
@@ -176,6 +204,7 @@ export function ProductRange() {
                   />
 
                   {/* Gradient */}
+
                   <div
                     className="
                       pointer-events-none
@@ -186,6 +215,7 @@ export function ProductRange() {
                   />
 
                   {/* Product Number */}
+
                   <span
                     className="
                       absolute
@@ -201,6 +231,7 @@ export function ProductRange() {
                   </span>
 
                   {/* Product Name */}
+
                   <h3
                     className="
                       absolute
@@ -211,21 +242,21 @@ export function ProductRange() {
                       font-semibold
                       leading-tight
                       text-white
-                      transition-transform
-                      duration-300
-                      group-hover:-translate-y-1
                     "
                   >
                     {product.name}
                   </h3>
+
                 </div>
 
                 {/* =================================================
                     CARD CONTENT
                 ================================================= */}
+
                 <div className="flex flex-1 flex-col">
 
                   {/* Description */}
+
                   <p
                     className="
                       mt-3
@@ -240,6 +271,7 @@ export function ProductRange() {
                   </p>
 
                   {/* View Products */}
+
                   <span
                     className="
                       mt-auto
@@ -256,13 +288,17 @@ export function ProductRange() {
                     "
                   >
                     View Products
+
                     <ArrowRight className="size-3.5" />
                   </span>
 
                 </div>
+
               </Link>
-            </Reveal>
+
+            </div>
           ))}
+
         </div>
 
       </div>
