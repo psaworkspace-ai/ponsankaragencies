@@ -7,6 +7,12 @@ import { SmartImage } from "@/components/common/SmartImage";
 
 import { PORTFOLIO_IMAGES } from "@/data/images";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
 const PRODUCT_CATEGORIES = [
   {
     id: 1,
@@ -47,89 +53,271 @@ const PRODUCT_CATEGORIES = [
 
 export function ProductPortfolios() {
   return (
-    <section className="bg-slate-50 py-6 sm:py-8 lg:py-12">
+    <section className="bg-slate-50 py-10 sm:py-12 lg:py-14">
       <div className="container-px">
+
+        {/* =====================================================
+            SECTION HEADING
+        ===================================================== */}
         <Reveal>
           <SectionHeading
-            eyebrow="PRODUCT CATEGORIES"
+            eyebrow="Product Categories"
             title="Explore Our Product Categories"
-            subtitle="Choose a category to browse all available products."
-            className="mb-6 sm:mb-8"
+            subtitle="Tap or select a product category to explore."
+            className="mb-7 sm:mb-8"
           />
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-3">
-          {PRODUCT_CATEGORIES.map((category, index) => (
-            <Reveal key={category.id} delay={index * 0.05}>
-              <article
-                className="
-                  group
-                  flex
-                  h-full
-                  flex-col
-                  overflow-hidden
-                  rounded-xl
-                  sm:rounded-2xl
-                  border
-                  border-slate-200
-                  bg-white
-                  shadow-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:shadow-xl
-                "
+        {/* =====================================================
+            AUTO PRODUCT SLIDER
+        ===================================================== */}
+        <div className="relative">
+
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            loop={true}
+            speed={700}
+            autoplay={{
+              delay: 2800,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            spaceBetween={14}
+            breakpoints={{
+              /* Mobile */
+              0: {
+                slidesPerView: 1.15,
+                spaceBetween: 12,
+              },
+
+              /* Large Mobile */
+              480: {
+                slidesPerView: 1.5,
+                spaceBetween: 14,
+              },
+
+              /* Tablet */
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+              },
+
+              /* Small Desktop */
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 18,
+              },
+
+              /* Desktop */
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 18,
+              },
+
+              /* Large Desktop */
+              1280: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+            }}
+            className="product-category-swiper !pb-10"
+          >
+
+            {PRODUCT_CATEGORIES.map((category, index) => (
+              <SwiperSlide
+                key={category.id}
+                className="!h-auto"
               >
-                {/* Image */}
-                <div className="overflow-hidden">
-                  <SmartImage
-                    variant="industrial"
-                    src={PORTFOLIO_IMAGES[category.key]}
-                    alt={category.title}
-                    className="h-28 sm:h-44 lg:h-52 w-full"
-                    imgClassName="
-                      h-full
-                      w-full
-                      object-cover
-                      transition-transform
-                      duration-500
-                      group-hover:scale-110
-                    "
-                  />
-                </div>
+                <Reveal
+                  delay={index * 0.05}
+                  className="h-full"
+                >
 
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-3 sm:p-5">
-                  <h3 className="text-sm sm:text-lg lg:text-xl font-bold leading-tight text-slate-900">
-                    {category.title}
-                  </h3>
-
-                  <p className="mt-1 text-[11px] sm:text-sm text-slate-500">
-                    {category.count} Products
-                  </p>
-
+                  {/* =================================================
+                      ENTIRE CARD IS CLICKABLE
+                  ================================================= */}
                   <Link
                     to={category.href}
+                    aria-label={`Explore ${category.title}`}
                     className="
-                      mt-3
-                      inline-flex
-                      items-center
-                      text-xs
-                      sm:text-sm
-                      font-semibold
-                      text-brand-600
+                      group
+                      flex
+                      h-full
+                      flex-col
+                      overflow-hidden
+                      rounded-xl
+                      border
+                      border-slate-200
+                      bg-white
+                      shadow-sm
                       transition-all
                       duration-300
-                      hover:gap-2
+                      hover:-translate-y-1
+                      hover:border-brand-300
+                      hover:shadow-lg
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-brand-500/30
+                      active:scale-[0.98]
                     "
                   >
-                    Explore
-                    <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
+
+                    {/* =================================================
+                        IMAGE
+                    ================================================= */}
+                    <div
+                      className="
+                        relative
+                        h-[145px]
+                        overflow-hidden
+                        bg-slate-100
+                        sm:h-[160px]
+                        lg:h-[175px]
+                      "
+                    >
+                      <SmartImage
+                        variant="industrial"
+                        src={PORTFOLIO_IMAGES[category.key]}
+                        alt={category.title}
+                        className="h-full w-full"
+                        imgClassName="
+                          h-full
+                          w-full
+                          object-cover
+                          transition-transform
+                          duration-500
+                          ease-out
+                          group-hover:scale-105
+                        "
+                      />
+
+                      {/* Image Overlay */}
+                      <div
+                        className="
+                          pointer-events-none
+                          absolute
+                          inset-0
+                          bg-gradient-to-t
+                          from-black/35
+                          via-transparent
+                          to-transparent
+                        "
+                      />
+
+                      {/* =================================================
+                          TAP / SELECT INDICATOR
+                      ================================================= */}
+                      <div
+                        className="
+                          absolute
+                          right-3
+                          top-3
+                          flex
+                          size-8
+                          items-center
+                          justify-center
+                          rounded-full
+                          bg-white/90
+                          text-slate-700
+                          opacity-0
+                          shadow-md
+                          backdrop-blur-sm
+                          transition-all
+                          duration-300
+                          group-hover:translate-x-0
+                          group-hover:opacity-100
+                        "
+                      >
+                        <ArrowRight className="size-4" />
+                      </div>
+                    </div>
+
+                    {/* =================================================
+                        CONTENT
+                    ================================================= */}
+                    <div
+                      className="
+                        flex
+                        min-h-[105px]
+                        flex-1
+                        flex-col
+                        p-3
+                        sm:p-4
+                      "
+                    >
+
+                      {/* Title */}
+                      <h3
+                        className="
+                          text-sm
+                          font-semibold
+                          leading-5
+                          text-slate-900
+                          transition-colors
+                          duration-300
+                          group-hover:text-brand-600
+                          sm:text-base
+                          lg:text-[17px]
+                        "
+                      >
+                        {category.title}
+                      </h3>
+
+                      {/* Product Count */}
+                      <p
+                        className="
+                          mt-1
+                          text-xs
+                          text-slate-500
+                          sm:text-sm
+                        "
+                      >
+                        {category.count} Products
+                      </p>
+
+                      {/* Explore */}
+                      <div
+                        className="
+                          mt-auto
+                          inline-flex
+                          w-fit
+                          items-center
+                          pt-3
+                          text-xs
+                          font-semibold
+                          text-brand-600
+                          transition-all
+                          duration-300
+                          sm:text-sm
+                        "
+                      >
+                        Explore
+
+                        <ArrowRight
+                          className="
+                            ml-1
+                            size-3.5
+                            transition-transform
+                            duration-300
+                            group-hover:translate-x-1
+                            sm:size-4
+                          "
+                        />
+                      </div>
+
+                    </div>
+
                   </Link>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+
+                </Reveal>
+              </SwiperSlide>
+            ))}
+
+          </Swiper>
+
         </div>
       </div>
     </section>

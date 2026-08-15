@@ -1,67 +1,94 @@
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+
 import type { NavColumn } from "@/types";
 
 interface MegaMenuProps {
-  title?: string;
   columns: NavColumn[];
 }
 
-export function MegaMenu({ title, columns }: MegaMenuProps) {
+export function MegaMenu({ columns }: MegaMenuProps) {
   return (
     <div
       className="
         invisible
         absolute
         left-1/2
-        top-[calc(100%+12px)]
+        top-[calc(100%+8px)]
         z-50
-        w-[min(1080px,94vw)]
+
+        w-[min(980px,92vw)]
+
         -translate-x-1/2
         translate-y-2
-        rounded-2xl
+
+        overflow-hidden
+        rounded-xl
         border
         border-line
         bg-white
-        p-8
+
+        p-5
+
         opacity-0
+
         shadow-[var(--shadow-lift)]
+
         transition-all
-        duration-300
+        duration-200
+
         group-hover/mega:visible
         group-hover/mega:translate-y-0
         group-hover/mega:opacity-100
       "
     >
-      {/* Optional Title */}
-      {title && (
-        <div className="mb-6 border-b border-line pb-4">
-          <h3 className="text-lg font-semibold text-slate-900">
-            {title}
-          </h3>
-        </div>
-      )}
-
-      <div className="grid grid-cols-4 gap-8">
+      {/* =====================================================
+          MEGA MENU COLUMNS
+      ===================================================== */}
+      <div
+        className="
+          grid
+          grid-cols-2
+          gap-x-5
+          gap-y-6
+          md:grid-cols-3
+          lg:grid-cols-4
+        "
+      >
         {columns.map((column) => (
           <div key={column.heading}>
-            <h5 className="mb-4 text-xs font-bold uppercase tracking-widest text-brand-600">
+
+            {/* Column Heading */}
+            <h5
+              className="
+                mb-2.5
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.12em]
+                text-brand-600
+              "
+            >
               {column.heading}
             </h5>
 
-            <div className="space-y-1">
+            {/* Links */}
+            <div className="space-y-0.5">
               {column.links.map((link) => (
                 <Link
                   key={link.label}
                   to={link.href}
                   className="
+                    group/link
                     flex
+                    min-h-[34px]
                     items-center
                     justify-between
+                    gap-3
                     rounded-lg
-                    px-2
-                    py-2
-                    text-sm
+                    px-2.5
+                    py-1.5
+                    text-[13px]
                     font-medium
                     text-ink-2
                     transition-all
@@ -70,7 +97,15 @@ export function MegaMenu({ title, columns }: MegaMenuProps) {
                     hover:text-brand-600
                   "
                 >
-                  <span>{link.label}</span>
+                  <span
+                    className="
+                      transition-transform
+                      duration-200
+                      group-hover/link:translate-x-0.5
+                    "
+                  >
+                    {link.label}
+                  </span>
 
                   {link.tag && (
                     <Badge variant="tagNew">
@@ -80,6 +115,7 @@ export function MegaMenu({ title, columns }: MegaMenuProps) {
                 </Link>
               ))}
             </div>
+
           </div>
         ))}
       </div>

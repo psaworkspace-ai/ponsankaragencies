@@ -41,59 +41,175 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-softer py-14 lg:py-16">
-      <div className="container-px max-w-3xl">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Frequently Asked Questions"
-          subtitle="Quick answers to common questions about our products and services."
-          className="mb-8"
-        />
+    <section className="bg-softer py-10 sm:py-12 lg:py-14">
+      <div className="container-px mx-auto max-w-3xl">
 
-        <div className="space-y-3">
+        {/* =====================================================
+            SECTION HEADING
+        ===================================================== */}
+        <div className="mb-7">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Frequently Asked Questions"
+            subtitle="Quick answers to common questions about our products and services."
+          />
+        </div>
+
+        {/* =====================================================
+            FAQ LIST
+        ===================================================== */}
+        <div className="space-y-2.5">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <Reveal key={faq.question} delay={index * 0.05}>
-                <div className="overflow-hidden rounded-xl border border-line bg-white shadow-sm transition hover:shadow-md">
+              <Reveal
+                key={faq.question}
+                delay={(index % 4) * 0.04}
+              >
+                <div
+                  className={`
+                    overflow-hidden
+                    rounded-xl
+                    border
+                    bg-white
+                    transition-all
+                    duration-300
+                    ${
+                      isOpen
+                        ? "border-brand-200 shadow-[var(--shadow-card)]"
+                        : "border-line shadow-sm hover:border-brand-100 hover:shadow-md"
+                    }
+                  `}
+                >
+
+                  {/* =================================================
+                      QUESTION
+                  ================================================= */}
                   <button
+                    type="button"
                     onClick={() =>
                       setOpenIndex(isOpen ? null : index)
                     }
-                    className="flex w-full items-center justify-between px-5 py-4 text-left"
+                    aria-expanded={isOpen}
+                    className="
+                      flex
+                      w-full
+                      items-center
+                      justify-between
+                      gap-4
+                      px-4
+                      py-3.5
+                      text-left
+                      transition-colors
+                      duration-200
+                      hover:bg-brand-50/40
+                      sm:px-5
+                    "
                   >
-                    <h3 className="pr-4 text-base font-semibold text-ink">
+
+                    <h3
+                      className={`
+                        flex-1
+                        pr-2
+                        text-sm
+                        font-semibold
+                        leading-5
+                        transition-colors
+                        duration-200
+                        sm:text-[15px]
+                        ${
+                          isOpen
+                            ? "text-brand-700"
+                            : "text-ink"
+                        }
+                      `}
+                    >
                       {faq.question}
                     </h3>
 
-                    <ChevronDown
-                      className={`h-5 w-5 text-brand-600 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
+                    {/* Chevron */}
+                    <span
+                      className={`
+                        grid
+                        size-8
+                        shrink-0
+                        place-items-center
+                        rounded-full
+                        transition-all
+                        duration-300
+                        ${
+                          isOpen
+                            ? "bg-brand-600 text-white"
+                            : "bg-brand-50 text-brand-600"
+                        }
+                      `}
+                    >
+                      <ChevronDown
+                        className={`
+                          size-4
+                          transition-transform
+                          duration-300
+                          ${
+                            isOpen
+                              ? "rotate-180"
+                              : ""
+                          }
+                        `}
+                      />
+                    </span>
+
                   </button>
 
+                  {/* =================================================
+                      ANSWER
+                  ================================================= */}
                   <div
-                    className={`grid transition-all duration-300 ${
-                      isOpen
-                        ? "grid-rows-[1fr]"
-                        : "grid-rows-[0fr]"
-                    }`}
+                    className={`
+                      grid
+                      transition-all
+                      duration-300
+                      ease-in-out
+                      ${
+                        isOpen
+                          ? "grid-rows-[1fr]"
+                          : "grid-rows-[0fr]"
+                      }
+                    `}
                   >
                     <div className="overflow-hidden">
-                      <div className="border-t border-line px-5 py-4">
-                        <p className="text-sm leading-6 text-muted">
+
+                      <div
+                        className="
+                          border-t
+                          border-line
+                          px-4
+                          py-3.5
+                          sm:px-5
+                        "
+                      >
+                        <p
+                          className="
+                            text-xs
+                            leading-5
+                            text-muted
+                            sm:text-sm
+                            sm:leading-6
+                          "
+                        >
                           {faq.answer}
                         </p>
                       </div>
+
                     </div>
                   </div>
+
                 </div>
               </Reveal>
             );
           })}
         </div>
+
       </div>
     </section>
   );

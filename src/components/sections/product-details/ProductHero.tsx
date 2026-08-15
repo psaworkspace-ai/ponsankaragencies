@@ -9,85 +9,328 @@ import { HERO_IMAGE } from "@/data/images";
 export function ProductHero() {
   return (
     <section className="relative overflow-hidden bg-slate-950">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute left-0 top-0 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-brand-600/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-blue-600/20 blur-3xl" />
+
+      {/* =====================================================
+          BACKGROUND GLOW
+      ===================================================== */}
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="
+            absolute
+            left-0
+            top-0
+            size-56
+            rounded-full
+            bg-brand-600/20
+            blur-3xl
+            sm:size-72
+            lg:size-80
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-0
+            right-0
+            size-56
+            rounded-full
+            bg-blue-600/20
+            blur-3xl
+            sm:size-72
+            lg:size-80
+          "
+        />
       </div>
 
-      <div className="relative z-10 container mx-auto px-5 py-10 sm:px-6 sm:py-16 lg:py-32">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          {/* Left Content */}
+      {/* =====================================================
+          CONTAINER
+      ===================================================== */}
+      <div
+        className="
+          container-px
+          relative
+          z-10
+          py-9
+          sm:py-12
+          lg:py-14
+        "
+      >
+        <div
+          className="
+            grid
+            items-center
+            gap-7
+            lg:grid-cols-[0.95fr_1.05fr]
+            lg:gap-10
+          "
+        >
+
+          {/* =================================================
+              LEFT — CONTENT
+          ================================================= */}
           <Reveal>
-            <span className="inline-flex rounded-full border border-brand-400/20 bg-brand-600/10 px-3 py-1.5 text-[11px] font-medium text-brand-300 sm:px-4 sm:py-2 sm:text-sm">
+
+            {/* Eyebrow */}
+            <span
+              className="
+                inline-flex
+                rounded-full
+                border
+                border-brand-400/20
+                bg-brand-600/10
+                px-3
+                py-1.5
+                text-[10px]
+                font-semibold
+                tracking-wide
+                text-brand-300
+                sm:px-3.5
+                sm:text-xs
+              "
+            >
               Premium Plumbing & Water Solutions
             </span>
 
-            <h1 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:mt-6 lg:text-6xl">
+            {/* Heading */}
+            <h1
+              className="
+                mt-3
+                max-w-xl
+                text-3xl
+                font-bold
+                leading-[1.08]
+                tracking-tight
+                text-white
+                sm:mt-4
+                sm:text-4xl
+                lg:text-[48px]
+              "
+            >
               Complete
               <span className="block text-brand-400">
                 Product Portfolio
               </span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7 lg:mt-6 lg:text-lg lg:leading-8">
-              Explore Ponshankar Agencies' complete collection of plumbing,
-              drainage, industrial, agricultural and water storage solutions
-              sourced from India's most trusted manufacturers.
+            {/* Description */}
+            <p
+              className="
+                mt-3
+                max-w-xl
+                text-sm
+                leading-6
+                text-slate-300
+                sm:mt-4
+                sm:text-[15px]
+                sm:leading-6
+                lg:text-base
+                lg:leading-7
+              "
+            >
+              Explore Ponshankar Agencies' complete collection of
+              plumbing, drainage, industrial, agricultural and water
+              storage solutions sourced from India's most trusted
+              manufacturers.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3 lg:mt-10 lg:gap-4">
+            {/* Buttons */}
+            <div
+              className="
+                mt-5
+                flex
+                flex-wrap
+                gap-2.5
+                sm:mt-6
+                sm:gap-3
+              "
+            >
               <Link
                 to="/contact"
-                className="inline-flex items-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-brand-700 sm:px-7 sm:py-4"
+                className="
+                  inline-flex
+                  items-center
+                  rounded-lg
+                  bg-brand-600
+                  px-4
+                  py-2.5
+                  text-xs
+                  font-semibold
+                  text-white
+                  transition-all
+                  duration-300
+                  hover:bg-brand-700
+                  hover:shadow-lg
+                  active:scale-95
+                  sm:px-5
+                  sm:py-3
+                  sm:text-sm
+                "
               >
                 Contact Us
-                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+
+                <ArrowRight
+                  className="
+                    ml-1.5
+                    size-3.5
+                    sm:size-4
+                  "
+                />
               </Link>
 
               <Link
                 to="/about"
-                className="inline-flex items-center rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-white hover:text-slate-900 sm:px-7 sm:py-4"
+                className="
+                  inline-flex
+                  items-center
+                  rounded-lg
+                  border
+                  border-white/20
+                  px-4
+                  py-2.5
+                  text-xs
+                  font-semibold
+                  text-white
+                  transition-all
+                  duration-300
+                  hover:bg-white
+                  hover:text-slate-900
+                  active:scale-95
+                  sm:px-5
+                  sm:py-3
+                  sm:text-sm
+                "
               >
                 About Us
               </Link>
             </div>
+
           </Reveal>
 
-          {/* Right Image */}
-          <Reveal delay={0.2}>
+          {/* =================================================
+              RIGHT — IMAGE
+          ================================================= */}
+          <Reveal delay={0.1}>
+
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl">
+
+              {/* Main Image */}
+              <div
+                className="
+                  overflow-hidden
+                  rounded-xl
+                  border
+                  border-white/10
+                  shadow-xl
+                  sm:rounded-2xl
+                "
+              >
                 <SmartImage
                   src={HERO_IMAGE}
                   alt="Ponshankar Agencies Products"
-                  className="h-[260px] w-full object-cover sm:h-[420px] lg:h-[620px]"
+                  className="
+                    h-[230px]
+                    w-full
+                    object-cover
+                    sm:h-[300px]
+                    lg:h-[360px]
+                  "
                 />
               </div>
 
-              {/* Floating Card 1 */}
-              <div className="absolute left-3 bottom-3 rounded-xl bg-white p-3 shadow-xl sm:-left-4 sm:bottom-6 sm:p-5 lg:-left-6 lg:bottom-8 lg:p-6">
-                <h3 className="text-lg font-bold text-slate-900 sm:text-2xl lg:text-3xl">
+              {/* =================================================
+                  FLOATING CARD — PRODUCT CATEGORIES
+              ================================================= */}
+              <div
+                className="
+                  absolute
+                  bottom-3
+                  left-3
+                  rounded-lg
+                  bg-white
+                  px-3
+                  py-2.5
+                  shadow-lg
+                  sm:bottom-4
+                  sm:left-4
+                  sm:rounded-xl
+                  sm:px-4
+                  sm:py-3
+                  lg:bottom-5
+                  lg:left-5
+                "
+              >
+                <h3
+                  className="
+                    text-base
+                    font-bold
+                    text-slate-900
+                    sm:text-xl
+                  "
+                >
                   25+
                 </h3>
 
-                <p className="mt-1 text-[10px] text-slate-600 sm:text-xs lg:text-sm">
+                <p
+                  className="
+                    mt-0.5
+                    text-[9px]
+                    text-slate-600
+                    sm:text-xs
+                  "
+                >
                   Product Categories
                 </p>
               </div>
 
-              {/* Floating Card 2 */}
-              <div className="absolute right-3 top-3 rounded-xl bg-brand-600 p-3 text-white shadow-xl sm:-right-4 sm:top-6 sm:p-5 lg:-right-6 lg:top-8 lg:p-6">
-                <h3 className="text-lg font-bold sm:text-2xl lg:text-3xl">
+              {/* =================================================
+                  FLOATING CARD — TRUSTED NETWORK
+              ================================================= */}
+              <div
+                className="
+                  absolute
+                  right-3
+                  top-3
+                  rounded-lg
+                  bg-brand-600
+                  px-3
+                  py-2.5
+                  text-white
+                  shadow-lg
+                  sm:right-4
+                  sm:top-4
+                  sm:rounded-xl
+                  sm:px-4
+                  sm:py-3
+                  lg:right-5
+                  lg:top-5
+                "
+              >
+                <h3
+                  className="
+                    text-base
+                    font-bold
+                    sm:text-xl
+                  "
+                >
                   Trusted
                 </h3>
 
-                <p className="mt-1 text-[10px] sm:text-xs lg:text-sm">
+                <p
+                  className="
+                    mt-0.5
+                    text-[9px]
+                    sm:text-xs
+                  "
+                >
                   Dealer Network
                 </p>
               </div>
+
             </div>
+
           </Reveal>
+
         </div>
       </div>
     </section>

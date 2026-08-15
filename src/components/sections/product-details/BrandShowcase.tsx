@@ -32,118 +32,218 @@ const FEATURES = [
 
 export function BrandShowcase() {
   return (
-    <section className="bg-softer py-10 sm:py-12 lg:py-16">
+    <section className="bg-softer py-10 sm:py-12 lg:py-14">
       <div className="container-px">
+
+        {/* =====================================================
+            SECTION HEADING
+        ===================================================== */}
         <Reveal>
           <SectionHeading
-            eyebrow="OUR BRANDS"
+            eyebrow="Our Brands"
             title="Trusted Brands We Proudly Distribute"
             subtitle="Partnering with India's leading manufacturers to deliver premium plumbing and water management solutions."
-            className="mb-8 lg:mb-10"
+            className="mb-7 sm:mb-8"
           />
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-10">
-          {/* Left Side */}
+        {/* =====================================================
+            MAIN CONTENT
+        ===================================================== */}
+        <div
+          className="
+            grid
+            items-center
+            gap-7
+            lg:grid-cols-[0.9fr_1.1fr]
+            lg:gap-10
+          "
+        >
+
+          {/* ===================================================
+              LEFT — FEATURES
+          =================================================== */}
           <Reveal>
-            <div className="space-y-4">
-              {FEATURES.map((feature, index) => {
+            <div className="space-y-3.5">
+
+              {FEATURES.map((feature) => {
                 const Icon = feature.icon;
 
                 return (
                   <div
-                    key={index}
+                    key={feature.title}
                     className="
                       group
                       flex
                       items-start
-                      gap-4
-                      rounded-2xl
+                      gap-3.5
+                      rounded-xl
                       border
                       border-line
                       bg-white
                       p-4
+                      shadow-sm
                       transition-all
                       duration-300
                       hover:-translate-y-1
-                      hover:border-brand-300
+                      hover:border-brand-200
                       hover:shadow-lg
                     "
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 transition group-hover:bg-brand-600">
-                      <Icon className="h-5 w-5 text-brand-600 transition group-hover:text-white" />
+
+                    {/* Icon */}
+                    <div
+                      className="
+                        flex
+                        h-10
+                        w-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-lg
+                        bg-brand-50
+                        transition-colors
+                        duration-300
+                        group-hover:bg-brand-600
+                      "
+                    >
+                      <Icon
+                        className="
+                          h-5
+                          w-5
+                          text-brand-600
+                          transition-colors
+                          duration-300
+                          group-hover:text-white
+                        "
+                      />
                     </div>
 
-                    <div>
-                      <h3 className="text-base font-semibold text-ink">
+                    {/* Content */}
+                    <div className="min-w-0">
+                      <h3
+                        className="
+                          text-sm
+                          font-semibold
+                          leading-5
+                          text-ink
+                          sm:text-base
+                        "
+                      >
                         {feature.title}
                       </h3>
 
-                      <p className="mt-1 text-sm leading-6 text-muted">
+                      <p
+                        className="
+                          mt-1
+                          text-xs
+                          leading-5
+                          text-muted
+                          sm:text-sm
+                          sm:leading-6
+                        "
+                      >
                         {feature.description}
                       </p>
                     </div>
+
                   </div>
                 );
               })}
+
             </div>
           </Reveal>
 
-          {/* Right Side */}
-          <Reveal delay={0.2}>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {/* ===================================================
+              RIGHT — BRAND GRID
+          =================================================== */}
+          <Reveal delay={0.1}>
+            <div
+              className="
+                grid
+                grid-cols-2
+                gap-3
+                sm:grid-cols-3
+                sm:gap-4
+              "
+            >
               {BRANDS.map((brand) => (
                 <div
                   key={brand.name}
                   className="
                     group
                     flex
-                    h-28
-                    sm:h-32
-                    lg:h-36
+                    h-[105px]
                     flex-col
                     items-center
                     justify-center
-                    rounded-2xl
+                    rounded-xl
                     border
                     border-line
                     bg-white
-                    p-4
+                    p-3
                     shadow-sm
                     transition-all
                     duration-300
                     hover:-translate-y-1
-                    hover:border-brand-300
+                    hover:border-brand-200
                     hover:shadow-lg
+                    sm:h-[120px]
+                    sm:p-4
                   "
                 >
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    className="
-                      mb-3
-                      max-h-10
-                      sm:max-h-12
-                      lg:max-h-14
-                      w-auto
-                      object-contain
-                      grayscale
-                      opacity-70
-                      transition-all
-                      duration-300
-                      group-hover:scale-105
-                      group-hover:grayscale-0
-                      group-hover:opacity-100
-                    "
-                  />
 
-                  <span className="text-center text-xs sm:text-sm font-medium text-muted">
+                  {/* Logo */}
+                  <div
+                    className="
+                      flex
+                      h-12
+                      w-full
+                      items-center
+                      justify-center
+                      sm:h-14
+                    "
+                  >
+                    <img
+                      src={brand.logo}
+                      alt={brand.name}
+                      className="
+                        max-h-9
+                        w-auto
+                        max-w-[85%]
+                        object-contain
+                        grayscale
+                        opacity-70
+                        transition-all
+                        duration-300
+                        group-hover:scale-105
+                        group-hover:grayscale-0
+                        group-hover:opacity-100
+                        sm:max-h-11
+                      "
+                    />
+                  </div>
+
+                  {/* Brand Name */}
+                  <span
+                    className="
+                      mt-2
+                      text-center
+                      text-[11px]
+                      font-medium
+                      leading-4
+                      text-muted
+                      sm:text-xs
+                    "
+                  >
                     {brand.name}
                   </span>
+
                 </div>
               ))}
             </div>
           </Reveal>
+
         </div>
       </div>
     </section>

@@ -57,30 +57,46 @@ const FEATURES = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-10 sm:py-12 lg:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Section Heading */}
+        {/* =====================================================
+            SECTION HEADING
+        ===================================================== */}
         <Reveal>
           <SectionHeading
             eyebrow="Why Choose Us"
             title="Why Customers Trust Ponshankar Agencies"
           />
 
-          <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-6 text-muted">
+          <p
+            className="
+              mx-auto
+              mt-2.5
+              max-w-3xl
+              text-center
+              text-sm
+              leading-6
+              text-muted
+              sm:text-[15px]
+            "
+          >
             Delivering quality products, dependable service, and complete
             piping solutions for residential, commercial, and industrial
             projects.
           </p>
         </Reveal>
 
-        {/* Slider */}
-        <div className="relative mt-10">
+        {/* =====================================================
+            SLIDER
+        ===================================================== */}
+        <div className="relative mt-7">
+
           <Swiper
             modules={[Autoplay, Pagination]}
             loop={true}
-            speed={700}
-            spaceBetween={24}
+            speed={650}
+            spaceBetween={14}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -91,16 +107,26 @@ export function WhyChooseUs() {
             }}
             breakpoints={{
               0: {
-                slidesPerView: 1,
+                slidesPerView: 1.08,
+                spaceBetween: 12,
               },
+
               640: {
                 slidesPerView: 2,
+                spaceBetween: 14,
               },
+
               1024: {
                 slidesPerView: 3,
+                spaceBetween: 16,
+              },
+
+              1280: {
+                slidesPerView: 3,
+                spaceBetween: 18,
               },
             }}
-            className="why-choose-swiper !pb-12"
+            className="why-choose-swiper !pb-9"
           >
             {FEATURES.map((feature, index) => {
               const Icon = feature.icon;
@@ -110,87 +136,109 @@ export function WhyChooseUs() {
                   key={feature.title}
                   className="!h-auto"
                 >
-                  <Reveal delay={index * 0.05}>
+                  <Reveal
+                    delay={(index % 3) * 0.05}
+                    className="h-full"
+                  >
                     <div
                       className="
                         group
                         relative
                         flex
+                        min-h-[175px]
                         h-full
-                        min-h-[190px]
                         flex-col
                         overflow-hidden
-                        rounded-2xl
+                        rounded-xl
                         border
                         border-line
                         bg-white
-                        p-5
+                        p-4
                         shadow-sm
                         transition-all
                         duration-300
-                        hover:-translate-y-2
+                        hover:-translate-y-1
                         hover:border-brand-200
-                        hover:shadow-xl
+                        hover:shadow-[var(--shadow-card)]
+                        sm:p-5
                       "
                     >
-                      {/* Background Glow */}
+
+                      {/* =================================================
+                          BACKGROUND GLOW
+                      ================================================= */}
                       <div
                         className="
                           pointer-events-none
                           absolute
-                          -right-8
-                          -top-8
-                          h-24
-                          w-24
+                          -right-7
+                          -top-7
+                          size-20
                           rounded-full
                           bg-brand-50
-                          opacity-40
+                          opacity-50
                           blur-3xl
                           transition-opacity
                           duration-300
-                          group-hover:opacity-70
+                          group-hover:opacity-80
                         "
                       />
 
                       <div className="relative">
 
-                        {/* Icon */}
+                        {/* =================================================
+                            ICON
+                        ================================================= */}
                         <div
                           className="
-                            mb-4
-                            flex
-                            h-12
-                            w-12
-                            items-center
-                            justify-center
-                            rounded-xl
+                            mb-3.5
+                            grid
+                            size-10
+                            place-items-center
+                            rounded-lg
                             bg-brand-50
-                            transition-colors
+                            transition-all
                             duration-300
-                            group-hover:bg-brand-100
+                            group-hover:bg-brand-600
                           "
                         >
-                          <Icon className="h-6 w-6 text-brand-600" />
+                          <Icon
+                            className="
+                              size-5
+                              text-brand-600
+                              transition-colors
+                              duration-300
+                              group-hover:text-white
+                            "
+                          />
                         </div>
 
-                        {/* Title */}
+                        {/* =================================================
+                            TITLE
+                        ================================================= */}
                         <h3
                           className="
-                            mb-2
-                            text-lg
+                            mb-1.5
+                            text-base
                             font-semibold
+                            leading-5
                             text-ink
+                            sm:text-[17px]
                           "
                         >
                           {feature.title}
                         </h3>
 
-                        {/* Description */}
+                        {/* =================================================
+                            DESCRIPTION
+                        ================================================= */}
                         <p
                           className="
-                            text-sm
-                            leading-6
+                            text-xs
+                            leading-5
                             text-muted
+                            sm:text-sm
+                            sm:leading-6
                           "
                         >
                           {feature.description}
@@ -203,6 +251,7 @@ export function WhyChooseUs() {
               );
             })}
           </Swiper>
+
         </div>
       </div>
     </section>
