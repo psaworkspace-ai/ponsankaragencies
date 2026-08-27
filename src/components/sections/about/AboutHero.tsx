@@ -1,11 +1,8 @@
-import { Link } from "react-router-dom";
 import {
-  ArrowRight,
   History,
   LayoutGrid,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/Reveal";
 import { ABOUT_HERO_IMAGE } from "@/data/images";
 
