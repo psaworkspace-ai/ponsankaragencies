@@ -235,17 +235,6 @@ export function CompanyStory() {
               {/* =================================================
                   CTA
               ================================================= */}
-              <div className="mt-5">
-                <Button
-                  asChild
-                  size="default"
-                >
-                  <Link to="/contact">
-                    Get in Touch
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-              </div>
 
             </div>
           </Reveal>
