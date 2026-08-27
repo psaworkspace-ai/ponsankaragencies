@@ -146,17 +146,6 @@ export function AboutHero() {
             {/* =================================================
                 CTA
             ================================================= */}
-            <div className="mt-5">
-              <Button
-                asChild
-                size="default"
-              >
-                <Link to="/contact">
-                  Browse Categories
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-            </div>
 
             {/* =================================================
                 STATS
