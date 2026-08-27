@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
 import {
-  ArrowRight,
   Award,
   Truck,
   ShieldCheck,
   Users,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/Reveal";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { SmartImage } from "@/components/common/SmartImage";
