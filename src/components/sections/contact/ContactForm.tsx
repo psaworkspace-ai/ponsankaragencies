@@ -89,9 +89,10 @@ export function ContactForm() {
        * Replace these three values with your
        * actual EmailJS credentials.
        */
-      const SERVICE_ID = "service_v0sreml";
-      const TEMPLATE_ID = "template_s7dlr8l";
-      const PUBLIC_KEY = "2BnFVbwI6zT8AOGeD";
+      const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 
       await emailjs.send(
         SERVICE_ID,
