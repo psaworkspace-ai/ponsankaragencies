@@ -9,7 +9,6 @@ import {
 } from "@/data/projects";
 
 import {
-  FEATURED_IMAGE,
   PROJECT_IMAGES,
 } from "@/data/images";
 
@@ -62,18 +61,6 @@ export function ProjectsShowcase() {
                 shadow-md
               "
             >
-              <SmartImage
-                src={FEATURED_IMAGE}
-                alt={FEATURED_PROJECT.title}
-                variant={FEATURED_PROJECT.media}
-                className="
-                  h-[190px]
-                  w-full
-                  object-cover
-                  sm:h-[230px]
-                  lg:h-[280px]
-                "
-              />
 
               {/* Overlay */}
               <div

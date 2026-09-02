@@ -5,6 +5,7 @@ import {
   Mail,
   MapPin,
   ArrowUpRight,
+  Instagram,
 } from "lucide-react";
 
 import { SITE } from "@/lib/constants";
@@ -75,7 +76,6 @@ const QUICK_LINKS = [
   { label: "About Us", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -87,21 +87,34 @@ const PRODUCTS = [
   { label: "Water Tanks", href: "/products" },
 ];
 
+/* ============================================================
+   FOOTER QUICK ACTIONS
+============================================================ */
+
 const SOCIALS = [
   {
     icon: Globe,
     label: "Website",
-    href: "/",
+    href: "https://www.ponsankaragencies.in",
+    external: true,
   },
   {
     icon: Phone,
     label: "Call",
     href: "tel:+919865293333",
+    external: false,
   },
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:ponsankared@gmail.com",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=ponsankared@gmail.com",
+    external: true,
+  },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/ponsankarerode",
+    external: true,
   },
 ];
 
@@ -121,7 +134,6 @@ export function Footer() {
 
   return (
     <footer className="bg-navy-950 text-white">
-
       <div className="container-px">
 
         {/* =====================================================
@@ -167,16 +179,25 @@ export function Footer() {
               commercial and industrial projects.
             </p>
 
-            {/* Social / Contact Icons */}
+            {/* =================================================
+                QUICK ACTION ICONS
+            ================================================= */}
             <div className="mt-5 flex gap-2">
               {SOCIALS.map((item) => {
                 const Icon = item.icon;
 
                 return (
-                  <Link
+                  <a
                     key={item.label}
-                    to={item.href}
+                    href={item.href}
                     aria-label={item.label}
+                    title={item.label}
+                    target={item.external ? "_blank" : undefined}
+                    rel={
+                      item.external
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     className="
                       grid
                       size-9
@@ -194,8 +215,14 @@ export function Footer() {
                       sm:rounded-xl
                     "
                   >
-                    <Icon className="size-4 text-white sm:size-[18px]" />
-                  </Link>
+                    <Icon
+                      className="
+                        size-4
+                        text-white
+                        sm:size-[18px]
+                      "
+                    />
+                  </a>
                 );
               })}
             </div>
@@ -303,9 +330,13 @@ export function Footer() {
 
             <div className="space-y-3.5">
 
-              {/* Phone */}
+              {/* =================================================
+                  PHONE
+              ================================================= */}
               <a
                 href="tel:+919865293333"
+                aria-label="Call Ponshankar Agencies"
+                title="Call Ponshankar Agencies"
                 className="
                   group
                   flex
@@ -325,7 +356,13 @@ export function Footer() {
                     group-hover:bg-brand-600
                   "
                 >
-                  <Phone className="size-3.5 text-brand-300 group-hover:text-white" />
+                  <Phone
+                    className="
+                      size-3.5
+                      text-brand-300
+                      group-hover:text-white
+                    "
+                  />
                 </span>
 
                 <span>
@@ -358,9 +395,15 @@ export function Footer() {
                 </span>
               </a>
 
-              {/* Email */}
+              {/* =================================================
+                  EMAIL
+              ================================================= */}
               <a
-                href="mailto:ponsankared@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=ponsankared@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Email Ponshankar Agencies"
+                title="Email Ponshankar Agencies"
                 className="
                   group
                   flex
@@ -380,7 +423,13 @@ export function Footer() {
                     group-hover:bg-brand-600
                   "
                 >
-                  <Mail className="size-3.5 text-brand-300 group-hover:text-white" />
+                  <Mail
+                    className="
+                      size-3.5
+                      text-brand-300
+                      group-hover:text-white
+                    "
+                  />
                 </span>
 
                 <span className="min-w-0">
@@ -414,7 +463,76 @@ export function Footer() {
                 </span>
               </a>
 
-              {/* Address */}
+              {/* =================================================
+                  INSTAGRAM
+              ================================================= */}
+              <a
+                href="https://www.instagram.com/ponsankarerode"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Ponshankar Agencies Instagram"
+                title="Instagram"
+                className="
+                  group
+                  flex
+                  items-start
+                  gap-3
+                "
+              >
+                <span
+                  className="
+                    grid
+                    size-8
+                    shrink-0
+                    place-items-center
+                    rounded-lg
+                    bg-white/5
+                    transition-colors
+                    group-hover:bg-brand-600
+                  "
+                >
+                  <Instagram
+                    className="
+                      size-3.5
+                      text-brand-300
+                      group-hover:text-white
+                    "
+                  />
+                </span>
+
+                <span>
+                  <span
+                    className="
+                      block
+                      text-[9px]
+                      font-medium
+                      uppercase
+                      tracking-wider
+                      text-slate-500
+                    "
+                  >
+                    Instagram
+                  </span>
+
+                  <span
+                    className="
+                      mt-0.5
+                      block
+                      text-xs
+                      text-slate-300
+                      transition-colors
+                      group-hover:text-white
+                      sm:text-sm
+                    "
+                  >
+                    @ponsankarerode
+                  </span>
+                </span>
+              </a>
+
+              {/* =================================================
+                  ADDRESS
+              ================================================= */}
               <div className="flex items-start gap-3">
 
                 <span
@@ -427,7 +545,12 @@ export function Footer() {
                     bg-white/5
                   "
                 >
-                  <MapPin className="size-3.5 text-brand-300" />
+                  <MapPin
+                    className="
+                      size-3.5
+                      text-brand-300
+                    "
+                  />
                 </span>
 
                 <div>

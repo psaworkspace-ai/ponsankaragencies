@@ -1,13 +1,13 @@
 export const SITE = {
-  name: 'Ponshankar Agencies',
+  name: 'Ponsankar Agencies',
   tagline: 'Building Stronger Water Systems for Every Project',
   since: 1993,
-  url: 'https://www.ponshankaragencies.com',
+  url: 'https://www.ponsankaragencies.in',
 } as const
 
 export const CONTACT = {
   phones: ['+91 98652 93333', '+91 98652 11114'],
-  emails: ['ponsankared@gmail.com','psa@gmail.com'],
+  emails: ['ponsankared@gmail.com'],
   whatsapp: '91 98652 93333',
   address: {
     line1: '558, Sathy Road,',

@@ -1,8 +1,10 @@
+
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Mail } from "lucide-react";
+import { Mail, CheckCircle2, AlertCircle } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,7 +16,7 @@ const schema = z.object({
   email: z.string().email("Enter a valid email"),
   phone: z.string().optional(),
   company: z.string().optional(),
-  requirement: z.string(),
+  requirement: z.string().min(1, "Please select a requirement"),
   message: z.string().optional(),
 });
 
@@ -55,6 +57,8 @@ const Field = ({
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const {
     register,
@@ -64,47 +68,94 @@ export function ContactForm() {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
       requirement: REQUIREMENTS[0],
+      message: "",
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    const subject = encodeURIComponent(
-      "New Inquiry - Ponshankar Agencies"
-    );
+  const onSubmit = async (data: FormValues) => {
+    setSending(true);
+    setSent(false);
+    setSendError(false);
 
-    const body = encodeURIComponent(
-      `Hello Ponshankar Agencies,
+    try {
+      /*
+       * EmailJS configuration
+       *
+       * Replace these three values with your
+       * actual EmailJS credentials.
+       */
+      const SERVICE_ID = "service_v0sreml";
+      const TEMPLATE_ID = "template_s7dlr8l";
+      const PUBLIC_KEY = "2BnFVbwI6zT8AOGeD";
 
-I would like to make an inquiry.
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          to_email: "ponsankared@gmail.com",
 
-Full Name: ${data.name}
+          from_name: data.name,
+          from_email: data.email,
 
-Email: ${data.email}
+          phone: data.phone || "Not provided",
+          company: data.company || "Not provided",
 
-Phone: ${data.phone || "Not provided"}
+          requirement: data.requirement,
 
-Company: ${data.company || "Not provided"}
+          message: data.message || "No additional message",
 
-Product Requirement: ${data.requirement}
+          subject: "New Inquiry - Ponshankar Agencies",
+        },
+        {
+          publicKey: PUBLIC_KEY,
+        }
+      );
 
-Message:
-${data.message || "No additional message"}
+      /*
+       * Email successfully sent.
+       */
+      setSent(true);
 
-Thank you.`
-    );
+      /*
+       * Clear the form after successful submission.
+       */
+      reset({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        requirement: REQUIREMENTS[0],
+        message: "",
+      });
 
-    window.location.href =
-      `mailto:ponsankared@gmail.com?subject=${subject}&body=${body}`;
+      /*
+       * Hide success message after 5 seconds.
+       */
+      setTimeout(() => {
+        setSent(false);
+      }, 5000);
+    } catch (error) {
+      console.error("Email sending failed:", error);
 
-    setSent(true);
-    reset({
-      requirement: REQUIREMENTS[0],
-    });
+      /*
+       * Show error message.
+       */
+      setSendError(true);
 
-    setTimeout(() => {
-      setSent(false);
-    }, 4000);
+      /*
+       * Hide error message after 5 seconds.
+       */
+      setTimeout(() => {
+        setSendError(false);
+      }, 5000);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -118,16 +169,24 @@ Thank you.`
       ===================================================== */}
       <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 
+        {/* ===================================================
+            FULL NAME
+        =================================================== */}
         <Field
           label="Full Name"
           error={errors.name?.message}
         >
           <Input
             placeholder="John Doe"
+            autoComplete="name"
             {...register("name")}
+            disabled={sending}
           />
         </Field>
 
+        {/* ===================================================
+            EMAIL
+        =================================================== */}
         <Field
           label="Email Address"
           error={errors.email?.message}
@@ -135,32 +194,49 @@ Thank you.`
           <Input
             type="email"
             placeholder="john@company.com"
+            autoComplete="email"
             {...register("email")}
+            disabled={sending}
           />
         </Field>
 
+        {/* ===================================================
+            PHONE
+        =================================================== */}
         <Field label="Phone Number">
           <Input
             type="tel"
             placeholder="+91 00000 00000"
+            autoComplete="tel"
             {...register("phone")}
+            disabled={sending}
           />
         </Field>
 
+        {/* ===================================================
+            COMPANY
+        =================================================== */}
         <Field label="Company Name">
           <Input
             placeholder="Industrial Corp."
+            autoComplete="organization"
             {...register("company")}
+            disabled={sending}
           />
         </Field>
-
       </div>
 
       {/* =====================================================
           PRODUCT REQUIREMENT
       ===================================================== */}
-      <Field label="Product Requirement">
-        <Select {...register("requirement")}>
+      <Field
+        label="Product Requirement"
+        error={errors.requirement?.message}
+      >
+        <Select
+          {...register("requirement")}
+          disabled={sending}
+        >
           {REQUIREMENTS.map((requirement) => (
             <option
               key={requirement}
@@ -175,10 +251,15 @@ Thank you.`
       {/* =====================================================
           MESSAGE
       ===================================================== */}
-      <Field label="Message">
+      <Field
+        label="Message"
+        error={errors.message?.message}
+      >
         <Textarea
           placeholder="How can we help your project succeed?"
+          rows={5}
           {...register("message")}
+          disabled={sending}
         />
       </Field>
 
@@ -189,34 +270,105 @@ Thank you.`
         type="submit"
         block
         size="lg"
+        disabled={sending}
         aria-label="Send inquiry"
       >
-        <Mail className="size-4" />
-        Send Inquiry
+        {sending ? (
+          <>
+            <span
+              className="
+                size-4
+                animate-spin
+                rounded-full
+                border-2
+                border-current
+                border-t-transparent
+              "
+              aria-hidden="true"
+            />
+
+            Sending Inquiry...
+          </>
+        ) : (
+          <>
+            <Mail className="size-4" />
+            Send Inquiry
+          </>
+        )}
       </Button>
 
       {/* =====================================================
           SUCCESS MESSAGE
       ===================================================== */}
       {sent && (
-        <p className="mt-3 text-center text-sm text-green-600">
-          Your email application has been opened with the
-          inquiry details.
-        </p>
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            justify-center
+            gap-2
+            rounded-lg
+            bg-green-50
+            px-4
+            py-3
+            text-center
+            text-sm
+            text-green-700
+          "
+          role="status"
+          aria-live="polite"
+        >
+          <CheckCircle2 className="size-4 shrink-0" />
+
+          <span>
+            Your inquiry has been sent successfully.
+            We&apos;ll contact you soon.
+          </span>
+        </div>
       )}
 
       {/* =====================================================
-          MAILTO INFO
+          ERROR MESSAGE
+      ===================================================== */}
+      {sendError && (
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            justify-center
+            gap-2
+            rounded-lg
+            bg-red-50
+            px-4
+            py-3
+            text-center
+            text-sm
+            text-red-700
+          "
+          role="alert"
+          aria-live="assertive"
+        >
+          <AlertCircle className="size-4 shrink-0" />
+
+          <span>
+            Unable to send your inquiry right now.
+            Please try again.
+          </span>
+        </div>
+      )}
+
+      {/* =====================================================
+          EMAIL INFORMATION
       ===================================================== */}
       <p className="mt-3 text-center text-xs text-muted">
-        Your inquiry will be sent to{" "}
-        <a
-          href="mailto:ponsankared@gmail.com"
-          className="font-medium text-brand-600 hover:underline"
-        >
+        Your inquiry will be sent securely to{" "}
+        <span className="font-medium text-brand-600">
           ponsankared@gmail.com
-        </a>
+        </span>
       </p>
     </form>
   );
 }
+
