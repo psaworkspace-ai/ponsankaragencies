@@ -40,6 +40,12 @@ const schema = z.object({
     .trim()
     .email("Please enter a valid email address."),
 
+  phone: z
+    .string()
+    .trim()
+    .min(10, "Please enter a valid phone number.")
+    .max(15, "Phone number is too long."),
+
   product: z
     .string()
     .min(1, "Please select a product."),
@@ -199,6 +205,7 @@ export function InquiryForm() {
       name: "",
       company: "",
       email: "",
+      phone: "",
       product: PRODUCTS[0],
       details: "",
     },
@@ -261,6 +268,14 @@ export function InquiryForm() {
           from_email: data.email,
 
           /*
+           * Customer phone number
+           *
+           * EmailJS:
+           * {{phone}}
+           */
+          phone: data.phone,
+
+          /*
            * Company
            */
           company:
@@ -304,6 +319,7 @@ export function InquiryForm() {
         name: "",
         company: "",
         email: "",
+        phone: "",
         product: PRODUCTS[0],
         details: "",
       });
@@ -512,21 +528,39 @@ export function InquiryForm() {
                 </div>
 
                 {/* ==========================================
-                    EMAIL
+                    EMAIL + PHONE
                 ========================================== */}
 
-                <Field
-                  label="Email Address"
-                  error={errors.email?.message}
-                >
-                  <Input
-                    type="email"
-                    placeholder="john@example.com"
-                    autoComplete="email"
-                    {...register("email")}
-                    disabled={status === "sending"}
-                  />
-                </Field>
+                <div className="grid gap-4 sm:grid-cols-2">
+
+                  <Field
+                    label="Email Address"
+                    error={errors.email?.message}
+                  >
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      autoComplete="email"
+                      {...register("email")}
+                      disabled={status === "sending"}
+                    />
+                  </Field>
+
+                  <Field
+                    label="Phone Number"
+                    error={errors.phone?.message}
+                  >
+                    <Input
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      autoComplete="tel"
+                      inputMode="tel"
+                      {...register("phone")}
+                      disabled={status === "sending"}
+                    />
+                  </Field>
+
+                </div>
 
                 {/* ==========================================
                     PRODUCT

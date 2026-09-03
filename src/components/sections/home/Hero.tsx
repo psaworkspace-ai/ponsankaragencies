@@ -40,11 +40,11 @@ export function Hero() {
             <Reveal>
               <div className="max-w-2xl">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-                  All Your Plumbing {" "}
+                  All Your  {" "}
                   <span className="text-brand-400">
-                    Needs, Under 
+                  Plumbing Needs, 
                   </span>{" "}
-                  One Roof.
+                 Under One Roof.
                 </h1>
 
                 <p className="mt-4 max-w-xl text-sm md:text-base leading-7 text-slate-200/85">

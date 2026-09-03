@@ -270,28 +270,6 @@ export function ProductRange() {
                     {product.description}
                   </p>
 
-                  {/* View Products */}
-
-                  <span
-                    className="
-                      mt-auto
-                      inline-flex
-                      items-center
-                      gap-1.5
-                      pt-3
-                      text-sm
-                      font-semibold
-                      text-brand-600
-                      transition-all
-                      duration-300
-                      group-hover:gap-2.5
-                    "
-                  >
-                    View Products
-
-                    <ArrowRight className="size-3.5" />
-                  </span>
-
                 </div>
 
               </Link>

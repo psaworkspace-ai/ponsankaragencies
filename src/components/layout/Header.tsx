@@ -73,7 +73,6 @@ function BrandMark() {
             sm:block
           "
         >
-          Premium Plumbing & Piping Solutions
         </p>
       </div>
     </Link>

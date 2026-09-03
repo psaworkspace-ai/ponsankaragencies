@@ -64,7 +64,6 @@ function BrandMark() {
             sm:text-xs
           "
         >
-          Premium Plumbing & Piping Solutions
         </p>
       </div>
     </Link>
@@ -78,14 +77,7 @@ const QUICK_LINKS = [
   { label: "Solutions", href: "/solutions" },
   { label: "Contact", href: "/contact" },
 ];
-
-const PRODUCTS = [
-  { label: "CPVC Plumbing", href: "/products" },
-  { label: "UPVC Pipes", href: "/products" },
-  { label: "Industrial Pipes", href: "/products" },
-  { label: "Agriculture Pipes", href: "/products" },
-  { label: "Water Tanks", href: "/products" },
-];
+ 
 
 /* ============================================================
    FOOTER QUICK ACTIONS
@@ -247,47 +239,6 @@ export function Footer() {
 
             <ul className="space-y-2">
               {QUICK_LINKS.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.href}
-                    className="
-                      inline-flex
-                      items-center
-                      text-xs
-                      text-slate-400
-                      transition-all
-                      duration-300
-                      hover:translate-x-1
-                      hover:text-brand-300
-                      sm:text-sm
-                    "
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* ===================================================
-              PRODUCTS
-          =================================================== */}
-          <div>
-            <h3
-              className="
-                mb-4
-                font-display
-                text-sm
-                font-semibold
-                text-white
-                sm:text-base
-              "
-            >
-              Products
-            </h3>
-
-            <ul className="space-y-2">
-              {PRODUCTS.map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.href}
