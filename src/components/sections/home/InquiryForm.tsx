@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -7,6 +8,8 @@ import {
   Mail,
   Phone,
   Send,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 
 import { CONTACT } from "@/lib/constants";
@@ -17,15 +20,41 @@ import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/Reveal";
 
+/* =========================================================
+   FORM VALIDATION
+========================================================= */
+
 const schema = z.object({
-  name: z.string().min(2, "Please enter your name"),
-  company: z.string().optional(),
-  email: z.string().email("Enter a valid email"),
-  product: z.string(),
-  details: z.string().optional(),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your full name."),
+
+  company: z
+    .string()
+    .trim()
+    .optional(),
+
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address."),
+
+  product: z
+    .string()
+    .min(1, "Please select a product."),
+
+  details: z
+    .string()
+    .trim()
+    .optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 const PRODUCTS = [
   "CPVC Industrial Piping",
@@ -38,13 +67,55 @@ const PRODUCTS = [
   "DWC Pipes",
 ];
 
-type Status = "idle" | "sending" | "sent" | "error";
+/* =========================================================
+   EMAILJS CONFIGURATION
+========================================================= */
+
+/*
+ * EmailJS account:
+ * Can be your personal Gmail.
+ *
+ * Customer inquiry:
+ * Will be delivered to:
+ *
+ * ponsankared@gmail.com
+ *
+ * The recipient is configured inside your EmailJS template.
+ */
+
+const SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID;
+
+const TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+const PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+type Status =
+  | "idle"
+  | "sending"
+  | "sent"
+  | "error";
+
+/* =========================================================
+   MAP
+========================================================= */
 
 const MAP_Q = encodeURIComponent(
-  "558,Sathy Road,Erode Tamil Nadu 638003"
+  "558,Sathy Road,Erode Tamil Nadu 638003",
 );
 
-const MAP_SRC = `https://www.google.com/maps?q=${MAP_Q}&output=embed`;
+const MAP_SRC =
+  `https://www.google.com/maps?q=${MAP_Q}&output=embed`;
+
+/* =========================================================
+   FIELD
+========================================================= */
 
 const Field = ({
   label,
@@ -53,7 +124,7 @@ const Field = ({
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) => (
   <div className="min-w-0">
     <label className="mb-1.5 block text-xs font-semibold tracking-wide text-muted">
@@ -63,12 +134,19 @@ const Field = ({
     {children}
 
     {error && (
-      <p className="mt-1 text-xs text-red-500">
+      <p
+        className="mt-1 text-xs text-red-500"
+        role="alert"
+      >
         {error}
       </p>
     )}
   </div>
 );
+
+/* =========================================================
+   CONTACT INFORMATION ROW
+========================================================= */
 
 const InfoRow = ({
   icon: Icon,
@@ -101,8 +179,13 @@ const InfoRow = ({
   </div>
 );
 
+/* =========================================================
+   INQUIRY FORM
+========================================================= */
+
 export function InquiryForm() {
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] =
+    useState<Status>("idle");
 
   const {
     register,
@@ -111,68 +194,138 @@ export function InquiryForm() {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+
     defaultValues: {
+      name: "",
+      company: "",
+      email: "",
       product: PRODUCTS[0],
+      details: "",
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  /* =======================================================
+     SUBMIT
+  ======================================================= */
+
+  const onSubmit = async (data: FormValues) => {
+    /*
+     * Prevent duplicate submissions.
+     */
+
+    if (status === "sending") {
+      return;
+    }
+
     setStatus("sending");
 
     try {
-      const recipient = "sales@ponshankaragencies.com";
+      /* ===================================================
+         CHECK EMAILJS CONFIGURATION
+      =================================================== */
 
-      const subject = `New Product Inquiry - ${data.product}`;
+      if (
+        !SERVICE_ID ||
+        !TEMPLATE_ID ||
+        !PUBLIC_KEY
+      ) {
+        throw new Error(
+          "EmailJS configuration is missing.",
+        );
+      }
 
-      const body = `
-New Product Inquiry
-===================
+      /* ===================================================
+         SEND INQUIRY
+      =================================================== */
 
-Customer Details
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          /*
+           * Customer name
+           *
+           * EmailJS:
+           * {{from_name}}
+           */
+          from_name: data.name,
 
-Name:
-${data.name}
+          /*
+           * Customer email
+           *
+           * EmailJS:
+           * {{from_email}}
+           *
+           * Used as Reply To.
+           */
+          from_email: data.email,
 
-Company:
-${data.company || "Not provided"}
+          /*
+           * Company
+           */
+          company:
+            data.company?.trim() ||
+            "Not provided",
 
-Email:
-${data.email}
+          /*
+           * Product
+           */
+          requirement: data.product,
 
-Interested Product:
-${data.product}
+          /*
+           * Project details
+           */
+          message:
+            data.details?.trim() ||
+            "No additional details provided",
 
-Project Details:
-${data.details || "Not provided"}
+          /*
+           * Subject
+           */
+          subject:
+            `New Product Inquiry - ${data.product}`,
+        },
+        {
+          publicKey: PUBLIC_KEY,
+        },
+      );
 
-===================
-This inquiry was submitted from the Ponshankar Agencies website.
-      `.trim();
-
-      const mailtoUrl =
-        `mailto:${recipient}` +
-        `?subject=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-      window.location.href = mailtoUrl;
-
-      reset({
-        product: PRODUCTS[0],
-      });
+      /* ===================================================
+         SUCCESS
+      =================================================== */
 
       setStatus("sent");
 
+      /* ===================================================
+         RESET FORM
+      =================================================== */
+
+      reset({
+        name: "",
+        company: "",
+        email: "",
+        product: PRODUCTS[0],
+        details: "",
+      });
+
+      /* ===================================================
+         RESET STATUS
+      =================================================== */
+
       window.setTimeout(() => {
         setStatus("idle");
-      }, 4000);
+      }, 5000);
     } catch (error) {
-      console.error("Mailto error:", error);
+      console.error(
+        "EmailJS inquiry failed:",
+        error,
+      );
 
       setStatus("error");
 
       window.setTimeout(() => {
         setStatus("idle");
-      }, 4000);
+      }, 5000);
     }
   };
 
@@ -190,9 +343,10 @@ This inquiry was submitted from the Ponshankar Agencies website.
           "
         >
 
-          {/* ===================================================
+          {/* =================================================
               LEFT — CONTACT INFORMATION
-          =================================================== */}
+          ================================================= */}
+
           <Reveal>
             <div className="lg:pr-6">
 
@@ -220,11 +374,13 @@ This inquiry was submitted from the Ponshankar Agencies website.
                   sm:text-[15px]
                 "
               >
-                Have a requirement or a query? Reach out to our
-                technical team today. We provide detailed
-                estimations and on-site consultations for large
-                projects.
+                Have a requirement or a query?
+                Reach out to our technical team today.
+                We provide detailed estimations and
+                on-site consultations for large projects.
               </p>
+
+              {/* Contact Details */}
 
               <div className="mt-6 grid gap-4">
 
@@ -240,18 +396,23 @@ This inquiry was submitted from the Ponshankar Agencies website.
                 <InfoRow
                   icon={Mail}
                   title="Email Us"
-                  lines={[...CONTACT.emails]}
+                  lines={[
+                    ...CONTACT.emails,
+                  ]}
                 />
 
                 <InfoRow
                   icon={Phone}
                   title="Call Support"
-                  lines={[...CONTACT.phones]}
+                  lines={[
+                    ...CONTACT.phones,
+                  ]}
                 />
 
               </div>
 
               {/* Map */}
+
               <div
                 className="
                   mt-6
@@ -281,9 +442,10 @@ This inquiry was submitted from the Ponshankar Agencies website.
             </div>
           </Reveal>
 
-          {/* ===================================================
+          {/* =================================================
               RIGHT — INQUIRY FORM
-          =================================================== */}
+          ================================================= */}
+
           <Reveal delay={0.1}>
             <div
               className="
@@ -298,14 +460,16 @@ This inquiry was submitted from the Ponshankar Agencies website.
               "
             >
 
+              {/* Form Heading */}
+
               <div className="mb-5">
                 <h3 className="text-xl font-semibold text-ink">
                   Send an Inquiry
                 </h3>
 
                 <p className="mt-1 text-sm text-muted">
-                  Tell us what you need and our team will get
-                  back to you.
+                  Tell us what you need and our team
+                  will get back to you.
                 </p>
               </div>
 
@@ -316,7 +480,10 @@ This inquiry was submitted from the Ponshankar Agencies website.
                 className="flex flex-col gap-4"
               >
 
-                {/* Name + Company */}
+                {/* ==========================================
+                    NAME + COMPANY
+                ========================================== */}
+
                 <div className="grid gap-4 sm:grid-cols-2">
 
                   <Field
@@ -324,21 +491,30 @@ This inquiry was submitted from the Ponshankar Agencies website.
                     error={errors.name?.message}
                   >
                     <Input
+                      type="text"
                       placeholder="John Doe"
+                      autoComplete="name"
                       {...register("name")}
+                      disabled={status === "sending"}
                     />
                   </Field>
 
                   <Field label="Company Name">
                     <Input
+                      type="text"
                       placeholder="Acme Construction"
+                      autoComplete="organization"
                       {...register("company")}
+                      disabled={status === "sending"}
                     />
                   </Field>
 
                 </div>
 
-                {/* Email */}
+                {/* ==========================================
+                    EMAIL
+                ========================================== */}
+
                 <Field
                   label="Email Address"
                   error={errors.email?.message}
@@ -346,13 +522,24 @@ This inquiry was submitted from the Ponshankar Agencies website.
                   <Input
                     type="email"
                     placeholder="john@example.com"
+                    autoComplete="email"
                     {...register("email")}
+                    disabled={status === "sending"}
                   />
                 </Field>
 
-                {/* Product */}
-                <Field label="Interested Products">
-                  <Select {...register("product")}>
+                {/* ==========================================
+                    PRODUCT
+                ========================================== */}
+
+                <Field
+                  label="Interested Products"
+                  error={errors.product?.message}
+                >
+                  <Select
+                    {...register("product")}
+                    disabled={status === "sending"}
+                  >
                     {PRODUCTS.map((product) => (
                       <option
                         key={product}
@@ -364,60 +551,158 @@ This inquiry was submitted from the Ponshankar Agencies website.
                   </Select>
                 </Field>
 
-                {/* Project Details */}
-                <Field label="Project Details">
+                {/* ==========================================
+                    PROJECT DETAILS
+                ========================================== */}
+
+                <Field
+                  label="Project Details"
+                  error={errors.details?.message}
+                >
                   <Textarea
                     placeholder="Tell us about your project requirements..."
+                    rows={4}
                     {...register("details")}
+                    disabled={status === "sending"}
                   />
                 </Field>
 
-                {/* Submit */}
+                {/* ==========================================
+                    SUBMIT BUTTON
+                ========================================== */}
+
                 <Button
                   type="submit"
                   block
                   size="lg"
                   variant="navy"
                   disabled={status === "sending"}
-                  aria-label="Send inquiry"
+                  aria-label={
+                    status === "sending"
+                      ? "Sending inquiry"
+                      : "Send inquiry"
+                  }
                   className="mt-1"
                 >
                   {status === "sending" ? (
-                    "Opening Email..."
+                    <>
+                      <span
+                        className="
+                          size-4
+                          animate-spin
+                          rounded-full
+                          border-2
+                          border-current
+                          border-t-transparent
+                        "
+                        aria-hidden="true"
+                      />
+
+                      Sending Inquiry...
+                    </>
                   ) : status === "sent" ? (
-                    "✓ Email Ready"
+                    <>
+                      <CheckCircle2 className="size-4" />
+
+                      Inquiry Sent
+                    </>
                   ) : status === "error" ? (
-                    "Failed - Try Again"
+                    <>
+                      <AlertCircle className="size-4" />
+
+                      Try Again
+                    </>
                   ) : (
                     <>
                       Send Inquiry
-                      <Send className="size-4" />
+
+                      <Send
+                        className="size-4"
+                        aria-hidden="true"
+                      />
                     </>
                   )}
                 </Button>
 
-                {/* Success */}
+                {/* ==========================================
+                    SUCCESS MESSAGE
+                ========================================== */}
+
                 {status === "sent" && (
-                  <p className="text-center text-xs leading-5 text-green-600">
-                    Your email application has been opened with
-                    the inquiry details.
-                  </p>
+                  <div
+                    className="
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-lg
+                      border
+                      border-green-200
+                      bg-green-50
+                      px-4
+                      py-3
+                      text-center
+                      text-xs
+                      leading-5
+                      text-green-700
+                    "
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <CheckCircle2 className="size-4 shrink-0" />
+
+                    <span>
+                      Your inquiry has been sent
+                      successfully. We&apos;ll contact
+                      you soon.
+                    </span>
+                  </div>
                 )}
 
-                {/* Error */}
+                {/* ==========================================
+                    ERROR MESSAGE
+                ========================================== */}
+
                 {status === "error" && (
-                  <p className="text-center text-xs leading-5 text-red-500">
-                    Unable to open your email application. Please
-                    email{" "}
-                    <a
-                      href="mailto:sales@ponshankaragencies.com"
-                      className="font-semibold underline"
-                    >
-                      sales@ponshankaragencies.com
-                    </a>{" "}
-                    directly.
-                  </p>
+                  <div
+                    className="
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-lg
+                      border
+                      border-red-200
+                      bg-red-50
+                      px-4
+                      py-3
+                      text-center
+                      text-xs
+                      leading-5
+                      text-red-700
+                    "
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    <AlertCircle className="size-4 shrink-0" />
+
+                    <span>
+                      Unable to send your inquiry right
+                      now. Please try again.
+                    </span>
+                  </div>
                 )}
+
+                {/* ==========================================
+                    RECIPIENT INFORMATION
+                ========================================== */}
+
+                <p className="text-center text-xs text-muted">
+                  Your inquiry will be sent securely to{" "}
+                  <span className="font-medium text-brand-600">
+                    ponsankared@gmail.com
+                  </span>
+                </p>
 
               </form>
             </div>
