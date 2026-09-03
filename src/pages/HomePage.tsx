@@ -5,6 +5,7 @@ import { Hero } from '@/components/sections/home/Hero'
 import { ProductRange } from '@/components/sections/home/ProductRange'
 import { ProjectsShowcase } from '@/components/sections/home/ProjectsShowcase'
 import { InquiryForm } from '@/components/sections/home/InquiryForm'
+import { WhyUs } from '@/components/sections/home/WhyUs'
 
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Marquee items={BRANDS} />
       <ProductRange />
       <ProjectsShowcase />
+      <WhyUs />
       <InquiryForm />
     </>
   )

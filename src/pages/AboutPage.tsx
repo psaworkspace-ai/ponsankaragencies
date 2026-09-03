@@ -4,6 +4,7 @@ import { AboutHero } from "../components/sections/about/AboutHero";
 import { CompanyStory } from "../components/sections/about/CompanyStory";
 import { Timeline } from "../components/sections/about/Timeline";
 import { VisionMission } from "../components/sections/about/VisionMission";
+import { WhyUs } from "@/components/sections/home/WhyUs";
 
 export default function AboutPage() {
   return (
@@ -29,6 +30,7 @@ export default function AboutPage() {
       <section id="timeline" className="scroll-mt-20">
         <Timeline />
       </section>
+      <WhyUs />
     </>
   );
 }

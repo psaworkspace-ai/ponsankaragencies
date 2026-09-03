@@ -44,8 +44,8 @@ export function ProjectsShowcase() {
             <SectionHeading
               align="left"
               eyebrow="Our Projects"
-              title="Trusted Piping Solutions Across Tamil Nadu"
-              subtitle="For over two decades, Ponshankar Agencies has successfully supplied premium plumbing, industrial, drainage, agricultural, and water management solutions across residential, commercial and infrastructure projects."
+              title="Solutions for Every Sector"
+              subtitle="From your home to large-scale projects, we meet every plumbing need."
             />
           </div>
 

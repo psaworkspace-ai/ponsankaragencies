@@ -7,13 +7,13 @@ const ITEMS = [
   {
     title: "Our Vision",
     description:
-      "To be Tamil Nadu’s most trusted distribution partner for premium piping and water management solutions by delivering quality products, innovation, and exceptional customer service.",
+      "To be a trusted leader in plumbing solutions, recognised for quality, innovation, and lasting partnerships across India.",
     icon: Eye,
   },
   {
     title: "Our Mission",
     description:
-      "To provide genuine products from leading brands, offer technical expertise, maintain efficient logistics, and build long-term relationships through reliability and customer satisfaction.",
+      "To deliver high-quality plumbing products backed by professional service, expert support, and solutions that create lasting value for our customers and partners.",
     icon: Target,
   },
 ];

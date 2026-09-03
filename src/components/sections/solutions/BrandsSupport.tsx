@@ -36,8 +36,8 @@ export function BrandsSupport() {
             <SectionHeading
               align="left"
               eyebrow="Trusted Brands"
-              title="Solutions Backed by Industry-Leading Manufacturers"
-              subtitle="We partner with India's most trusted piping and water management brands to ensure every solution meets the highest standards of quality, reliability, and performance."
+              title="Trusted Partnerships. Quality Products."
+              subtitle="Built on strong partnerships with brands we trust, so you can trust every product we deliver."
             />
 
             {/* =================================================

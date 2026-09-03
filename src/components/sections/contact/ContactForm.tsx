@@ -1,26 +1,59 @@
-
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Mail, CheckCircle2, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
+/* =========================================================
+   FORM VALIDATION
+========================================================= */
+
 const schema = z.object({
-  name: z.string().min(2, "Please enter your name"),
-  email: z.string().email("Enter a valid email"),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  requirement: z.string().min(1, "Please select a requirement"),
-  message: z.string().optional(),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your full name."),
+
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address."),
+
+  phone: z
+    .string()
+    .trim()
+    .optional(),
+
+  company: z
+    .string()
+    .trim()
+    .optional(),
+
+  requirement: z
+    .string()
+    .min(1, "Please select a product requirement."),
+
+  message: z
+    .string()
+    .trim()
+    .optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
+
+/* =========================================================
+   PRODUCT REQUIREMENTS
+========================================================= */
 
 const REQUIREMENTS = [
   "High-Performance Piping",
@@ -31,6 +64,41 @@ const REQUIREMENTS = [
   "Sewerage & Drainage",
 ];
 
+/* =========================================================
+   EMAILJS CONFIGURATION
+========================================================= */
+
+/*
+ * IMPORTANT:
+ *
+ * These values come from your .env file.
+ *
+ * VITE_EMAILJS_SERVICE_ID
+ * VITE_EMAILJS_TEMPLATE_ID
+ * VITE_EMAILJS_PUBLIC_KEY
+ *
+ * The EmailJS account/login email can be your PERSONAL Gmail.
+ *
+ * The customer inquiry will be delivered to:
+ *
+ * ponsankared@gmail.com
+ *
+ * That recipient is configured inside the EmailJS template.
+ */
+
+const SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID;
+
+const TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+const PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+/* =========================================================
+   FIELD COMPONENT
+========================================================= */
+
 const Field = ({
   label,
   error,
@@ -38,22 +106,31 @@ const Field = ({
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
-}) => (
-  <div className="mb-4">
-    <label className="mb-[7px] block text-[.72rem] font-bold uppercase tracking-wider text-ink-2">
-      {label}
-    </label>
+  children: ReactNode;
+}) => {
+  return (
+    <div className="mb-4">
+      <label className="mb-[7px] block text-[0.72rem] font-bold uppercase tracking-wider text-ink-2">
+        {label}
+      </label>
 
-    {children}
+      {children}
 
-    {error && (
-      <p className="mt-1 text-[.75rem] text-red-500">
-        {error}
-      </p>
-    )}
-  </div>
-);
+      {error && (
+        <p
+          className="mt-1 text-[0.75rem] text-red-500"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  );
+};
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -67,6 +144,7 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+
     defaultValues: {
       name: "",
       email: "",
@@ -77,54 +155,108 @@ export function ContactForm() {
     },
   });
 
+  /* =======================================================
+     SUBMIT FORM
+  ======================================================= */
+
   const onSubmit = async (data: FormValues) => {
+    /*
+     * Prevent duplicate submissions.
+     */
+    if (sending) return;
+
     setSending(true);
     setSent(false);
     setSendError(false);
 
     try {
-      /*
-       * EmailJS configuration
-       *
-       * Replace these three values with your
-       * actual EmailJS credentials.
-       */
-      const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      /* ===================================================
+         CHECK EMAILJS CONFIGURATION
+      =================================================== */
 
+      if (
+        !SERVICE_ID ||
+        !TEMPLATE_ID ||
+        !PUBLIC_KEY
+      ) {
+        throw new Error(
+          "EmailJS configuration is missing. Please check your environment variables.",
+        );
+      }
+
+      /* ===================================================
+         SEND EMAIL
+      =================================================== */
 
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          to_email: "ponsankared@gmail.com",
-
+          /*
+           * Customer name
+           *
+           * EmailJS template:
+           * {{from_name}}
+           */
           from_name: data.name,
+
+          /*
+           * Customer email
+           *
+           * EmailJS template:
+           * {{from_email}}
+           *
+           * This is used as Reply To
+           */
           from_email: data.email,
 
-          phone: data.phone || "Not provided",
-          company: data.company || "Not provided",
+          /*
+           * Customer phone
+           */
+          phone:
+            data.phone?.trim() ||
+            "Not provided",
 
+          /*
+           * Customer company
+           */
+          company:
+            data.company?.trim() ||
+            "Not provided",
+
+          /*
+           * Product requirement
+           */
           requirement: data.requirement,
 
-          message: data.message || "No additional message",
+          /*
+           * Customer message
+           */
+          message:
+            data.message?.trim() ||
+            "No additional message",
 
-          subject: "New Inquiry - Ponshankar Agencies",
+          /*
+           * Email subject
+           */
+          subject:
+            "New Inquiry - Ponshankar Agencies",
         },
         {
           publicKey: PUBLIC_KEY,
-        }
+        },
       );
 
-      /*
-       * Email successfully sent.
-       */
+      /* ===================================================
+         SUCCESS
+      =================================================== */
+
       setSent(true);
 
-      /*
-       * Clear the form after successful submission.
-       */
+      /* ===================================================
+         RESET FORM
+      =================================================== */
+
       reset({
         name: "",
         email: "",
@@ -134,24 +266,30 @@ export function ContactForm() {
         message: "",
       });
 
-      /*
-       * Hide success message after 5 seconds.
-       */
-      setTimeout(() => {
+      /* ===================================================
+         HIDE SUCCESS MESSAGE
+      =================================================== */
+
+      window.setTimeout(() => {
         setSent(false);
       }, 5000);
     } catch (error) {
-      console.error("Email sending failed:", error);
+      /* ===================================================
+         ERROR
+      =================================================== */
 
-      /*
-       * Show error message.
-       */
+      console.error(
+        "EmailJS inquiry failed:",
+        error,
+      );
+
       setSendError(true);
 
-      /*
-       * Hide error message after 5 seconds.
-       */
-      setTimeout(() => {
+      /* ===================================================
+         HIDE ERROR MESSAGE
+      =================================================== */
+
+      window.setTimeout(() => {
         setSendError(false);
       }, 5000);
     } finally {
@@ -159,25 +297,29 @@ export function ContactForm() {
     }
   };
 
+  /* =======================================================
+     UI
+  ======================================================= */
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       aria-label="Contact inquiry form"
     >
-      {/* =====================================================
+      {/* ==================================================
           CONTACT DETAILS
-      ===================================================== */}
-      <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+      ================================================== */}
 
-        {/* ===================================================
-            FULL NAME
-        =================================================== */}
+      <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+        {/* FULL NAME */}
+
         <Field
           label="Full Name"
           error={errors.name?.message}
         >
           <Input
+            type="text"
             placeholder="John Doe"
             autoComplete="name"
             {...register("name")}
@@ -185,9 +327,8 @@ export function ContactForm() {
           />
         </Field>
 
-        {/* ===================================================
-            EMAIL
-        =================================================== */}
+        {/* EMAIL */}
+
         <Field
           label="Email Address"
           error={errors.email?.message}
@@ -201,9 +342,8 @@ export function ContactForm() {
           />
         </Field>
 
-        {/* ===================================================
-            PHONE
-        =================================================== */}
+        {/* PHONE */}
+
         <Field label="Phone Number">
           <Input
             type="tel"
@@ -214,11 +354,11 @@ export function ContactForm() {
           />
         </Field>
 
-        {/* ===================================================
-            COMPANY
-        =================================================== */}
+        {/* COMPANY */}
+
         <Field label="Company Name">
           <Input
+            type="text"
             placeholder="Industrial Corp."
             autoComplete="organization"
             {...register("company")}
@@ -227,9 +367,10 @@ export function ContactForm() {
         </Field>
       </div>
 
-      {/* =====================================================
+      {/* ==================================================
           PRODUCT REQUIREMENT
-      ===================================================== */}
+      ================================================== */}
+
       <Field
         label="Product Requirement"
         error={errors.requirement?.message}
@@ -249,30 +390,36 @@ export function ContactForm() {
         </Select>
       </Field>
 
-      {/* =====================================================
+      {/* ==================================================
           MESSAGE
-      ===================================================== */}
+      ================================================== */}
+
       <Field
         label="Message"
         error={errors.message?.message}
       >
         <Textarea
-          placeholder="How can we help your project succeed?"
-          rows={5}
+          placeholder="Tell us about your requirement..."
+          rows={4}
           {...register("message")}
           disabled={sending}
         />
       </Field>
 
-      {/* =====================================================
-          SEND BUTTON
-      ===================================================== */}
+      {/* ==================================================
+          SUBMIT BUTTON
+      ================================================== */}
+
       <Button
         type="submit"
         block
         size="lg"
         disabled={sending}
-        aria-label="Send inquiry"
+        aria-label={
+          sending
+            ? "Sending inquiry"
+            : "Send inquiry"
+        }
       >
         {sending ? (
           <>
@@ -292,15 +439,20 @@ export function ContactForm() {
           </>
         ) : (
           <>
-            <Mail className="size-4" />
+            <Mail
+              className="size-4"
+              aria-hidden="true"
+            />
+
             Send Inquiry
           </>
         )}
       </Button>
 
-      {/* =====================================================
+      {/* ==================================================
           SUCCESS MESSAGE
-      ===================================================== */}
+      ================================================== */}
+
       {sent && (
         <div
           className="
@@ -310,6 +462,8 @@ export function ContactForm() {
             justify-center
             gap-2
             rounded-lg
+            border
+            border-green-200
             bg-green-50
             px-4
             py-3
@@ -320,7 +474,10 @@ export function ContactForm() {
           role="status"
           aria-live="polite"
         >
-          <CheckCircle2 className="size-4 shrink-0" />
+          <CheckCircle2
+            className="size-4 shrink-0"
+            aria-hidden="true"
+          />
 
           <span>
             Your inquiry has been sent successfully.
@@ -329,9 +486,10 @@ export function ContactForm() {
         </div>
       )}
 
-      {/* =====================================================
+      {/* ==================================================
           ERROR MESSAGE
-      ===================================================== */}
+      ================================================== */}
+
       {sendError && (
         <div
           className="
@@ -341,6 +499,8 @@ export function ContactForm() {
             justify-center
             gap-2
             rounded-lg
+            border
+            border-red-200
             bg-red-50
             px-4
             py-3
@@ -351,7 +511,10 @@ export function ContactForm() {
           role="alert"
           aria-live="assertive"
         >
-          <AlertCircle className="size-4 shrink-0" />
+          <AlertCircle
+            className="size-4 shrink-0"
+            aria-hidden="true"
+          />
 
           <span>
             Unable to send your inquiry right now.
@@ -360,9 +523,10 @@ export function ContactForm() {
         </div>
       )}
 
-      {/* =====================================================
-          EMAIL INFORMATION
-      ===================================================== */}
+      {/* ==================================================
+          RECIPIENT INFORMATION
+      ================================================== */}
+
       <p className="mt-3 text-center text-xs text-muted">
         Your inquiry will be sent securely to{" "}
         <span className="font-medium text-brand-600">
@@ -372,4 +536,3 @@ export function ContactForm() {
     </form>
   );
 }
-

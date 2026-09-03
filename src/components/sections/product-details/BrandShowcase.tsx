@@ -41,8 +41,8 @@ export function BrandShowcase() {
         <Reveal>
           <SectionHeading
             eyebrow="Our Brands"
-            title="Trusted Brands We Proudly Distribute"
-            subtitle="Partnering with India's leading manufacturers to deliver premium plumbing and water management solutions."
+            title="Trusted Partnerships. Quality Products."
+            subtitle="Built on strong partnerships with brands we trust, so you can trust every product we deliver."
             className="mb-7 sm:mb-8"
           />
         </Reveal>

@@ -44,8 +44,8 @@ export function ProductRange() {
           <div className="min-w-0">
             <SectionHeading
               align="left"
-              title="Comprehensive Product Range"
-              subtitle="Every pipe, fitting, and storage solution needed for world-class infrastructure."
+              title="Out Product Range"
+              subtitle=" Explore our complete range of plumbing products, carefully selected to meet the needs of every application."
             />
           </div>
 

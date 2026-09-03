@@ -106,8 +106,7 @@ export function CompanyStory() {
               <SectionHeading
                 align="left"
                 eyebrow="Who We Are"
-                title="Delivering Trusted Piping Solutions Since 1993"
-                subtitle="For over 30 years, Ponshankar Agencies has been supplying quality piping products and water management solutions to customers across Tamil Nadu."
+                title="Built on Trust. Since 1991."
               />
 
               {/* =================================================
@@ -125,18 +124,11 @@ export function CompanyStory() {
                 "
               >
                 <p>
-                  Established in 1993, Ponshankar Agencies is a trusted
-                  distributor of premium piping products from leading
-                  brands. We serve residential, commercial, industrial,
-                  agricultural, and infrastructure projects with
-                  reliable products and professional service.
+Since 1991, Ponsankar Agencies has been delivering reliable plumbing solutions across India. We specialise in quality pipes, fittings, bathroom fittings, and plumbing accessories for agricultural, residential, and industrial applications.
                 </p>
 
                 <p>
-                  Our focus on quality, timely delivery, and customer
-                  satisfaction has helped us build long-term
-                  relationships with contractors, engineers, builders,
-                  and businesses across Tamil Nadu.
+With decades of expertise, we partner with dealers, contractors, businesses, and government and private-sector projects, providing quality products, professional support, and reliable after-sales service.
                 </p>
               </div>
 

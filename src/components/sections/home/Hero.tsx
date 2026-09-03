@@ -40,17 +40,15 @@ export function Hero() {
             <Reveal>
               <div className="max-w-2xl">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-                  Building Stronger{" "}
+                  All Your Plumbing {" "}
                   <span className="text-brand-400">
-                    Water Systems
+                    Needs, Under 
                   </span>{" "}
-                  for Every Project.
+                  One Roof.
                 </h1>
 
                 <p className="mt-4 max-w-xl text-sm md:text-base leading-7 text-slate-200/85">
-                  We provide high-end, professional industrial infrastructure
-                  solutions. Premium PVC, CPVC, and SWR systems engineered for
-                  longevity and performance.
+A complete range of PVC, CPVC, uPVC, and GI pipes and fittings, valves, hoses, water tanks, and allied plumbing products for agricultural, residential, and industrial needs—all under one roof.
                 </p>
               </div>
             </Reveal>

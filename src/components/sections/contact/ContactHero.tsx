@@ -135,7 +135,7 @@ export function ContactHero() {
                   text-transparent
                 "
               >
-                Let's Build Your
+                We’re Here to Help !
               </span>
 
               <span
@@ -145,7 +145,6 @@ export function ContactHero() {
                   text-brand-300
                 "
               >
-                Next Project Together
               </span>
             </h1>
 
@@ -160,10 +159,8 @@ export function ContactHero() {
                 sm:leading-7
               "
             >
-              Need product recommendations, technical assistance,
-              or a bulk quotation? Our experienced team is here to
-              help with reliable piping solutions tailored to your
-              project.
+Whether you’re a farmer, homeowner, dealer, contractor or project partner, we’re here to help you find the right products for your needs from product enquiries and quotations to complete project requirements.
+
             </p>
 
             {/* =================================================
