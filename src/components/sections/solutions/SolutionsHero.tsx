@@ -1,22 +1,9 @@
 import { Link } from "react-router-dom";
-import { Building2, Factory, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/Reveal";
 import { SOLUTIONS_HERO_IMAGE } from "@/data/images";
-
-const STATS = [
-  {
-    icon: Building2,
-    value: "4500+",
-    label: "Products",
-  },
-  {
-    icon: Factory,
-    value: "30+",
-    label: "Years Experience",
-  },
-];
 
 export function SolutionsHero() {
   return (
@@ -65,10 +52,8 @@ export function SolutionsHero() {
       <div
         className="
           container-px
+          section-y
           relative
-          py-10
-          sm:py-12
-          lg:py-14
         "
       >
         <Reveal>
@@ -165,88 +150,6 @@ export function SolutionsHero() {
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
-            </div>
-
-            {/* =================================================
-                STATS
-            ================================================= */}
-            <div
-              className="
-                mt-6
-                grid
-                grid-cols-2
-                gap-3
-                sm:flex
-                sm:flex-wrap
-              "
-            >
-              {STATS.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    key={item.label}
-                    className="
-                      flex
-                      items-center
-                      gap-2.5
-                      rounded-xl
-                      border
-                      border-white/[0.14]
-                      bg-white/[0.08]
-                      px-3.5
-                      py-2.5
-                      backdrop-blur-[10px]
-                      sm:px-4
-                    "
-                  >
-                    {/* Icon */}
-                    <div
-                      className="
-                        grid
-                        size-9
-                        shrink-0
-                        place-items-center
-                        rounded-lg
-                        bg-brand-500/20
-                      "
-                    >
-                      <Icon
-                        className="
-                          size-[18px]
-                          text-brand-300
-                        "
-                      />
-                    </div>
-
-                    {/* Stat */}
-                    <div>
-                      <div
-                        className="
-                          text-lg
-                          font-extrabold
-                          leading-none
-                          text-white
-                          sm:text-xl
-                        "
-                      >
-                        {item.value}
-                      </div>
-
-                      <div
-                        className="
-                          mt-0.5
-                          text-[10px]
-                          text-slate-300
-                          sm:text-xs
-                        "
-                      >
-                        {item.label}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
 
           </div>

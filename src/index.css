@@ -59,7 +59,9 @@
   --radius-brand: 12px;
 
   /* Layout */
-  --space-section: 64px;
+  --space-section: 32px;
+  --space-section-sm: 40px;
+  --space-section-lg: 48px;
 
   /* Motion */
   --ease-out-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -143,8 +145,24 @@
     padding-inline: 1.5rem;
   }
 
+  /* Single vertical rhythm for every page section.
+     Change the three --space-section-* tokens above to
+     tighten or loosen the whole site at once. */
+
   .section-y {
     padding-block: var(--space-section);
+  }
+
+  @media (min-width: 640px) {
+    .section-y {
+      padding-block: var(--space-section-sm);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-y {
+      padding-block: var(--space-section-lg);
+    }
   }
 
   .nav-link {

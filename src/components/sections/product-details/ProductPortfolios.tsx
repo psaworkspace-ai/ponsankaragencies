@@ -53,7 +53,7 @@ const PRODUCT_CATEGORIES = [
 
 export function ProductPortfolios() {
   return (
-    <section className="bg-slate-50 py-10 sm:py-12 lg:py-14">
+    <section className="section-y bg-slate-50">
       <div className="container-px">
 
         {/* =====================================================
@@ -64,7 +64,7 @@ export function ProductPortfolios() {
             eyebrow="Product Categories"
             title="Explore Our Product Categories"
             subtitle="Tap or select a product category to explore."
-            className="mb-7 sm:mb-8"
+            className="mb-6 sm:mb-7"
           />
         </Reveal>
 

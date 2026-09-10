@@ -94,7 +94,7 @@ export function WhyUs() {
   }, [isPaused])
 
   return (
-    <section className="relative overflow-hidden bg-softer py-12 sm:py-14 lg:py-16">
+    <section className="section-y relative overflow-hidden bg-softer">
       {/* Soft Background Glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 top-20 size-64 rounded-full bg-brand-100/25 blur-3xl" />
@@ -237,7 +237,7 @@ export function WhyUs() {
                 </div>
 
                 {/* Content */}
-                <div className="mt-7 max-w-2xl sm:mt-8">
+                <div className="mt-6 max-w-2xl sm:mt-7">
                   {/* 35+ only */}
                   {activeIndex === 0 && (
                     <div className="mb-1.5 flex items-baseline gap-2">

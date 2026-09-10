@@ -57,13 +57,13 @@ const APPLICATIONS = [
 
 export function ProductApplications() {
   return (
-    <section className="bg-softer py-10 sm:py-12 lg:py-14">
+    <section className="section-y bg-softer">
       <div className="container-px">
 
         {/* =====================================================
             SECTION HEADING
         ===================================================== */}
-        <div className="mb-7">
+        <div className="mb-6">
           <SectionHeading
             eyebrow="Applications"
             title="Built for Every Environment"

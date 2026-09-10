@@ -174,7 +174,7 @@ export const NAV_ITEMS: NavItem[] = [
           },
           {
             label: "Plumbing Accessories",
-            href: "/products/allied-products?type=accessories",
+            href: "/products/allied-products?type=plumbing",
           },
           {
             label: "Adhesives",
@@ -205,7 +205,7 @@ export const NAV_ITEMS: NavItem[] = [
           },
           {
             label: "Bathroom Accessories",
-            href: "/products/bath-fittings?type=accessories",
+            href: "/products/bath-fittings?type=bathroom",
           },
           {
             label: "Faucets & Taps",

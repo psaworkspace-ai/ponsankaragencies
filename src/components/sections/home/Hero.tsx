@@ -5,7 +5,7 @@ import { HERO_IMAGE } from '@/data/images'
 
 export function Hero() {
   return (
-    <section className="pt-6 md:pt-8 pb-0">
+    <section className="pb-0 pt-5 md:pt-6">
       <div className="container-px">
         <div className="relative overflow-hidden rounded-2xl">
 
@@ -27,14 +27,14 @@ export function Hero() {
               relative
               flex
               items-center
-              min-h-[420px]
-              md:min-h-[500px]
-              lg:min-h-[560px]
+              min-h-[380px]
+              md:min-h-[460px]
+              lg:min-h-[500px]
               px-6
-              py-12
+              py-10
               sm:px-10
               lg:px-12
-              lg:py-20
+              lg:py-14
             "
           >
             <Reveal>

@@ -38,7 +38,7 @@ export function ProductRange() {
             SECTION HEADER
         ===================================================== */}
 
-        <div className="mb-8 flex items-end justify-between gap-6">
+        <div className="mb-6 flex items-end justify-between gap-6">
 
           {/* Heading */}
           <div className="min-w-0">

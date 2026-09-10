@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { SmartImage } from "@/components/common/SmartImage";
 
@@ -8,34 +9,65 @@ interface ProductCardProps {
   subcategory?: string;
 }
 
-export function ProductCard({
-  name,
-  image,
-  href = "#",
-  subcategory,
-}: ProductCardProps) {
+const CARD_CLASS = `
+  group
+  block
+  overflow-hidden
+  rounded-xl
+  border
+  border-slate-200
+  bg-white
+  shadow-sm
+  transition-all
+  duration-300
+  hover:-translate-y-1
+  hover:border-brand-300
+  hover:shadow-lg
+  focus:outline-none
+  focus:ring-2
+  focus:ring-brand-500/30
+`;
+
+/* =========================================================
+   CARD SHELL
+
+   Products without a destination render as a plain card
+   instead of a link that navigates nowhere.
+========================================================= */
+
+function CardShell({
+  href,
+  children,
+}: {
+  href?: string;
+  children: ReactNode;
+}) {
+  if (!href || href === "#") {
+    return (
+      <div className={CARD_CLASS}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <Link
       to={href}
-      className="
-        group
-        block
-        overflow-hidden
-        rounded-xl
-        border
-        border-slate-200
-        bg-white
-        shadow-sm
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:border-brand-300
-        hover:shadow-lg
-        focus:outline-none
-        focus:ring-2
-        focus:ring-brand-500/30
-      "
+      className={CARD_CLASS}
     >
+      {children}
+    </Link>
+  );
+}
+
+export function ProductCard({
+  name,
+  image,
+  href,
+  subcategory,
+}: ProductCardProps) {
+  return (
+    <CardShell href={href}>
       {/* =====================================================
           PRODUCT IMAGE
       ===================================================== */}
@@ -141,6 +173,6 @@ export function ProductCard({
           {name}
         </h3>
       </div>
-    </Link>
+    </CardShell>
   );
 }

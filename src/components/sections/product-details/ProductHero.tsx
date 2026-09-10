@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { Reveal } from "@/components/common/Reveal";
@@ -49,11 +49,9 @@ export function ProductHero() {
       <div
         className="
           container-px
+          section-y
           relative
           z-10
-          py-9
-          sm:py-12
-          lg:py-14
         "
       >
         <div
@@ -284,47 +282,97 @@ export function ProductHero() {
               </div>
 
               {/* =================================================
-                  FLOATING CARD — TRUSTED NETWORK
+                  WATERMARK SEAL — TRUSTED DEALER NETWORK
               ================================================= */}
               <div
                 className="
+                  pointer-events-none
                   absolute
                   right-3
                   top-3
-                  rounded-lg
-                  bg-brand-600
-                  px-3
-                  py-2.5
-                  text-white
-                  shadow-lg
+                  select-none
                   sm:right-4
                   sm:top-4
-                  sm:rounded-xl
-                  sm:px-4
-                  sm:py-3
                   lg:right-5
                   lg:top-5
                 "
+                aria-hidden="true"
               >
-                <h3
+                <div
                   className="
-                    text-base
-                    font-bold
-                    sm:text-xl
+                    flex
+                    items-center
+                    gap-2.5
+                    rounded-lg
+                    border
+                    border-white/25
+                    bg-white/[0.07]
+                    px-3
+                    py-2
+                    shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+                    backdrop-blur-[6px]
+                    sm:gap-3
+                    sm:rounded-xl
+                    sm:px-3.5
+                    sm:py-2.5
                   "
                 >
-                  Trusted
-                </h3>
+                  {/* Seal */}
+                  <span
+                    className="
+                      grid
+                      size-7
+                      shrink-0
+                      place-items-center
+                      rounded-full
+                      border
+                      border-white/30
+                      sm:size-8
+                    "
+                  >
+                    <ShieldCheck
+                      className="
+                        size-3.5
+                        text-white/70
+                        sm:size-4
+                      "
+                      strokeWidth={1.75}
+                    />
+                  </span>
 
-                <p
-                  className="
-                    mt-0.5
-                    text-[9px]
-                    sm:text-xs
-                  "
-                >
-                  Dealer Network
-                </p>
+                  {/* Label */}
+                  <span className="block">
+                    <span
+                      className="
+                        block
+                        text-[11px]
+                        font-bold
+                        uppercase
+                        leading-none
+                        tracking-[0.22em]
+                        text-white/80
+                        sm:text-[13px]
+                      "
+                    >
+                      Trusted
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+                        block
+                        text-[8px]
+                        uppercase
+                        leading-none
+                        tracking-[0.28em]
+                        text-white/55
+                        sm:text-[9px]
+                      "
+                    >
+                      Dealer Network
+                    </span>
+                  </span>
+                </div>
               </div>
 
             </div>

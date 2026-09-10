@@ -41,13 +41,13 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-softer py-10 sm:py-12 lg:py-14">
+    <section className="section-y bg-softer">
       <div className="container-px mx-auto max-w-3xl">
 
         {/* =====================================================
             SECTION HEADING
         ===================================================== */}
-        <div className="mb-7">
+        <div className="mb-6">
           <SectionHeading
             eyebrow="FAQ"
             title="Frequently Asked Questions"

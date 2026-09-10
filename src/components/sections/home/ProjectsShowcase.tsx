@@ -20,7 +20,7 @@ export function ProjectsShowcase() {
   return (
     <section
       id="projects"
-      className="bg-softer py-10 sm:py-12 lg:py-14"
+      className="section-y bg-softer"
     >
       <div className="container-px mx-auto max-w-7xl">
 
@@ -129,7 +129,7 @@ export function ProjectsShowcase() {
         {/* =====================================================
             PROJECTS SLIDER
         ===================================================== */}
-        <div className="mt-7 lg:mt-8">
+        <div className="mt-6 lg:mt-7">
           <Swiper
             modules={[Autoplay]}
             autoplay={{

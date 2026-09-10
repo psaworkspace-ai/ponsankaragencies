@@ -26,7 +26,7 @@ export function VisionMission() {
         {/* =====================================================
             SECTION HEADING
         ===================================================== */}
-        <div className="mb-7">
+        <div className="mb-6">
           <SectionHeading
             eyebrow="Our Purpose"
             title="Vision & Mission"

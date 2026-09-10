@@ -21,7 +21,7 @@ export function Marquee({
   return (
     <div
       className={cn(
-        'overflow-hidden border-y border-line bg-slate-50 py-6',
+        'overflow-hidden border-y border-line bg-slate-50 py-5',
         className
       )}
     >

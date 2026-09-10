@@ -47,7 +47,7 @@ export function Timeline() {
         {/* =====================================================
             SECTION HEADING
         ===================================================== */}
-        <div className="mb-8">
+        <div className="mb-6">
           <SectionHeading
             eyebrow="Our Journey"
             title="Growing Through Quality & Trust"

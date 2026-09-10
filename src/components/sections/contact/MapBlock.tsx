@@ -13,7 +13,7 @@ const DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP_Q}`
 
 export function MapBlock() {
   return (
-    <section className="pb-10 sm:pb-12 lg:pb-14">
+    <section className="pb-8 sm:pb-10 lg:pb-12">
       <div className="container-px">
 
         <Reveal

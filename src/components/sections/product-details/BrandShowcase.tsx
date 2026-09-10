@@ -32,7 +32,7 @@ const FEATURES = [
 
 export function BrandShowcase() {
   return (
-    <section className="bg-softer py-10 sm:py-12 lg:py-14">
+    <section className="section-y bg-softer">
       <div className="container-px">
 
         {/* =====================================================
@@ -43,7 +43,7 @@ export function BrandShowcase() {
             eyebrow="Our Brands"
             title="Trusted Partnerships. Quality Products."
             subtitle="Built on strong partnerships with brands we trust, so you can trust every product we deliver."
-            className="mb-7 sm:mb-8"
+            className="mb-6 sm:mb-7"
           />
         </Reveal>
 

@@ -9,6 +9,11 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+import {
+  CUSTOMER_TYPES,
+  PRODUCT_REQUIREMENTS,
+} from "@/data/inquiry";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
@@ -39,6 +44,10 @@ const schema = z.object({
     .trim()
     .optional(),
 
+  customerType: z
+    .string()
+    .min(1, "Please select who you are."),
+
   requirement: z
     .string()
     .min(1, "Please select a product requirement."),
@@ -52,17 +61,13 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 /* =========================================================
-   PRODUCT REQUIREMENTS
+   SELECT OPTIONS
+
+   Both lists live in @/data/inquiry so the Home page
+   inquiry form offers exactly the same options.
 ========================================================= */
 
-const REQUIREMENTS = [
-  "High-Performance Piping",
-  "CPVC Hot & Cold Systems",
-  "Industrial Fittings & Valves",
-  "Agricultural & Borewell",
-  "Storage Tanks",
-  "Sewerage & Drainage",
-];
+const REQUIREMENTS = PRODUCT_REQUIREMENTS;
 
 /* =========================================================
    EMAILJS CONFIGURATION
@@ -150,6 +155,7 @@ export function ContactForm() {
       email: "",
       phone: "",
       company: "",
+      customerType: CUSTOMER_TYPES[0],
       requirement: REQUIREMENTS[0],
       message: "",
     },
@@ -225,9 +231,25 @@ export function ContactForm() {
             "Not provided",
 
           /*
-           * Product requirement
+           * Customer type
+           *
+           * EmailJS template:
+           * {{customer_type}}
            */
-          requirement: data.requirement,
+          customer_type: data.customerType,
+
+          /*
+           * Product requirement
+           *
+           * EmailJS template:
+           * {{requirement}}
+           *
+           * The customer type is folded in as well so the
+           * inquiry still carries it on templates that do
+           * not yet render {{customer_type}}.
+           */
+          requirement:
+            `${data.customerType} — ${data.requirement}`,
 
           /*
            * Customer message
@@ -240,7 +262,7 @@ export function ContactForm() {
            * Email subject
            */
           subject:
-            "New Inquiry - Ponshankar Agencies",
+            `New Inquiry (${data.customerType}) - Ponshankar Agencies`,
         },
         {
           publicKey: PUBLIC_KEY,
@@ -262,6 +284,7 @@ export function ContactForm() {
         email: "",
         phone: "",
         company: "",
+        customerType: CUSTOMER_TYPES[0],
         requirement: REQUIREMENTS[0],
         message: "",
       });
@@ -368,27 +391,52 @@ export function ContactForm() {
       </div>
 
       {/* ==================================================
-          PRODUCT REQUIREMENT
+          CUSTOMER TYPE + PRODUCT REQUIREMENT
       ================================================== */}
 
-      <Field
-        label="Product Requirement"
-        error={errors.requirement?.message}
-      >
-        <Select
-          {...register("requirement")}
-          disabled={sending}
+      <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+        {/* CUSTOMER TYPE */}
+
+        <Field
+          label="I Am A"
+          error={errors.customerType?.message}
         >
-          {REQUIREMENTS.map((requirement) => (
-            <option
-              key={requirement}
-              value={requirement}
-            >
-              {requirement}
-            </option>
-          ))}
-        </Select>
-      </Field>
+          <Select
+            {...register("customerType")}
+            disabled={sending}
+          >
+            {CUSTOMER_TYPES.map((type) => (
+              <option
+                key={type}
+                value={type}
+              >
+                {type}
+              </option>
+            ))}
+          </Select>
+        </Field>
+
+        {/* PRODUCT REQUIREMENT */}
+
+        <Field
+          label="Product Requirement"
+          error={errors.requirement?.message}
+        >
+          <Select
+            {...register("requirement")}
+            disabled={sending}
+          >
+            {REQUIREMENTS.map((requirement) => (
+              <option
+                key={requirement}
+                value={requirement}
+              >
+                {requirement}
+              </option>
+            ))}
+          </Select>
+        </Field>
+      </div>
 
       {/* ==================================================
           MESSAGE

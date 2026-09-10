@@ -137,9 +137,9 @@ export function Footer() {
             gap-8
             border-b
             border-white/10
-            py-9
+            py-8
             sm:gap-10
-            sm:py-12
+            sm:py-10
             lg:grid-cols-[2fr_1fr_1fr_1.2fr]
             lg:gap-8
           "

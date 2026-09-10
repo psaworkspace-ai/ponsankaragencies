@@ -25,40 +25,92 @@ interface ProductGridProps {
 
 /* =========================================================
    URL TYPE → PRODUCT SUBCATEGORY
+
+   A `?type=` value may be either the slug of a subcategory
+   ("bathroom-accessories") or one of the short aliases below.
+   Aliases are matched against the subcategories that actually
+   exist in the category being viewed, so the same short alias
+   can safely be reused by more than one category.
 ========================================================= */
 
-const TYPE_TO_SUBCATEGORY: Record<string, string> = {
+const TYPE_ALIASES: Record<string, string[]> = {
   /* Pipes & Fittings */
-  pvc: "PVC Pipes",
-  cpvc: "CPVC Pipes",
-  upvc: "UPVC Pipes",
-  fittings: "Pipe Fittings",
+  pvc: ["PVC Pipes"],
+  cpvc: ["CPVC Pipes"],
+  upvc: ["UPVC Pipes"],
+  fittings: ["Pipe Fittings"],
 
   /* Hoses & Fittings */
-  garden: "Garden Hoses",
-  industrial: "Industrial Hoses",
-  agricultural: "Agricultural Hoses",
-  flexible: "Flexible Hoses",
-  accessories: "Hose Accessories",
+  garden: ["Garden Hoses"],
+  industrial: ["Industrial Hoses"],
+  agricultural: ["Agricultural Hoses"],
+  flexible: ["Flexible Hoses"],
 
   /* Valves & Cocks */
-  ball: "Ball Valves",
-  gate: "Gate Valves",
-  control: "Control Valves",
-  check: "Check Valves",
-  bib: "Bib Cocks",
+  ball: ["Ball Valves"],
+  gate: ["Gate Valves"],
+  control: ["Control Valves"],
+  check: ["Check Valves"],
+  bib: ["Bib Cocks"],
 
   /* Allied Products */
-  sealants: "Sealants",
-  solvent: "Solvent Cement",
-  adhesives: "Adhesives",
-  plumbing: "Plumbing Accessories",
+  sealants: ["Sealants"],
+  solvent: ["Solvent Cement"],
+  adhesives: ["Adhesives"],
+  plumbing: ["Plumbing Accessories"],
 
   /* Bath & Sanitary */
-  bath: "Bath Fittings",
-  sanitary: "Sanitary Ware",
-  faucets: "Faucets & Taps",
+  bath: ["Bath Fittings"],
+  sanitary: ["Sanitary Ware"],
+  faucets: ["Faucets & Taps"],
+  bathroom: ["Bathroom Accessories"],
+
+  /* Shared alias — resolved against the current category */
+  accessories: [
+    "Hose Accessories",
+    "Plumbing Accessories",
+    "Bathroom Accessories",
+  ],
 };
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+function resolveType(
+  type: string,
+  subcategories: string[]
+) {
+  if (!type) {
+    return "";
+  }
+
+  const wanted = slugify(type);
+
+  /* Exact subcategory slug — e.g. ?type=bathroom-accessories */
+
+  const bySlug = subcategories.find(
+    (item) => slugify(item) === wanted
+  );
+
+  if (bySlug) {
+    return bySlug;
+  }
+
+  /* Short alias — only if this category actually has it */
+
+  const candidates =
+    TYPE_ALIASES[wanted] ?? [];
+
+  return (
+    candidates.find((item) =>
+      subcategories.includes(item)
+    ) ?? ""
+  );
+}
 
 /* =========================================================
    PRODUCT GRID
@@ -80,9 +132,6 @@ export function ProductGrid({
 
   const urlType = searchParams.get("type") || "";
 
-  const urlSubcategory =
-    TYPE_TO_SUBCATEGORY[urlType] || "";
-
   /* =========================================================
      CURRENT CATEGORY
   ========================================================= */
@@ -103,6 +152,19 @@ export function ProductGrid({
 
     return [...new Set(categories)];
   }, [products]);
+
+  /* =========================================================
+     URL SUBCATEGORY
+  ========================================================= */
+
+  const urlSubcategory = useMemo(
+    () =>
+      resolveType(
+        urlType,
+        currentSubcategories
+      ),
+    [urlType, currentSubcategories]
+  );
 
   /* =========================================================
      ACTIVE SUBCATEGORY
@@ -237,7 +299,7 @@ export function ProductGrid({
   ========================================================= */
 
   return (
-    <section className="bg-white py-8 sm:py-10 lg:py-12">
+    <section className="section-y bg-white">
       <div className="container-px">
 
         {/* ===================================================

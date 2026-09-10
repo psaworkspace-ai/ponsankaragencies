@@ -1,6 +1,7 @@
 import {
   History,
   LayoutGrid,
+  Users,
 } from "lucide-react";
 
 import { Reveal } from "@/components/common/Reveal";
@@ -16,6 +17,16 @@ const STATS = [
     icon: LayoutGrid,
     value: "4500+",
     label: "Products",
+  },
+
+  /* =====================================================
+     NEW CARD — placeholder content.
+     Change the icon / value / label here later.
+  ===================================================== */
+  {
+    icon: Users,
+    value: "1200+",
+    label: "Happy Clients",
   },
 ];
 
@@ -66,10 +77,8 @@ export function AboutHero() {
       <div
         className="
           container-px
+          section-y
           relative
-          py-10
-          sm:py-12
-          lg:py-14
         "
       >
         <Reveal>
@@ -157,13 +166,18 @@ export function AboutHero() {
                 sm:flex-wrap
               "
             >
-              {STATS.map((stat) => {
+              {STATS.map((stat, index) => {
                 const Icon = stat.icon;
+
+                /* A lone card on the last mobile row spans both columns */
+                const isLastOdd =
+                  STATS.length % 2 === 1 &&
+                  index === STATS.length - 1;
 
                 return (
                   <div
                     key={stat.label}
-                    className="
+                    className={`
                       flex
                       items-center
                       gap-2.5
@@ -175,7 +189,8 @@ export function AboutHero() {
                       py-2.5
                       backdrop-blur-[10px]
                       sm:px-4
-                    "
+                      ${isLastOdd ? "col-span-2 sm:col-span-1" : ""}
+                    `}
                   >
                     <Icon
                       className="

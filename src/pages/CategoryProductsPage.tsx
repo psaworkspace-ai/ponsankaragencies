@@ -41,14 +41,14 @@ export default function CategoryProductsPage() {
       />
 
       {/* Hero */}
-      <section className="bg-slate-50 py-10 lg:py-14">
+      <section className="section-y bg-slate-50">
         <div className="container-px text-center">
 
           <h1 className="text-3xl font-bold text-slate-900 lg:text-5xl">
             {title}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
             Browse our complete collection of {title}.
             Select the products that best match your
             project requirements.

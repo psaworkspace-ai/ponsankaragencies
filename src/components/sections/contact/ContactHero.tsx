@@ -71,10 +71,8 @@ export function ContactHero() {
       <div
         className="
           container-px
+          section-y
           relative
-          py-10
-          sm:py-12
-          lg:py-14
         "
       >
 

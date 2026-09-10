@@ -5,7 +5,7 @@ import { CONTACT } from '@/lib/constants'
 
 export function CtaNavy() {
   return (
-    <section className="bg-navy-900 py-[88px] text-center text-white">
+    <section className="section-y bg-navy-900 text-center text-white">
       <div className="container-px">
         <Reveal>
           <h2 className="mb-3.5 text-[clamp(1.6rem,3.4vw,2.2rem)] text-white">
