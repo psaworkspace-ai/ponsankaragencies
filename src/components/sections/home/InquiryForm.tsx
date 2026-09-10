@@ -299,13 +299,8 @@ export function InquiryForm() {
            *
            * EmailJS:
            * {{requirement}}
-           *
-           * The customer type is folded in as well so the
-           * inquiry still carries it on templates that do
-           * not yet render {{customer_type}}.
            */
-          requirement:
-            `${data.customerType} — ${data.product}`,
+          requirement: data.product,
 
           /*
            * Project details

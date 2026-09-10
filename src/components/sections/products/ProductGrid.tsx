@@ -123,7 +123,6 @@ export function ProductGrid({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [search, setSearch] = useState("");
-  const [subcategory, setSubcategory] = useState("All");
   const [sort, setSort] = useState("default");
 
   /* =========================================================
@@ -168,10 +167,13 @@ export function ProductGrid({
 
   /* =========================================================
      ACTIVE SUBCATEGORY
+
+     The `?type=` parameter is the single source of truth, so
+     the heading, the chips, the URL and a page refresh all
+     agree on which filter is applied.
   ========================================================= */
 
-  const activeSubcategory =
-    urlSubcategory || subcategory;
+  const activeSubcategory = urlSubcategory;
 
   /* =========================================================
      FILTER PRODUCTS
@@ -180,26 +182,13 @@ export function ProductGrid({
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    /* URL FILTER */
+    /* SUBCATEGORY */
 
-    if (urlSubcategory) {
+    if (activeSubcategory) {
       result = result.filter(
         (product) =>
           product.subcategory ===
-          urlSubcategory
-      );
-    }
-
-    /* LOCAL FILTER */
-
-    if (
-      !urlSubcategory &&
-      subcategory !== "All"
-    ) {
-      result = result.filter(
-        (product) =>
-          product.subcategory ===
-          subcategory
+          activeSubcategory
       );
     }
 
@@ -243,9 +232,8 @@ export function ProductGrid({
   }, [
     products,
     search,
-    subcategory,
     sort,
-    urlSubcategory,
+    activeSubcategory,
   ]);
 
   /* =========================================================
@@ -255,15 +243,19 @@ export function ProductGrid({
   const handleSubcategoryChange = (
     value: string
   ) => {
-    setSubcategory(value);
-
     const params = new URLSearchParams(
       searchParams
     );
 
-    params.delete("type");
+    if (value === "All") {
+      params.delete("type");
+    } else {
+      params.set("type", slugify(value));
+    }
 
-    setSearchParams(params);
+    setSearchParams(params, {
+      replace: true,
+    });
   };
 
   /* =========================================================
@@ -272,7 +264,6 @@ export function ProductGrid({
 
   const clearFilters = () => {
     setSearch("");
-    setSubcategory("All");
     setSort("default");
 
     const params = new URLSearchParams(
@@ -281,7 +272,9 @@ export function ProductGrid({
 
     params.delete("type");
 
-    setSearchParams(params);
+    setSearchParams(params, {
+      replace: true,
+    });
   };
 
   /* =========================================================
@@ -290,8 +283,7 @@ export function ProductGrid({
 
   const hasFilters =
     search.trim() !== "" ||
-    subcategory !== "All" ||
-    Boolean(urlType) ||
+    Boolean(activeSubcategory) ||
     sort !== "default";
 
   /* =========================================================
@@ -317,9 +309,7 @@ export function ProductGrid({
               lg:text-3xl
             "
           >
-            {urlSubcategory
-              ? urlSubcategory
-              : title}
+            {activeSubcategory || title}
           </h2>
 
           <p
@@ -331,8 +321,8 @@ export function ProductGrid({
               sm:text-[15px]
             "
           >
-            {urlSubcategory
-              ? `Browse all ${urlSubcategory.toLowerCase()} products.`
+            {activeSubcategory
+              ? `Browse all ${activeSubcategory.toLowerCase()} products.`
               : `Browse our complete range of ${
                   currentCategory?.toLowerCase() ||
                   "products"
@@ -428,8 +418,7 @@ export function ProductGrid({
                     duration-200
                     sm:text-sm
                     ${
-                      !urlSubcategory &&
-                      subcategory === "All"
+                      !activeSubcategory
                         ? "border-brand-600 bg-brand-600 text-white"
                         : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
                     }
@@ -648,8 +637,7 @@ export function ProductGrid({
             </strong>{" "}
             products
 
-            {(urlSubcategory ||
-              subcategory !== "All") && (
+            {activeSubcategory && (
               <>
                 {" · "}
                 Filter:{" "}

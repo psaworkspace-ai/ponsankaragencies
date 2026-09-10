@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  Globe,
   Phone,
   Mail,
   MapPin,
@@ -8,7 +7,7 @@ import {
   Instagram,
 } from "lucide-react";
 
-import { SITE } from "@/lib/constants";
+import { CONTACT, SITE } from "@/lib/constants";
 import logo from "@/assets/logo.jpg";
 
 function BrandMark() {
@@ -70,6 +69,17 @@ function BrandMark() {
   );
 }
 
+/* ============================================================
+   GOOGLE MAPS
+============================================================ */
+
+const MAP_QUERY = encodeURIComponent(
+  CONTACT.address.full
+);
+
+const MAP_DIRECTIONS =
+  `https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`;
+
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
@@ -85,9 +95,9 @@ const QUICK_LINKS = [
 
 const SOCIALS = [
   {
-    icon: Globe,
-    label: "Website",
-    href: "https://www.ponsankaragencies.in",
+    icon: MapPin,
+    label: "Location",
+    href: MAP_DIRECTIONS,
     external: true,
   },
   {
@@ -140,7 +150,8 @@ export function Footer() {
             py-8
             sm:gap-10
             sm:py-10
-            lg:grid-cols-[2fr_1fr_1fr_1.2fr]
+            md:grid-cols-2
+            lg:grid-cols-[1.8fr_1fr_1.4fr]
             lg:gap-8
           "
         >
@@ -148,7 +159,7 @@ export function Footer() {
           {/* ===================================================
               COMPANY
           =================================================== */}
-          <div className="max-w-md">
+          <div className="max-w-md md:col-span-2 lg:col-span-1">
 
             <BrandMark />
 
@@ -401,7 +412,7 @@ export function Footer() {
                     className="
                       mt-0.5
                       block
-                      break-all
+                      break-words
                       text-xs
                       text-slate-300
                       transition-colors
@@ -484,7 +495,19 @@ export function Footer() {
               {/* =================================================
                   ADDRESS
               ================================================= */}
-              <div className="flex items-start gap-3">
+              <a
+                href={MAP_DIRECTIONS}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Ponshankar Agencies location in Google Maps"
+                title="Get Directions"
+                className="
+                  group
+                  flex
+                  items-start
+                  gap-3
+                "
+              >
 
                 <span
                   className="
@@ -494,12 +517,15 @@ export function Footer() {
                     place-items-center
                     rounded-lg
                     bg-white/5
+                    transition-colors
+                    group-hover:bg-brand-600
                   "
                 >
                   <MapPin
                     className="
                       size-3.5
                       text-brand-300
+                      group-hover:text-white
                     "
                   />
                 </span>
@@ -523,6 +549,8 @@ export function Footer() {
                       text-xs
                       leading-5
                       text-slate-300
+                      transition-colors
+                      group-hover:text-white
                       sm:text-sm
                       sm:leading-5
                     "
@@ -535,7 +563,7 @@ export function Footer() {
                   </p>
                 </div>
 
-              </div>
+              </a>
 
             </div>
           </div>

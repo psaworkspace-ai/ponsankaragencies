@@ -243,13 +243,8 @@ export function ContactForm() {
            *
            * EmailJS template:
            * {{requirement}}
-           *
-           * The customer type is folded in as well so the
-           * inquiry still carries it on templates that do
-           * not yet render {{customer_type}}.
            */
-          requirement:
-            `${data.customerType} — ${data.requirement}`,
+          requirement: data.requirement,
 
           /*
            * Customer message
