@@ -11,8 +11,8 @@ export const CONTACT = {
   whatsapp: '91 98652 93333',
   address: {
     line1: '558, Sathy Road,',
-    line2: 'Erode, Tamil Nadu - 638002',
-    full: '558, Sathy Road, Erode, Tamil Nadu - 638002',
+    line2: 'Erode, Tamil Nadu - 638003',
+    full: '558, Sathy Road, Erode, Tamil Nadu - 638003',
   },
   hours: ['Mon - Fri: 09:00 - 18:00', 'Sat: 09:00 - 13:00'],
 } as const
