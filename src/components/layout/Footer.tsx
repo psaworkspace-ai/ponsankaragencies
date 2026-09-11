@@ -557,7 +557,7 @@ export function Footer() {
                   >
                     558, Sathy Road,
                     <br />
-                    Erode - 3,
+                    Erode - 638003,
                     <br />
                     Tamil Nadu
                   </p>

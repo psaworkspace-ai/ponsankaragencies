@@ -25,7 +25,7 @@ const STATS = [
   ===================================================== */
   {
     icon: Users,
-    value: "1200+",
+    value: "2000+",
     label: "Happy Clients",
   },
 ];
