@@ -62,6 +62,26 @@ const CARDS: {
   },
 ];
 
+/*
+ * An email address has no natural wrap point, so a narrow card breaks it
+ * mid-word ("...gmail.c" / "om"). Allow a break right after the "@" instead.
+ */
+function withEmailBreak(line: string) {
+  const at = line.indexOf("@");
+
+  if (at < 0) {
+    return line;
+  }
+
+  return (
+    <>
+      {line.slice(0, at + 1)}
+      <wbr />
+      {line.slice(at + 1)}
+    </>
+  );
+}
+
 export function ContactHero() {
   return (
     <section
@@ -332,7 +352,7 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
                             text-slate-300
                           "
                         >
-                          {line}
+                          {withEmailBreak(line)}
                         </p>
                       ))}
                     </div>
