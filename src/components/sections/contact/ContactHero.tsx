@@ -292,7 +292,7 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
                     group
                     flex
                     h-full
-                    items-start
+                    flex-col
                     gap-3
                     rounded-xl
                     border
@@ -308,39 +308,41 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
                   "
                 >
 
-                  {/* Icon */}
-                  <div
-                    className="
-                      flex
-                      size-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-lg
-                      bg-brand-500/20
-                      transition-colors
-                      duration-300
-                      group-hover:bg-brand-500/30
-                    "
-                  >
-                    <Icon
-                      className="size-5 text-brand-300"
-                    />
-                  </div>
+                  {/* Icon + Title */}
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="
+                        flex
+                        size-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-lg
+                        bg-brand-500/20
+                        transition-colors
+                        duration-300
+                        group-hover:bg-brand-500/30
+                      "
+                    >
+                      <Icon
+                        className="size-5 text-brand-300"
+                      />
+                    </div>
 
-                  {/* Content */}
-                  <div className="min-w-0">
                     <h3
                       className="
-                        mb-1.5
                         text-sm
                         font-semibold
+                        leading-tight
                         text-white
                       "
                     >
                       {card.title}
                     </h3>
+                  </div>
 
+                  {/* Content */}
+                  <div className="min-w-0">
                     <div className="space-y-0.5">
                       {card.lines.map((line) => (
                         <p
