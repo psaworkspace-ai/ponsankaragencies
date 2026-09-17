@@ -5,6 +5,7 @@ import {
   MapPin,
   ArrowUpRight,
   Instagram,
+  Store,
 } from "lucide-react";
 
 import { CONTACT, SITE } from "@/lib/constants";
@@ -116,6 +117,12 @@ const SOCIALS = [
     icon: Instagram,
     label: "Instagram",
     href: "https://www.instagram.com/ponsankarerode",
+    external: true,
+  },
+  {
+    icon: Store,
+    label: "Visit Our Shop",
+    href: MAP_DIRECTIONS,
     external: true,
   },
 ];

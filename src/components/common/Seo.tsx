@@ -5,12 +5,14 @@ interface SeoProps {
   description: string
   path?: string
   image?: string
+  /* Render `title` exactly as given, without the " - Ponsankar Agencies" suffix. */
+  exactTitle?: boolean
 }
 
 const DEFAULT_OG = `${SITE.url}/favicon.svg` // replace with a real 1200x630 image later
 
-export function Seo({ title, description, path = '', image = DEFAULT_OG }: SeoProps) {
-  const fullTitle = `${title} - ${SITE.name}`
+export function Seo({ title, description, path = '', image = DEFAULT_OG, exactTitle = false }: SeoProps) {
+  const fullTitle = exactTitle ? title : `${title} - ${SITE.name}`
   const url = `${SITE.url}${path}`
   return (
     <>

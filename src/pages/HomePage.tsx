@@ -12,8 +12,9 @@ export default function HomePage() {
   return (
     <>
       <Seo
-        title="Building Stronger Water Systems"
-        description="Premium PVC, CPVC, and SWR piping systems engineered for longevity. Trusted piping solutions across Tamil Nadu since 1993."
+        exactTitle
+        title="Ponsankar Agencies | Leading Plumbing Material Distribution Company"
+        description="Premium PVC, CPVC, and SWR piping systems engineered for longevity. Trusted piping solutions across Tamil Nadu since 1991."
         path="/"
       />
       <Hero />

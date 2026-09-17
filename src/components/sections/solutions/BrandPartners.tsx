@@ -103,13 +103,9 @@ export function BrandPartners() {
                       max-h-14
                       w-auto
                       object-contain
-                      grayscale
-                      opacity-70
-                      transition-all
+                      transition-transform
                       duration-300
-                      group-hover:grayscale-0
                       group-hover:scale-105
-                      group-hover:opacity-100
                     "
                   />
 

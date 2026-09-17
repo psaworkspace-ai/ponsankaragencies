@@ -19,7 +19,6 @@ interface Product {
 }
 
 interface ProductGridProps {
-  title: string;
   products: readonly Product[];
 }
 
@@ -117,12 +116,10 @@ function resolveType(
 ========================================================= */
 
 export function ProductGrid({
-  title,
   products,
 }: ProductGridProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [search, setSearch] = useState("");
   const [sort, setSort] = useState("default");
 
   /* =========================================================
@@ -192,28 +189,6 @@ export function ProductGrid({
       );
     }
 
-    /* SEARCH */
-
-    const query = search
-      .trim()
-      .toLowerCase();
-
-    if (query) {
-      result = result.filter((product) => {
-        return (
-          product.name
-            .toLowerCase()
-            .includes(query) ||
-          product.category
-            ?.toLowerCase()
-            .includes(query) ||
-          product.subcategory
-            ?.toLowerCase()
-            .includes(query)
-        );
-      });
-    }
-
     /* SORT */
 
     if (sort === "az") {
@@ -231,7 +206,6 @@ export function ProductGrid({
     return result;
   }, [
     products,
-    search,
     sort,
     activeSubcategory,
   ]);
@@ -263,7 +237,6 @@ export function ProductGrid({
   ========================================================= */
 
   const clearFilters = () => {
-    setSearch("");
     setSort("default");
 
     const params = new URLSearchParams(
@@ -282,7 +255,6 @@ export function ProductGrid({
   ========================================================= */
 
   const hasFilters =
-    search.trim() !== "" ||
     Boolean(activeSubcategory) ||
     sort !== "default";
 
@@ -295,102 +267,25 @@ export function ProductGrid({
       <div className="container-px">
 
         {/* ===================================================
-            HEADER
-        =================================================== */}
-
-        <div className="mb-6 sm:mb-7">
-          <h2
-            className="
-              text-xl
-              font-bold
-              leading-tight
-              text-slate-900
-              sm:text-2xl
-              lg:text-3xl
-            "
-          >
-            {activeSubcategory || title}
-          </h2>
-
-          <p
-            className="
-              mt-1.5
-              text-sm
-              leading-6
-              text-slate-500
-              sm:text-[15px]
-            "
-          >
-            {activeSubcategory
-              ? `Browse all ${activeSubcategory.toLowerCase()} products.`
-              : `Browse our complete range of ${
-                  currentCategory?.toLowerCase() ||
-                  "products"
-                }.`}
-          </p>
-        </div>
-
-        {/* ===================================================
-            CATEGORY / SUBCATEGORY
+            SUBCATEGORY FILTERS
         =================================================== */}
 
         {currentCategory && (
-          <div className="mb-5">
+          <div
+            className="
+              mb-5
+              flex
+              items-center
+              gap-3
+            "
+          >
 
             <div
               className="
-                mb-2
-                flex
-                items-center
-                justify-between
-                gap-3
-              "
-            >
-              <div>
-                <p
-                  className="
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.15em]
-                    text-brand-600
-                  "
-                >
-                  Category
-                </p>
-
-                <h3
-                  className="
-                    mt-0.5
-                    text-base
-                    font-semibold
-                    text-slate-900
-                    sm:text-lg
-                  "
-                >
-                  {currentCategory}
-                </h3>
-              </div>
-
-              <span
-                className="
-                  rounded-full
-                  bg-slate-100
-                  px-3
-                  py-1
-                  text-xs
-                  font-medium
-                  text-slate-500
-                "
-              >
-                {products.length} Products
-              </span>
-            </div>
-
-            <div
-              className="
+                min-w-0
+                flex-1
                 overflow-x-auto
-                pb-2
+                pb-1
                 [scrollbar-width:none]
                 [&::-webkit-scrollbar]:hidden
               "
@@ -464,11 +359,28 @@ export function ProductGrid({
                 )}
               </div>
             </div>
+
+            <span
+              className="
+                hidden
+                shrink-0
+                rounded-full
+                bg-slate-100
+                px-3
+                py-1
+                text-xs
+                font-medium
+                text-slate-500
+                sm:inline-block
+              "
+            >
+              {products.length} Products
+            </span>
           </div>
         )}
 
         {/* ===================================================
-            SEARCH / SORT
+            SORT
         =================================================== */}
 
         <div
@@ -484,54 +396,13 @@ export function ProductGrid({
         >
           <div
             className="
-              grid
+              flex
+              flex-wrap
+              items-center
+              justify-between
               gap-3
-              md:grid-cols-[1fr_auto_auto]
-              md:items-center
             "
           >
-
-            {/* SEARCH */}
-
-            <div className="relative">
-              <Search
-                className="
-                  pointer-events-none
-                  absolute
-                  left-3
-                  top-1/2
-                  size-4
-                  -translate-y-1/2
-                  text-slate-400
-                "
-              />
-
-              <input
-                type="search"
-                value={search}
-                onChange={(event) =>
-                  setSearch(
-                    event.target.value
-                  )
-                }
-                placeholder="Search products..."
-                className="
-                  h-10
-                  w-full
-                  rounded-lg
-                  border
-                  border-slate-200
-                  bg-white
-                  pl-9
-                  pr-3
-                  text-sm
-                  outline-none
-                  focus:border-brand-500
-                  focus:ring-2
-                  focus:ring-brand-500/10
-                "
-              />
-            </div>
 
             {/* SORT */}
 
@@ -545,7 +416,7 @@ export function ProductGrid({
                 }
                 className="
                   h-10
-                  w-full
+                  w-[170px]
                   appearance-none
                   rounded-lg
                   border
@@ -557,7 +428,7 @@ export function ProductGrid({
                   text-slate-700
                   outline-none
                   focus:border-brand-500
-                  md:w-[160px]
+                  sm:w-[180px]
                 "
               >
                 <option value="default">
@@ -704,7 +575,7 @@ export function ProductGrid({
             </h3>
 
             <p className="mt-1 text-sm text-slate-500">
-              Try another product name or filter.
+              Try another filter.
             </p>
 
             {hasFilters && (

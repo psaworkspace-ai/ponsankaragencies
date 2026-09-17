@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu } from "lucide-react";
 
@@ -88,6 +89,31 @@ export function Header() {
 
   const closeOnClick = () =>
     (document.activeElement as HTMLElement | null)?.blur();
+
+  /*
+   * On the contact page the button has nowhere to navigate, so it would
+   * otherwise look dead. Scroll to the inquiry form instead.
+   */
+  const handleContactClick = (
+    event: MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (pathname !== "/contact") return;
+
+    event.preventDefault();
+
+    const form = document.getElementById("contact-form");
+
+    const top = form
+      ? form.getBoundingClientRect().top +
+        window.scrollY -
+        80
+      : 0;
+
+    window.scrollTo({
+      top: Math.max(top, 0),
+      behavior: "smooth",
+    });
+  };
 
   return (
     <header
@@ -268,7 +294,10 @@ export function Header() {
             size="sm"
             className="px-4"
           >
-            <Link to="/contact">
+            <Link
+              to="/contact"
+              onClick={handleContactClick}
+            >
               Contact
             </Link>
           </Button>

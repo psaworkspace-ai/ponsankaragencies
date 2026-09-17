@@ -4,6 +4,7 @@ import {
   Mail,
   MapPin,
   Clock,
+  Store,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -16,10 +17,16 @@ const BADGES = [
   "Global Distribution Network",
 ];
 
+const MAP_DIRECTIONS =
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    CONTACT.address.full,
+  )}`;
+
 const CARDS: {
   icon: LucideIcon;
   title: string;
   lines: string[];
+  href?: string;
 }[] = [
   {
     icon: Phone,
@@ -43,6 +50,15 @@ const CARDS: {
     icon: Clock,
     title: "Business Hours",
     lines: [...CONTACT.hours],
+  },
+  {
+    icon: Store,
+    title: "Visit Our Shop",
+    lines: [
+      CONTACT.address.full,
+      "Get directions",
+    ],
+    href: MAP_DIRECTIONS,
   },
 ];
 
@@ -201,7 +217,9 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
           =================================================== */}
           <Reveal delay={0.1}>
             <div
+              id="contact-form"
               className="
+                scroll-mt-24
                 rounded-2xl
                 bg-white
                 p-5
@@ -226,11 +244,14 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
             gap-3
             sm:grid-cols-2
             lg:mt-10
-            xl:grid-cols-4
+            lg:grid-cols-3
+            xl:grid-cols-5
           "
         >
           {CARDS.map((card, index) => {
             const Icon = card.icon;
+
+            const Wrapper = card.href ? "a" : "div";
 
             return (
               <Reveal
@@ -238,7 +259,15 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
                 delay={0.15 + index * 0.05}
                 className="h-full"
               >
-                <div
+                <Wrapper
+                  {...(card.href
+                    ? {
+                        href: card.href,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        "aria-label": `${card.title} â€” open in Google Maps`,
+                      }
+                    : {})}
                   className="
                     group
                     flex
@@ -309,7 +338,7 @@ Whether youâ€™re a farmer, homeowner, dealer, contractor or project partner, weâ
                     </div>
                   </div>
 
-                </div>
+                </Wrapper>
               </Reveal>
             );
           })}

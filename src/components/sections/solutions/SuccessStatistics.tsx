@@ -14,7 +14,7 @@ const STATS = [
   {
     value: "30+",
     label: "Years of Experience",
-    description: "Delivering trusted piping solutions since 1993.",
+    description: "Delivering trusted piping solutions since 1991.",
     icon: Clock3,
   },
   {

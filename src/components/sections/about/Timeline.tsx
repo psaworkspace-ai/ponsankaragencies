@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 
 const MILESTONES = [
   {
-    year: "1993",
+    year: "1991",
     title: "Company Founded",
     description:
       "Ponshankar Agencies was established with the vision of supplying reliable piping solutions.",

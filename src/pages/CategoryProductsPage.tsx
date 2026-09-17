@@ -58,10 +58,7 @@ export default function CategoryProductsPage() {
       </section>
 
       {/* Product Grid */}
-      <ProductGrid
-        title={title}
-        products={products}
-      />
+      <ProductGrid products={products} />
     </>
   );
 }

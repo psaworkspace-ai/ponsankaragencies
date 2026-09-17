@@ -212,13 +212,9 @@ export function BrandShowcase() {
                         w-auto
                         max-w-[85%]
                         object-contain
-                        grayscale
-                        opacity-70
-                        transition-all
+                        transition-transform
                         duration-300
                         group-hover:scale-105
-                        group-hover:grayscale-0
-                        group-hover:opacity-100
                         sm:max-h-11
                       "
                     />
